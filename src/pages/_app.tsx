@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { store } from 'store'
 import { authActions } from 'store/auth.slice'
 import { isEmptyObject } from 'utils/isEmptyObject'
-import { useRem } from 'hooks/useRem'
+import { useREM } from 'hooks/useREM'
 import "styles/index.scss"
 import "styles/transition.scss"
 
@@ -16,7 +16,7 @@ interface AppProps {
 
 function MyApp({ initialValue, Component, pageProps }: AppProps) {
 
-  useRem()
+  useREM()
   bootstrapUser(initialValue.userInfo)
   
   return (

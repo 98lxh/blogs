@@ -1,10 +1,10 @@
+import Layout from "layout"
 import { NextPage } from "next"
-import Navigation from "components/navigation"
 
 const Home: NextPage = () => { 
   return (
     <div>
-      <Navigation />
+      <Layout />
    </div>
   )
 }

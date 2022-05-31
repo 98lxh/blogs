@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMount } from 'ahooks';
 import { ICaytegory } from '../../../types/category';
 import { useAsync, useHttp } from "hooks/useAsync"
-import { ALL_CATEGORY_ITEM } from 'constants';
+import { ALL_CATEGORY_ITEM } from '../../../constants';
 
 export const useCategorys = () => {
   const client = useHttp()
@@ -11,7 +11,7 @@ export const useCategorys = () => {
 
   useEffect(() => {
     if (!data) return
-    setCategorys(() => [ALL_CATEGORY_ITEM, ...data])
+    setCategorys(() => [ALL_CATEGORY_ITEM as any, ...data])
   },
     [data])
 

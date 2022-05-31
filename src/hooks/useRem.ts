@@ -1,6 +1,6 @@
-import { useMount } from './../hooks/useMount';
+import { useMount } from './useMount';
 //动态指定 rem 基准 根据用户屏幕宽度计算 计算的值给根标签
-export const useRem = () => {
+export const useREM = () => {
   useMount(() => {
     //定义最大的fontSize
     const MAX_FONT_SIZE = 40
