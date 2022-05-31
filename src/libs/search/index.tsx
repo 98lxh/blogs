@@ -1,8 +1,10 @@
 import { NextPage } from "next"
 import React, { useState } from "react"
 import SearchIcon from "assets/icons/search.svg"
-import DeleteIcon from "assets/icons/close.svg"
+import SearchButtonIcon from "assets/icons/search-button.svg"
+import DeleteIcon from "assets/icons/input-delete.svg"
 import { CSSTransition } from "react-transition-group"
+import Button from "libs/button"
 
 
 const Search: NextPage = () => {
@@ -25,7 +27,13 @@ const Search: NextPage = () => {
         />
         {/* 分割线 */}
         <div className="h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200" />
-        {/* TODO:搜索按钮 */}
+        <Button
+          className="absolute translate-y-[-50%] top-[50%] right-1 rounded-full"
+          size="small"
+          icon={
+            <SearchButtonIcon />
+          }
+        />
       </div>
       <CSSTransition classNames="slider" in={show} unmountOnExit={true} timeout={300}>
         <div
