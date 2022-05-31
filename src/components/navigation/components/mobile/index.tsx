@@ -5,14 +5,38 @@ import Logo from "assets/icons/hamburger.svg"
 import { useMobileSider } from "components/navigation/hooks/useMobileSider"
 import Popup from "libs/popup"
 
+
+const PopupMenu: NextPage<{ categorys: ICaytegory[], onItemClick: (curIndex: number) => void }> = ({ categorys, onItemClick }) => {
+
+  return (
+    <div className="py-2 h-[80vh] flex flex-col">
+      <h2 className="text-xl text-zinc-900 font-bold mb-2 px-1">所有分类</h2>
+      <ul className="overflow-scroll">
+        {
+          categorys.map((category, index) => (
+            <li
+              key={category.id}
+              className="text-lg text-zinc-900 px-1 py-1.5 duration-100"
+              onClick={() => onItemClick(index)}
+            >
+              {category.title}
+            </li>
+          )
+          )
+        }
+      </ul>
+    </div>
+  )
+}
+
 const MobileNavgation: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
   const { siderItemsRef, siderTargetRef, siderStyle, setCurCategoryIdx, curCategoryIdx } = useMobileSider()
-  const [visiblePopup, setVisiblePopup] = useState(false) 
-  
-  const onClosePopup = () => { 
+  const [visiblePopup, setVisiblePopup] = useState(false)
+
+  const onClosePopup = () => {
     setVisiblePopup(false)
   }
-  
+
   return (
     <div className="bg-white sticky top-0 z-10">
       <ul
@@ -21,7 +45,7 @@ const MobileNavgation: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) =
       >
         <li
           className="fixed top-0 right-[-1px] h-3.5 px-1 flex items-center bg-white z-20 shadow-l-white"
-          onClick={()=>setVisiblePopup(true)}
+          onClick={() => setVisiblePopup(true)}
         >
           <Logo className="h-1.5 w-1.5" />
         </li>
@@ -45,7 +69,13 @@ const MobileNavgation: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) =
         visible={visiblePopup}
         onClose={onClosePopup}
       >
-        <div>我是内容</div>
+        <PopupMenu
+          categorys={categorys}
+          onItemClick={(index: number) => {
+            setCurCategoryIdx(index)
+            setVisiblePopup(false)
+          }}
+        />
       </Popup>
     </div>
   )

@@ -22,23 +22,47 @@
 }
 
 
-.popup-down-up-enter{
+.popup-down-up-enter, .popup-down-up-appear,
+.popup-down-up-exit-done
+{
   transform: translateY(100%);
 }
 
-.popup-down-up-active{
-  transition: all .4s;
+.popup-down-up-enter-active, .popup-down-up-appear-active { 
+  transform: translateY(0);
+  transition: all .3s;
+}
+.popup-down-up-enter-done {
   transform: translateY(0);
 }
 
 .popup-down-up-exit {
-  transition: all .4s;
-  transform: translate(0);
+  transform: translateY(0);
 }
+
 .popup-down-up-exit-active {
+  transition: all .3s;
   transform: translateY(100%);
 }
 
 
 
+
+
+// .popup-down-up-enter{
+//   transform: translateY(100%);
+// }
+
+// .popup-down-up-active{
+//   transition: all .4s;
+//   transform: translateY(0);
+// }
+
+// .popup-down-up-exit {
+//   transition: all .4s;
+//   transform: translate(0);
+// }
+// .popup-down-up-exit-active {
+//   transform: translateY(100%);
+// }
 
