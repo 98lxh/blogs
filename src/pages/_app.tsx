@@ -5,6 +5,7 @@ import { authActions } from 'store/auth.slice'
 import { isEmptyObject } from 'utils/isEmptyObject'
 import { useRem } from 'hooks/useRem'
 import "styles/index.scss"
+import "styles/transition.scss"
 
 interface AppProps {
   initialValue: Record<any, any>,
