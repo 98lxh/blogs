@@ -8,7 +8,7 @@ export const useMobileSider = () => {
   const siderTargetScroll = useScroll(siderTargetRef)
   const [siderStyle, setSiderStyle] = useState({
     transform: 'translateX(0px) translateY(-50%)',
-    width: '60px'
+    width: '52px'
   })
 
 

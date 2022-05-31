@@ -6,11 +6,11 @@ import { useCategorys } from "./hooks/useCategorys"
 
 const Navigation: NextPage = () => {
   const isMobile = useIsMobile()
-  const { data: categorys } = useCategorys()
+  const { categorys } = useCategorys()
   
   return (
     isMobile
-     ? <MobileNavgation categorys={categorys || []} />
+     ? <MobileNavgation categorys={categorys} />
      : <PCNavgation />
   )
 }
