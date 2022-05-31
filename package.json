@@ -26,6 +26,7 @@
     "next-remove-imports": "^1.0.6",
     "next-svgr": "^0.0.2",
     "next-svgr-react-component": "^1.1.1",
+    "normalize.scss": "^0.1.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-redux": "^8.0.2",

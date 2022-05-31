@@ -3,8 +3,8 @@ import { Provider } from 'react-redux'
 import { store } from 'store'
 import { authActions } from 'store/auth.slice'
 import { isEmptyObject } from 'utils/isEmptyObject'
-import "styles/index.scss"
 import { useRem } from 'hooks/useRem'
+import "styles/index.scss"
 
 interface AppProps {
   initialValue: Record<any, any>,
