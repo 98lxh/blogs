@@ -9,7 +9,8 @@ const HeaderTheme: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
 
   return (
     <div {...props}>
-      <Popover overlay={(
+      <Popover
+        overlay={(
         <div className="w-[140px] overflow-hidden">
           {
             themes.map(theme => {

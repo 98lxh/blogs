@@ -67,7 +67,7 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
           }
         />
       </div>
-      <CSSTransition classNames="slider" in={showDropdown} unmountOnExit={true} timeout={300}>
+      <CSSTransition classNames="slider-right" in={showDropdown} unmountOnExit={true} timeout={300}>
         <div
           className="max-h-[368px] w-full text-base overflow-auto 
           bg-white absolute z-20 left-0 top-[56px] p-2
