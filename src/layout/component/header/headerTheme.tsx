@@ -28,7 +28,7 @@ const HeaderTheme: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
         </div>
       )}
       >
-        <Luminous className="inline-block w-4 h-4 p-1 duration-200 outline-none hover:bg-zinc-100/60 cursor-pointer rounded-sm" />
+        <Luminous className="block w-4 h-4 p-1 duration-200 outline-none hover:bg-zinc-100/60 cursor-pointer rounded-sm" />
       </Popover>
     </div>
   )
