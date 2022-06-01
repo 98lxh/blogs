@@ -3,7 +3,9 @@ import { HTMLAttributes } from "react"
 
 const HeaderMy: NextPage<HTMLAttributes<HTMLElement>> = (props) => { 
   return (
-    <div {...props}>my</div>
+    <div {...props}>
+      My
+    </div>
   )
 }
 

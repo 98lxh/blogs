@@ -6,6 +6,7 @@ import { useMobileSider } from "components/navigation/hooks/useMobileSider"
 import Popup from "libs/popup"
 
 
+// eslint-disable-next-line no-unused-vars
 const PopupMenu: NextPage<{ categorys: ICaytegory[], onItemClick: (curIndex: number) => void }> = ({ categorys, onItemClick }) => {
 
   return (

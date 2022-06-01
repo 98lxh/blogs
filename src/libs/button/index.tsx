@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, MouseEventHandler } from "react";
 import { NextPage } from "next";
-import LoadingIcon from "assets/icons/loading.svg"
+import { Loading } from "@icon-park/react"
 import { MapSizeToClass, MapTypeToClass } from "./config";
 
 interface ButtonProps {
@@ -44,7 +44,7 @@ const Button: NextPage<ButtonProps & HTMLAttributes<HTMLButtonElement>> = (
       {...restProps}
       onClick={onButtonClick}
     >
-      {loading && <LoadingIcon className="w-2 h-2 animate-spin mr-1" />}
+      {loading && <Loading className="w-2 h-2 animate-spin mr-1" />}
       {Icon && Icon}
       {restProps.children}
     </button>

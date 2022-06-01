@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@icon-park/react": "^1.4.0",
     "@reduxjs/toolkit": "^1.8.2",
     "@types/mockjs": "^1.0.6",
     "@types/react-transition-group": "^4.4.4",

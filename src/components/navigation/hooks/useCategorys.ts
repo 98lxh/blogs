@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMount } from 'ahooks';
 import { ICaytegory } from '../../../types/category';
 import { useAsync, useHttp } from "hooks/useAsync"
-import { ALL_CATEGORY_ITEM } from '../../../constants';
+import { ALL_CATEGORY_ITEM } from 'constant';
 
 export const useCategorys = () => {
   const client = useHttp()

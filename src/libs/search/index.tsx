@@ -1,18 +1,18 @@
 import { NextPage } from "next"
 import React, { FormEventHandler, HTMLAttributes, useRef, useState } from "react"
+import { Search as SearchIcon, CloseOne as DeleteIcon} from "@icon-park/react"
 import { CSSTransition } from "react-transition-group"
 import { useClickAway } from "ahooks"
-import SearchIcon from "assets/icons/search.svg"
-import SearchButtonIcon from "assets/icons/search-button.svg"
-import DeleteIcon from "assets/icons/input-delete.svg"
 import Button from "libs/button"
 
 
 interface SearchProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
   value?: string
   dropdown?: React.ReactNode
-  onClear:() => void
+  onClear?: () => void
+  // eslint-disable-next-line no-unused-vars
   onChange?: (value: string) => void
+  // eslint-disable-next-line no-unused-vars
   onSearch?: (searchValue: string) => void
 }
 
@@ -31,7 +31,9 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
 
   useClickAway(() => { 
     setShowDropdown(false)
-  },searchContainerRef)
+  },
+    searchContainerRef
+  )
 
   return (
     <div
@@ -46,7 +48,10 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
           border-zinc-100 focus:border-blue-300  group-hover:bg-white"
           type="text"
           {...inputProps}
-          onFocus={(evt) => inputProps.onFocus && inputProps.onFocus(evt)}
+          onFocus={(evt) => { 
+            setShowDropdown(true)
+            inputProps.onFocus && inputProps.onFocus(evt)
+          }}
           onBlur={evt => inputProps.onBlur && inputProps.onBlur(evt)}
           onChange={onIputValueChange}
         />
@@ -58,7 +63,7 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
           size="small"
           onClick={onInputSearch}
           icon={
-            <SearchButtonIcon />
+            <SearchIcon />
           }
         />
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDebounce, useSize } from 'ahooks';
-import { PC_DEVICE_WIDTH } from './../constants/index';
+import { PC_DEVICE_WIDTH } from 'constant';
 
 //判断是否为移动端设备 判断依据是屏幕宽度是否小于一个宽度(1280px)
 export const useIsMobile = () => {

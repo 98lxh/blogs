@@ -16,7 +16,7 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
   return (
     <header
       {...restProps}
-      className={`${className} w-full bg-white border-b  px-2 py-1`}
+      className={`${className} w-full bg-white border border-b px-2 py-0.5`}
     >
       <div className="flex items-center">
         <img
@@ -26,7 +26,7 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
           alt=""
         />
         <HeaderSearch className="mr-1 flex-1" />
-        <HeaderTheme className="mr-1" />
+        <HeaderTheme className="mr-1 h-4" />
         <HeaderMy className="mr-1" />
       </div>
     </header>
