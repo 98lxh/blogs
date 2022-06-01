@@ -2,8 +2,8 @@ import { NextPage } from "next"
 import { useRouter } from "next/router"
 import { HTMLAttributes } from "react"
 import HeaderSearch from "./headerSearch"
-import My from "./my"
-import Theme from "./theme"
+import HeaderMy from "./headerMy"
+import HeaderTheme from "./headerTheme"
 
 
 const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps }) => { 
@@ -26,8 +26,8 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
           alt=""
         />
         <HeaderSearch className="mr-1 flex-1" />
-        <Theme className="mr-1" />
-        <My className="mr-1" />
+        <HeaderTheme className="mr-1" />
+        <HeaderMy className="mr-1" />
       </div>
     </header>
   )
