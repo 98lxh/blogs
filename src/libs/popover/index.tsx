@@ -39,7 +39,7 @@ const Popover: NextPage<PopopoverProps> = (
         timeout={300}
         unmountOnExit={true}>
         <div
-          className="absolute p-1 z-20 bg-white border rounded-sm"
+          className="absolute p-1 z-20 bg-white border rounded-sm dark:bg-zinc-900 dark:border-zinc-700"
           ref={overlayRef}
           style={overlayPosition}
         >

@@ -17,7 +17,10 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
   return (
     <header
       {...restProps}
-      className={`${className} w-full bg-white border border-b px-2 py-0.5`}
+      className={
+        `${className} w-full bg-whit border-b px-2 py-0.5
+        dark:bg-zinc-800 dark:border-b-zinc-700
+      `}
     >
       <div className="flex items-center">
         <Snowflake

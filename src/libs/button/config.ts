@@ -1,7 +1,7 @@
 export const MapTypeToClass = {
-  primary: 'text-white bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-900',
+  primary: 'text-white bg-zinc-800 hover:bg-zinc-900 active:bg-zinc-900 dark:bg-zinc-900 dark:hover-zinc-700 dark:active:zinc-700',
   main: 'text-white bg-main hover:bg-hover-main active:bg-main',
-  info: 'text-zinc-800 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200'
+  info: 'text-zinc-800 bg-zinc-200 hover:bg-zinc-300 active:bg-zinc-200 dark:text-zinc-300 dark:bg-zinc-700 dark:hover:bg-zinc-600 dark:active:bg-zinc-700'
 }
 
 export const MapSizeToClass = {

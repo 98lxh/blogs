@@ -30,7 +30,7 @@ const Popup: NextPage<PopupProps> = ({ children, visible, onClose }) => {
         timeout={400}
         unmountOnExit={true}
       >
-        <div className="w-screen bg-white z-50 fixed bottom-0 rounded-t-sm">
+        <div className="w-screen bg-white z-50 fixed bottom-0 rounded-t-sm dark:bg-zinc-800">
           {children}
         </div>
       </CSSTransition>

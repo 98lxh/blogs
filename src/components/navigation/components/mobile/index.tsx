@@ -12,14 +12,14 @@ import { NavigationProps } from "components/navigation"
 const PopupMenu: NextPage<{ categorys: ICaytegory[], onItemClick: (curIndex: number) => void }> = ({ categorys, onItemClick }) => {
 
   return (
-    <div className="py-2 h-[80vh] flex flex-col">
-      <h2 className="text-xl text-zinc-900 font-bold mb-2 px-1">所有分类</h2>
-      <ul className="overflow-scroll">
+    <div className="py-2 h-[80vh] flex flex-col text-zinc-900 dark:text-zinc-200">
+      <h2 className="text-xl font-bold mb-2 px-1">所有分类</h2>
+      <ul className="overflow-x-auto">
         {
           categorys.map((category, index) => (
             <li
               key={category.id}
-              className="text-lg text-zinc-900 px-1 py-1.5 duration-100"
+              className="text-lg px-1 py-1.5 duration-100 dark:text-zinc-300 active:bg-zinc-100 dark:active:bg-zinc-900"
               onClick={() => onItemClick(index)}
             >
               {category.title}
@@ -37,20 +37,23 @@ const MobileNavgation: NextPage<NavigationProps> = ({ categorys, setCurCategoryI
   const [visiblePopup, setVisiblePopup] = useState(false)
 
   return (
-    <div className="bg-white sticky top-0 z-10">
+    <div className="bg-white sticky top-0 z-10 dark:bg-zinc-900">
       <ul
         className="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden last:mr-4"
         ref={siderTargetRef}
       >
+        {/* 弹出层按钮 */}
         <li
-          className="fixed top-0 right-[-1px] h-3.5 px-1 flex items-center bg-white z-20 shadow-l-white"
+          className="fixed top-0 right-[-1px] h-3.5 px-1 flex items-center bg-white z-20 shadow-l-white dark:bg-zinc-900 dark:shadow-l-zinc"
           onClick={() => setVisiblePopup(true)}
         >
           <Logo className="h-1.5 w-1.5" />
         </li>
+        {/* 滑块 */}
         <li
           style={siderStyle}
-          className="absolute h-[20px] bg-gray-700 top-1/2 rounded-lg duration-150" />
+          className="absolute h-[20px] bg-gray-700 top-1/2 rounded-lg duration-150 dark:bg-zinc-800" />
+        
         {
           categorys.map((category, index) => (
             <li
