@@ -37,7 +37,7 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
 
   return (
     <div
-      className="group relative p-0.5 rounded-xl border-white duration-500 hover:bg-blue-200 dark:border-zinc-200"
+      className="group relative p-0.5 rounded-xl border-white  hover:bg-blue-200 dark:border-zinc-200"
       ref={searchContainerRef}
     >
       <div>
@@ -46,7 +46,7 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
           className="block w-full h-[44px] pl-4 outline-0 bg-zinc-100 caret-zinc-400 
           rounded-xl text-zinc-900 tracking-wide text-sm font-semibold border
           border-zinc-100 focus:border-blue-300  group-hover:bg-white dark:bg-zinc-800 dark:text-zinc-200
-          dark:border-zinc-700 dark:group-hover:bg-zinc-900 dark:group-hover:border-zinc-700
+          dark:border-zinc-700 dark:group-hover:bg-zinc-900 dark:group-hover:border-zinc-700 duration-500 transition-colors
           "
           type="text"
           {...inputProps}

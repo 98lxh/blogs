@@ -1,12 +1,16 @@
 import { NextPage } from "next"
-import { HTMLAttributes } from "react"
+import { HTMLAttributes, useMemo } from "react"
 import Popover from "libs/popover"
 import { Display, Sun, Moon } from "@icon-park/react"
 import { THEME_DARK, THEME_LIGHT, THEME_SYSTEM } from "constant"
-
+import { useSelector } from "react-redux"
+import { selectThemeType, systemActions } from "store/system.slice"
+import { store } from "store"
 
 const HeaderTheme: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
-
+  const themeType = useSelector(selectThemeType)
+  const { icon: ThemeIcon } = useMemo(() => themes.find(t => t.type === themeType) || themes[0], [themeType])
+  
   return (
     <div {...props}>
       <Popover
@@ -16,7 +20,10 @@ const HeaderTheme: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
             themes.map(theme => {
               const Icon = theme.icon
               return (
-                <div className="w-[140px] overflow-hidden" key={theme.id}>
+                <div
+                  className="w-[140px] overflow-hidden" key={theme.id}
+                  onClick={ ()=> store.dispatch(systemActions.setThemeType(theme.type))}
+                >
                   <div className="flex items-center p-1 cursor-pointer rounded duration-200 hover:bg-zinc-100/60 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-300">
                     <Icon className="w-1.5 h-1.5 mr-1" />
                     <span className="0 text-sm">{theme.name}</span>
@@ -28,7 +35,7 @@ const HeaderTheme: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
         </div>
       )}
       >
-        <Sun className="block w-4 h-4 p-1 duration-200 outline-none hover:bg-zinc-100/60 cursor-pointer rounded-sm dark:text-zinc-300 dark:hover:bg-zinc-900" />
+        { ThemeIcon && <ThemeIcon className="block w-4 h-4 p-1 duration-200 outline-none hover:bg-zinc-100/60 cursor-pointer rounded-sm dark:text-zinc-300 dark:hover:bg-zinc-900" />}
       </Popover>
     </div>
   )

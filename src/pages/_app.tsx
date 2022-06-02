@@ -1,11 +1,11 @@
 import { NextPage } from 'next'
 import { Provider } from 'react-redux'
-import Layout from 'layout'
 import { store } from 'store'
 import { authActions } from 'store/auth.slice'
-import { isEmptyObject } from 'utils/isEmptyObject'
 import { useREM } from 'hooks/useREM'
 import { useIsMobile } from 'hooks/useIsMobile'
+import { isEmptyObject } from 'utils/isEmptyObject'
+import Layout from 'layout'
 import "styles/index.scss"
 import "styles/transition.scss"
 
@@ -15,23 +15,21 @@ interface AppProps {
   pageProps: any
 }
 
-
 function MyApp({ initialValue, Component, pageProps }: AppProps) {
-  useBootstarp(initialValue.userInfo)
+  const { userInfo } = initialValue || {}
+  useBootstarp(userInfo)
+
   return (
     <Provider store={store}>
       <Layout>
         <Component {...pageProps} />
-      </Layout>
+       </Layout>
     </Provider>
   )
 }
 
-
-
 MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
   const { userId, nickname, avatar } = ctx?.req?.cookies || {};
-
   return {
     initialValue: {
       userInfo: {
@@ -49,8 +47,8 @@ const useBootstarp = (userInfo:any) => {
   //rem适配
   useREM()
   //初始化用户数据
-  if(isEmptyObject(userInfo)) return
-  store.dispatch(authActions.setUser(userInfo))
+  if (!isEmptyObject(userInfo))  store.dispatch(authActions.setUser(userInfo))
 }
+
 
 export default MyApp

@@ -1,7 +1,6 @@
 import { NextPage } from "next"
 import { useMemo, useState } from "react"
 import { useSelector } from "react-redux"
-import { useCategorys } from "./hooks/useCategorys"
 import { selectIsMobile } from "store/system.slice"
 import MobileNavgation from "./components/mobile"
 import PCNavgation from "./components/pc"
@@ -14,15 +13,15 @@ export interface NavigationProps {
   categorys:ICaytegory[]
 }
 
-const Navigation: NextPage = () => {
-  const { categorys } = useCategorys()
+const Navigation: NextPage<Pick<NavigationProps, 'categorys'>> = ({categorys}) => {
   const [curCategoryIdx, setCurCategoryIdx ] = useState(0)
   const isMobile = useSelector(selectIsMobile)
+
 
   const navigationProps = useMemo(()=>({
     curCategoryIdx,
     setCurCategoryIdx,
-    categorys
+    categorys:categorys || []
   }),
     [categorys,setCurCategoryIdx,curCategoryIdx]
   )

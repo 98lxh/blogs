@@ -10,6 +10,7 @@ export const useIsMobile = () => {
   const debounceSize = useDebounce(size, { wait: 200 })
 
   useEffect(() => {
-    store.dispatch(systemActions.setIsMobile(!!debounceSize?.width && debounceSize.width < PC_DEVICE_WIDTH))
+    if (!debounceSize || !debounceSize.width) return
+    store.dispatch(systemActions.setIsMobile(debounceSize.width < PC_DEVICE_WIDTH))
   }, [debounceSize])
 }

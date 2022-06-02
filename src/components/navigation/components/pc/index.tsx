@@ -7,7 +7,7 @@ const PCNavgation: NextPage<NavigationProps> = ({ categorys, setCurCategoryIdx, 
   const [isOpenCategory, setIsOpenCategory] = useState(false)
 
   return (
-    <div className="bg-white sticky top-0 left-0 w-full z-10 dark:bg-zinc-800">
+    <div className="bg-white sticky top-0 left-0 w-full z-10 dark:bg-zinc-800 duration-500">
       <ul className={
         `w-[800px] relative flex flex-wrap justify-center overflow-x-auto px-[10px] py-1 text-xs text-zinc-600 duration-300 overflow-hidden mx-auto
          ${isOpenCategory ? 'h-[156px]' : 'h-[56px]'}
