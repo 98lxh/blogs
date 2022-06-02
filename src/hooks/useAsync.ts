@@ -1,6 +1,7 @@
+import { useUnmountedRef } from "ahooks"
 import { useCallback, useReducer, useState } from "react"
 import { http } from "utils/http"
-import { useMountRef } from "./useMount"
+
 
 interface State<D> {
   error: Error | null
@@ -20,9 +21,9 @@ const defaultConfig = {
 
 /* eslint-disable*/
 const useSafeDispath = <T>(dispatch: (...args: T[]) => void) => {
-  const mountedRef = useMountRef()
+  const unMountedRef = useUnmountedRef()
 
-  return useCallback((...args: T[]) => (mountedRef.current ? dispatch(...args) : void 0), [dispatch, mountedRef])
+  return useCallback((...args: T[]) => (!unMountedRef.current ? dispatch(...args) : void 0), [dispatch, unMountedRef])
 }
 
 export const useAsync = <D>(
@@ -75,6 +76,7 @@ export const useAsync = <D>(
 
     return promise
       .then(data => {
+        console.log(data)
         setData(data)
         return data
       })
