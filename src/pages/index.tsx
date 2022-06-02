@@ -1,10 +1,9 @@
-import Layout from "layout"
 import { NextPage } from "next"
 
 const Home: NextPage = () => { 
   return (
     <div>
-      <Layout />
+      出口
    </div>
   )
 }

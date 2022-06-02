@@ -1,8 +1,8 @@
 import { useScroll } from "ahooks"
 import { useEffect, useRef, useState } from "react"
+import { NavigationProps } from "../index"
 
-export const useMobileSider = () => {
-  const [curCategoryIdx, setCurCategoryIdx] = useState(0)
+export const useMobileSider = ({ curCategoryIdx, setCurCategoryIdx }: Pick<NavigationProps, 'curCategoryIdx' | 'setCurCategoryIdx'>) => {
   const siderTargetRef = useRef<HTMLUListElement | null>(null)
   const siderItemsRef = useRef<(HTMLLIElement | null)[]>([])
   const siderTargetScroll = useScroll(siderTargetRef)
@@ -14,7 +14,6 @@ export const useMobileSider = () => {
 
   useEffect(() => {
     const siderItemRect = siderItemsRef.current[curCategoryIdx]?.getBoundingClientRect()
-
     if (!siderItemRect || !siderTargetScroll) return
 
     const { width: siderItemWidth, left: sideritemLeft } = siderItemRect
@@ -26,7 +25,7 @@ export const useMobileSider = () => {
       transform: `translateX(${siderTargetScrollLeft + sideritemLeft - 10}px) translateY(-50%)`
     }))
   },
-    [curCategoryIdx, siderItemsRef]
+    [curCategoryIdx, siderItemsRef, siderTargetScroll]
   )
 
   return {

@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { HTMLAttributes } from "react"
 import Popover from "libs/popover"
-import { DarkMode, NaturalMode, Luminous } from "@icon-park/react"
+import { ColorFilter, Sun, Moon } from "@icon-park/react"
 import { THEME_DARK, THEME_LIGHT, THEME_SYSTEM } from "constant"
 
 
@@ -28,7 +28,7 @@ const HeaderTheme: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
         </div>
       )}
       >
-        <Luminous className="block w-4 h-4 p-1 duration-200 outline-none hover:bg-zinc-100/60 cursor-pointer rounded-sm" />
+        <Sun className="block w-4 h-4 p-1 duration-200 outline-none hover:bg-zinc-100/60 cursor-pointer rounded-sm" />
       </Popover>
     </div>
   )
@@ -38,19 +38,19 @@ const themes = [
   {
     id: '0',
     type: THEME_LIGHT,
-    icon: Luminous,
+    icon: Sun,
     name: '浅色模式'
   },
   {
     id: '1',
     type: THEME_DARK,
-    icon: DarkMode,
+    icon: Moon,
     name: '深色模式'
   },
   {
     id: '3',
     type: THEME_SYSTEM,
-    icon: NaturalMode,
+    icon: ColorFilter,
     name: '跟随系统'
   }
 ]

@@ -1,9 +1,11 @@
 import { NextPage } from "next"
 import { useState } from "react"
-import { ICaytegory } from "types/category"
-import Logo from "assets/icons/hamburger.svg"
-import { useMobileSider } from "components/navigation/hooks/useMobileSider"
 import Popup from "libs/popup"
+import Logo from "assets/icons/hamburger.svg"
+import { ICaytegory } from "types/category"
+import { useMobileSider } from "components/navigation/hooks/useMobileSider"
+import { NavigationProps } from "components/navigation"
+
 
 
 // eslint-disable-next-line no-unused-vars
@@ -30,13 +32,9 @@ const PopupMenu: NextPage<{ categorys: ICaytegory[], onItemClick: (curIndex: num
   )
 }
 
-const MobileNavgation: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
-  const { siderItemsRef, siderTargetRef, siderStyle, setCurCategoryIdx, curCategoryIdx } = useMobileSider()
+const MobileNavgation: NextPage<NavigationProps> = ({ categorys, setCurCategoryIdx, curCategoryIdx }) => {
+  const { siderItemsRef, siderTargetRef, siderStyle } = useMobileSider({ setCurCategoryIdx, curCategoryIdx })
   const [visiblePopup, setVisiblePopup] = useState(false)
-
-  const onClosePopup = () => {
-    setVisiblePopup(false)
-  }
 
   return (
     <div className="bg-white sticky top-0 z-10">
@@ -68,7 +66,7 @@ const MobileNavgation: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) =
       </ul>
       <Popup
         visible={visiblePopup}
-        onClose={onClosePopup}
+        onClose={()=> setVisiblePopup(false)}
       >
         <PopupMenu
           categorys={categorys}

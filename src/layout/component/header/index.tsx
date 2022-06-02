@@ -4,6 +4,7 @@ import { HTMLAttributes } from "react"
 import HeaderSearch from "./headerSearch"
 import HeaderMy from "./headerMy"
 import HeaderTheme from "./headerTheme"
+import { Snowflake } from "@icon-park/react"
 
 
 const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps }) => { 
@@ -19,11 +20,9 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
       className={`${className} w-full bg-white border border-b px-2 py-0.5`}
     >
       <div className="flex items-center">
-        <img
-          className="h-4 cursor-pointer mr-2"
+        <Snowflake
+          className="h-2 w-2 rounded-sm text-main cursor-pointer mr-2"
           onClick={onToHome}
-          src="https://www.tailwindcss.cn/safari-pinned-tab.svg"
-          alt=""
         />
         <HeaderSearch className="mr-1 flex-1" />
         <HeaderTheme className="mr-1 h-4" />

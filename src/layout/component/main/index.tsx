@@ -1,10 +1,18 @@
 import { NextPage } from "next"
-import { HTMLAttributes } from "react"
+import React, { HTMLAttributes } from "react"
+import Navigation from "components/navigation"
 
-const Main:NextPage<HTMLAttributes<HTMLElement>> = (props) => { 
+interface MainProps extends Omit<HTMLAttributes<HTMLElement>,'children'> { 
+  children:React.ReactNode
+}
+
+const Main: NextPage<MainProps> = ({ children,...props}) => { 
 
   return (
-    <main {...props}>main</main>
+    <main {...props}>
+      <Navigation />
+      {children}
+    </main>
   )
 }
 
