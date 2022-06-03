@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { useState } from "react"
 import Popup from "libs/popup"
-import Logo from "assets/icons/hamburger.svg"
+import { HamburgerButton } from "@icon-park/react"
 import { ICaytegory } from "types/category"
 import { useMobileSider } from "components/navigation/hooks/useMobileSider"
 import { NavigationProps } from "components/navigation"
@@ -47,7 +47,7 @@ const MobileNavgation: NextPage<NavigationProps> = ({ categorys, setCurCategoryI
           className="fixed top-0 right-[-1px] h-3.5 px-1 flex items-center bg-white z-20 shadow-l-white dark:bg-zinc-900 dark:shadow-l-zinc"
           onClick={() => setVisiblePopup(true)}
         >
-          <Logo className="h-1.5 w-1.5" />
+          <HamburgerButton className="h-1.5 w-1.5" />
         </li>
         {/* 滑块 */}
         <li

@@ -9,7 +9,7 @@ const list = async (
   req: NextApiRequest,
   res:NextApiResponse
 ) => { 
-  const { page = 1, size = 20, categoryId = 0 } = req.body
+  const { page = 1, size = 20, categoryId = 0 } = JSON.parse(req.body)
   const dataSource = await getInitializedDataSource()
   const categoryRepo = dataSource.getRepository(Category)
 

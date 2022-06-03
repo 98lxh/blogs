@@ -76,7 +76,6 @@ export const useAsync = <D>(
 
     return promise
       .then(data => {
-        console.log(data)
         setData(data)
         return data
       })

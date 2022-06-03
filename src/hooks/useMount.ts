@@ -10,9 +10,7 @@ export const useMountRef = () => {
   const mountRef = useRef(false)
 
   useEffect(() => {
-    setTimeout(() => {
-      mountRef.current = true
-    }, 500)
+    mountRef.current = true
     return () => {
       mountRef.current = false
     }
