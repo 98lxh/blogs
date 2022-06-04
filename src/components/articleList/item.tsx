@@ -19,7 +19,7 @@ const Item: NextPage<{ article: IArticle,width:number }> = ({ article,width }) =
           src={article.cover}
           style={{height:calcImgHeight()}}
         />
-        <div className="hidden opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 right-0 rounded duration-300 group-hover:opacity-100 xl:block">
+        <div className="opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 right-0 rounded duration-300 group-hover:opacity-100">
           <Button
             className=" absolute top-1.5 left-1.5"
             type="info"

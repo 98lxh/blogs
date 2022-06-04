@@ -87,7 +87,7 @@ export const onGetItemHeights = (items: HTMLElement[]) => {
     timer = setTimeout(() => {
       items.forEach(el => itemsHeights.push(el.offsetHeight))
       resolve(itemsHeights)
-    })
+    }, 100)
   })
 }
 
