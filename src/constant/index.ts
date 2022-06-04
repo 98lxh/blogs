@@ -1,6 +1,6 @@
 import { Light, DarkMode, Other } from "@icon-park/react"
 //pc设备指定宽度
-export const PC_DEVICE_WIDTH = 1280
+export const PC_DEVICE_WIDTH = 992
 //category本地构建数据
 export const ALL_CATEGORY_ITEM = {
   id: 0,

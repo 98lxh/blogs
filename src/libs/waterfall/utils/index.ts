@@ -79,15 +79,16 @@ export const buildColumnHeightRecord = (colunm: number) => {
   return record
 }
 
-
-//返回下一个item的left
-export const getItemLeft = (columnHeightRecord: Record<string, number>, colunmSpacing: number, containerLeft: number, columnWidth: number) => {
-  //拿到最小宽度的列
-  const column = getMinHeightColumn(columnHeightRecord) as unknown as number
-  return column * (columnWidth + colunmSpacing) + containerLeft
+let timer: any = 0
+export const onGetItemHeights = (items: HTMLElement[]) => {
+  if (timer) clearTimeout(timer)
+  const itemsHeights: number[] = []
+  return new Promise<number[]>(resolve => {
+    timer = setTimeout(() => {
+      items.forEach(el => itemsHeights.push(el.offsetHeight))
+      resolve(itemsHeights)
+    })
+  })
 }
 
-//返回下一个item的top
-export const getItemTop = (columnHeightRecord: Record<string, number>) => {
-  return getMinHeight(columnHeightRecord)
-}
+

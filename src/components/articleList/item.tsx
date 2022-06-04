@@ -2,14 +2,22 @@ import Button from "libs/button"
 import { NextPage } from "next"
 import { IArticle } from "types/article"
 import { Eyes } from "@icon-park/react"
-const Item: NextPage<{ article: IArticle }> = ({article }) => {
+import { mapImgUrlToSize } from "config/mapUrlToImgSize"
+
+const Item: NextPage<{ article: IArticle,width:number }> = ({ article,width }) => {
+
+  const calcImgHeight = () => { 
+    const imgSize = mapImgUrlToSize[article.cover]
+    return (width / imgSize.width) * imgSize.height
+  }
   
   return (
-    <div className="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pd-1 w-[230px]">
+    <div className="bg-white dark:bg-zinc-800 rounded pd-1">
       <div className="relative w-full rounded cursor-zoom-in group">
         <img
           className="w-full h-full rounded bg-transparent"
           src={article.cover}
+          style={{height:calcImgHeight()}}
         />
         <div className="hidden opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 right-0 rounded duration-300 group-hover:opacity-100 xl:block">
           <Button
