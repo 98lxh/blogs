@@ -32,55 +32,64 @@ const PopupMenu: NextPage<{ categorys: ICaytegory[], onItemClick: (curIndex: num
   )
 }
 
-const MobileNavgation: NextPage<NavigationProps> = ({ categorys, setCurCategoryIdx, curCategoryIdx }) => {
-  const { siderItemsRef, siderTargetRef, siderStyle } = useMobileSider({ setCurCategoryIdx, curCategoryIdx })
-  const [visiblePopup, setVisiblePopup] = useState(false)
+const MobileNavgation: NextPage<NavigationProps> =
+  ({ categorys,
+    setCurCategoryIdx,
+    curCategoryIdx,
+    setCategoryId
+  }) => {
+    const { siderItemsRef, siderTargetRef, siderStyle } = useMobileSider({ setCurCategoryIdx, curCategoryIdx })
+    const [visiblePopup, setVisiblePopup] = useState(false)
 
-  return (
-    <div className="bg-white sticky top-0 z-10 dark:bg-zinc-900 duration-500 transition-colors">
-      <ul
-        className="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden last:mr-4"
-        ref={siderTargetRef}
-      >
-        {/* 弹出层按钮 */}
-        <li
-          className="fixed top-0 right-[-1px] h-3.5 px-1 flex items-center bg-white z-20 shadow-l-white dark:bg-zinc-900 dark:shadow-l-zinc"
-          onClick={() => setVisiblePopup(true)}
+    return (
+      <div className="bg-white sticky top-0 z-10 dark:bg-zinc-900 duration-500 transition-colors">
+        <ul
+          className="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden last:mr-4"
+          ref={siderTargetRef}
         >
-          <HamburgerButton className="h-1.5 w-1.5" />
-        </li>
-        {/* 滑块 */}
-        <li
-          style={siderStyle}
-          className="absolute h-[20px] bg-gray-700 top-1/2 rounded-lg duration-150 dark:bg-zinc-800" />
-        
-        {
-          categorys.map((category, index) => (
-            <li
-              className={`shrink-0 px-1.5 py-0 z-10 duration-150 ${curCategoryIdx === index && 'text-zinc-100'}`}
-              key={category.id}
-              onClick={() => setCurCategoryIdx(index)}
-              ref={siderItem => siderItemsRef.current[index] = siderItem}
-            >
-              {category.title}
-            </li>
-          ))
-        }
-      </ul>
-      <Popup
-        visible={visiblePopup}
-        onClose={()=> setVisiblePopup(false)}
-      >
-        <PopupMenu
-          categorys={categorys}
-          onItemClick={(index: number) => {
-            setCurCategoryIdx(index)
-            setVisiblePopup(false)
-          }}
-        />
-      </Popup>
-    </div>
-  )
-}
+          {/* 弹出层按钮 */}
+          <li
+            className="fixed top-0 right-[-1px] h-3.5 px-1 flex items-center bg-white z-20 shadow-l-white dark:bg-zinc-900 dark:shadow-l-zinc"
+            onClick={() => setVisiblePopup(true)}
+          >
+            <HamburgerButton className="h-1.5 w-1.5" />
+          </li>
+          {/* 滑块 */}
+          <li
+            style={siderStyle}
+            className="absolute h-[20px] bg-gray-700 top-1/2 rounded-lg duration-150 dark:bg-zinc-800" />
+
+          {
+            categorys.map((category, index) => (
+              <li
+                className={`shrink-0 px-1.5 py-0 z-10 duration-150 ${curCategoryIdx === index && 'text-zinc-100'}`}
+                key={category.id}
+                onClick={() => {
+                  setCurCategoryIdx(index)
+                  setCategoryId(category.id)
+                }}
+                ref={siderItem => siderItemsRef.current[index] = siderItem}
+              >
+                {category.title}
+              </li>
+            ))
+          }
+        </ul>
+        <Popup
+          visible={visiblePopup}
+          onClose={() => setVisiblePopup(false)}
+        >
+          <PopupMenu
+            categorys={categorys}
+            onItemClick={(index: number) => {
+              setCurCategoryIdx(index)
+              setCategoryId(categorys[index].id)
+              setVisiblePopup(false)
+            }}
+          />
+        </Popup>
+      </div>
+    )
+  }
 
 export default MobileNavgation

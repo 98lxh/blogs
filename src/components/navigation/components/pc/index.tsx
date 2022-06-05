@@ -3,7 +3,14 @@ import { useState } from "react"
 import { DoubleDown, DoubleUp } from "@icon-park/react"
 import { NavigationProps } from "components/navigation"
 
-const PCNavgation: NextPage<NavigationProps> = ({ categorys, setCurCategoryIdx, curCategoryIdx }) => {
+const PCNavgation: NextPage<NavigationProps> = (
+  {
+    categorys,
+    setCurCategoryIdx,
+    curCategoryIdx,
+    setCategoryId
+  }
+) => {
   const [isOpenCategory, setIsOpenCategory] = useState(false)
 
   return (
@@ -30,7 +37,10 @@ const PCNavgation: NextPage<NavigationProps> = ({ categorys, setCurCategoryIdx, 
                  dark:hover:bg-zinc-900
                 `
               }
-              onClick={() => setCurCategoryIdx(index)}
+              onClick={() => {
+                setCurCategoryIdx(index)
+                setCategoryId(category.id)
+              }}
               key={category.id}
             >
               {category.title}

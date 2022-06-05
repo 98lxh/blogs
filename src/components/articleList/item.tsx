@@ -9,6 +9,7 @@ import { buildRandomColor } from "utils/buildRandomColor"
 
 const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ article, width, lazy }) => {
   const imageRef = useRef<HTMLImageElement | null>(null)
+
   const calcImgHeight = () => { 
     const imgSize = mapImgUrlToSize[article.cover]
     return (width / imgSize.width) * imgSize.height

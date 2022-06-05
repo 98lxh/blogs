@@ -5,16 +5,16 @@ import { Category } from "db/enyity/category"
 import { NextPage } from "next"
 import { ALL_CATEGORY_ITEM } from "constant"
 import { ICaytegory } from "types/category"
+import { useState } from "react"
 
 
 const Home: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => { 
-  
+  const [categoryId, setCategoryId] = useState(0)
+
   return (
     <div className="h-full overflow-auto bg-white  dark:bg-zinc-800 duration-500 transition-colors">
-      <Navigation categorys={categorys} />
-      <div className="max-w-screen-xl mx-auto relative m-1 xl:mt-4">
-        <ArticleList />
-      </div>
+      <Navigation categorys={categorys} setCategoryId={setCategoryId } />
+      <ArticleList categoryId={categoryId} />
     </div>
   )
 }

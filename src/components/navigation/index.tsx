@@ -10,20 +10,22 @@ export interface NavigationProps {
   curCategoryIdx: number
   // eslint-disable-next-line no-unused-vars
   setCurCategoryIdx: (value: number) => void
+  // eslint-disable-next-line no-unused-vars
+  setCategoryId:(value:number) => void
   categorys:ICaytegory[]
 }
 
-const Navigation: NextPage<Pick<NavigationProps, 'categorys'>> = ({categorys}) => {
+const Navigation: NextPage<Pick<NavigationProps, 'categorys' | 'setCategoryId'>> = ({categorys,setCategoryId}) => {
   const [curCategoryIdx, setCurCategoryIdx ] = useState(0)
   const isMobile = useSelector(selectIsMobile)
-
 
   const navigationProps = useMemo(()=>({
     curCategoryIdx,
     setCurCategoryIdx,
+    setCategoryId,
     categorys:categorys || []
   }),
-    [categorys,setCurCategoryIdx,curCategoryIdx]
+    [categorys,setCurCategoryIdx,curCategoryIdx,setCategoryId]
   )
 
   return (
