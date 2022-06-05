@@ -2,22 +2,23 @@ import { useHttp } from "hooks/useAsync";
 import { useMount } from "hooks/useMount";
 import Infinite from "libs/infinite";
 import Waterfall from "libs/waterfall";
+import Item from "./item";
 import { NextPage } from "next";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsMobile } from "store/system.slice";
 import { IArticle } from "types/article";
-import Item from "./item";
 
 const List: NextPage = () => {
   const client = useHttp()
   const [articleList, setArticleList] = useState<IArticle[]>([])
   const [isFinished, setIsFinished] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [complatePosition,setComplatePosition] = useState(false)
   const isMobile = useSelector(selectIsMobile)
   const [query, setQuery] = useState({
     page: 1,
-    size: 10
+    size: 20
   })
 
 
@@ -58,7 +59,8 @@ const List: NextPage = () => {
           nodeKey="id"
           picturePreReading={false}
           colunm={isMobile ? 2 : 5}
-          renderItem={(article, width) => <Item article={article} width={width}></Item>}
+          onComplatePosition={()=>!complatePosition && setComplatePosition(true)}
+          renderItem={(article, width) => <Item article={article} width={width} lazy={complatePosition}></Item>}
         />
       </Infinite>
     </div>

@@ -9,6 +9,7 @@ interface WaterfallProps {
   colunmSpacing?: number
   rowSpacing?: number
   picturePreReading?: boolean
+  onComplatePosition?:() => void
   // eslint-disable-next-line no-unused-vars
   renderItem: (item: any, columnWidth: number, index: number) => React.ReactNode
 }
@@ -18,6 +19,7 @@ const Waterfall: NextPage<WaterfallProps> = ({
   colunmSpacing = 20,
   rowSpacing = 20,
   picturePreReading = true,
+  onComplatePosition,
   renderItem,
   nodeKey,
   dataSource
@@ -90,6 +92,7 @@ const Waterfall: NextPage<WaterfallProps> = ({
       increasingHeight(index)
     })
 
+    onComplatePosition && onComplatePosition()
     setContainerHeight(getMaxHeight(columnHeightRecord))
   }
 
@@ -127,19 +130,25 @@ const Waterfall: NextPage<WaterfallProps> = ({
       style={{ height: conatinerHeight + 'px' }}
     >
       {
-        dataSource.map((item, index) => (
-          <div
-            key={nodeKey ? item[nodeKey] : index}
-            className="waterfall-item absolute duration-300"
-            style={{
-              width: columnWidth + 'px',
-              left: mapStyle[index]?.left + 'px',
-              top: mapStyle[index]?.top + 'px',
-            }}
-          >
-            {renderItem && renderItem(item, columnWidth, index)}
-          </div>
-        ))
+        dataSource && columnWidth
+          ? 
+          <>
+            {
+            dataSource.map((item, index) => (
+              <div
+                key={nodeKey ? item[nodeKey] : index}
+                className="waterfall-item absolute duration-300"
+                style={{
+                  width: columnWidth + 'px',
+                  left: mapStyle[index]?.left + 'px',
+                  top: mapStyle[index]?.top + 'px',
+                }}
+              >
+                {renderItem && renderItem(item, columnWidth, index)}
+              </div>
+            ))}
+          </>
+          : null
       }
     </div>
   )
