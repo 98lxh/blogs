@@ -18,7 +18,7 @@ const List: NextPage = () => {
   const isMobile = useSelector(selectIsMobile)
   const [query, setQuery] = useState({
     page: 1,
-    size: 20
+    size: 10
   })
 
 

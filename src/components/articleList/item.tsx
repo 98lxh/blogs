@@ -1,10 +1,11 @@
-import Button from "libs/button"
+import { useRef } from "react"
 import { NextPage } from "next"
+import Button from "libs/button"
 import { IArticle } from "types/article"
 import { Eyes } from "@icon-park/react"
 import { mapImgUrlToSize } from "config/mapUrlToImgSize"
-import { useRef } from "react"
 import { useLazy } from "hooks/useLazy"
+import { buildRandomColor } from "utils/buildRandomColor"
 
 const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ article, width, lazy }) => {
   const imageRef = useRef<HTMLImageElement | null>(null)
@@ -20,7 +21,7 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
   
   return (
     <div className="bg-white dark:bg-zinc-800 rounded pd-1">
-      <div className="relative w-full rounded cursor-zoom-in group">
+      <div className="relative w-full rounded cursor-zoom-in group" style={{backgroundColor:buildRandomColor()}}>
         <img
           className="w-full h-full rounded bg-transparent"
           ref={imageRef}
