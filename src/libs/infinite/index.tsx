@@ -15,14 +15,17 @@ interface InfiniteProps {
 const Infinite: NextPage<InfiniteProps> = ({ children, isLoading,isFinished,setIsLoading,onLoading }) => {
   const loadingRef = useRef<HTMLDivElement | null>(null)
   const [loadRefInViewPort] = useInViewport(loadingRef)
+  const isInit = useRef(true)
 
   useEffect(() => { 
     if (
-       (!isLoading && !isFinished && loadRefInViewPort) 
+       (!isLoading && !isFinished && loadRefInViewPort && !isInit.current) 
     ) { 
       setIsLoading && setIsLoading(true)
       onLoading && onLoading()
     }
+
+    isInit.current = false
   },
     [loadRefInViewPort]
   )
