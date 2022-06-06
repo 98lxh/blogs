@@ -10,7 +10,6 @@ import { useState } from "react"
 
 const Home: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => { 
   const [categoryId, setCategoryId] = useState(0)
-
   return (
     <div className="h-full overflow-auto bg-white  dark:bg-zinc-800 duration-500 transition-colors">
       <Navigation categorys={categorys} setCategoryId={setCategoryId } />

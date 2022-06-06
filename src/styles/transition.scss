@@ -99,3 +99,33 @@ svg{
   width: 100%;
   height: 100%;
 }
+
+
+
+.up-enter, .up-appear,
+.up-exit-done
+{
+  opacity: 0;
+  transform:translate3d(-50%,-50%,0);
+}
+
+.up-enter-active, .up-appear-active { 
+  opacity: 1;
+  transform:translate(-50%,50%);
+  transition: all .3s;
+}
+.up-enter-done {
+  transform:translate(-50%,50%);
+  opacity: 1;
+}
+
+.up-exit {
+  transform:translate(-50%,50%);
+  opacity: 1;
+}
+
+.up-exit-active {
+  opacity: 0;
+  transform:translate(-50%,-50%);
+  transition: all .3s;
+}

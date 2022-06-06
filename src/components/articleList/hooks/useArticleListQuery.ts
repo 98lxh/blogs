@@ -26,9 +26,9 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
 
     case 'search': {
       return {
-        ...intialState,
+        ...prevState,
+        page: 1,
         reset: true,
-        categoryId: data?.categoryId || 0,
         search: data?.search || '',
       }
     }

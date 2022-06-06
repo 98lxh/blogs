@@ -15,7 +15,7 @@ const list = async (
   let where: string = ''
   let parameters: any = {}
   let categoryWhere: any = {}
-
+  console.log(page, size, categoryId, search)
   if (categoryId) {
     const category = await categoryRepo.findOneBy({ id: categoryId })
     categoryWhere = {

@@ -41,7 +41,7 @@ export const useArticleListSearch = (categoryId: number) => {
     if (prevCategoryId.current !== categoryId) {
       queryDispatch({ type: 'category', data: { categoryId } })
     } else if (prevSearch.current !== search) {
-      queryDispatch({ type: 'search', data: { search, categoryId } })
+      queryDispatch({ type: 'search', data: { search } })
     } else {
       getArticleList()
     }

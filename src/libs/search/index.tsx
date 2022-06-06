@@ -89,7 +89,7 @@ const SearchDeleteIcon: NextPage<Pick<SearchProps, 'value' | 'onChange' | 'onCle
     value
       ? (
         <DeleteIcon
-          className="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] right-8 cursor-pointer"
+          className="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] right-8 cursor-pointer text-zinc-900 dark:text-zinc-200"
           onClick={() => { 
             onChange && onChange('')
             onClear && onClear()
