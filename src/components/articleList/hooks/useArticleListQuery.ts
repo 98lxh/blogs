@@ -1,14 +1,16 @@
 import { useReducer } from 'react';
+
 const intialState = {
   size: 10,
   page: 1,
   categoryId: 0,
+  search: '',
   reset: false
 }
 
 type QueryAction = {
   data?: Partial<typeof intialState>
-  type: 'category' | 'page'
+  type: 'category' | 'page' | 'search'
 }
 
 const listQueryReducer = (prevState: typeof intialState, action: QueryAction) => {
@@ -22,6 +24,15 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
       }
     }
 
+    case 'search': {
+      return {
+        ...intialState,
+        reset: true,
+        categoryId: data?.categoryId || 0,
+        search: data?.search || '',
+      }
+    }
+
     case 'page': {
       return {
         ...prevState,
@@ -32,4 +43,4 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
   }
 }
 
-export const useListQuery = () => useReducer(listQueryReducer, intialState)
+export const useArtcleListQuery = () => useReducer(listQueryReducer, intialState)

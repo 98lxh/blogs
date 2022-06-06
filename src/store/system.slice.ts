@@ -5,13 +5,15 @@ import { ICaytegory } from 'types/category';
 interface State {
   isMobile?: boolean
   themeType?: any
-  categorys: ICaytegory[]
+  categorys: ICaytegory[],
+  searchText: ''
 }
 
 const initialState: State = {
   isMobile: undefined,
   themeType: undefined,
-  categorys: []
+  categorys: [],
+  searchText: ''
 }
 
 export const systemSlice = createSlice({
@@ -27,6 +29,9 @@ export const systemSlice = createSlice({
     },
     setCategory(state, action) {
       state.categorys = action.payload
+    },
+    setSearchText(state, action) {
+      state.searchText = action.payload
     }
   }
 })
@@ -35,3 +40,4 @@ export const systemSlice = createSlice({
 export const systemActions = systemSlice.actions
 export const selectIsMobile = (state: RootState) => state.system.isMobile
 export const selectThemeType = (state: RootState) => state.system.themeType
+export const selectSearchText = (state: RootState) => state.system.searchText

@@ -7,17 +7,27 @@ import { EXCEPTION_ARTICLE } from "../config/codes"
 //获取分页文章列表
 const list = async (
   req: NextApiRequest,
-  res:NextApiResponse
-) => { 
-  const { page = 1, size = 20, categoryId = 0 } = JSON.parse(req.body)
+  res: NextApiResponse
+) => {
+  const { page = 1, size = 20, categoryId = 0, search = '' } = JSON.parse(req.body)
   const dataSource = await getInitializedDataSource()
   const categoryRepo = dataSource.getRepository(Category)
+  let where: string = ''
+  let parameters: any = {}
+  let categoryWhere: any = {}
 
-  let where: any
-  if (categoryId) { 
+  if (categoryId) {
     const category = await categoryRepo.findOneBy({ id: categoryId })
-    where = {
+    categoryWhere = {
       category
+    }
+  }
+
+  if (search) {
+    where += `articles.title=:title`
+    parameters = {
+      ...parameters,
+      title: search
     }
   }
 
@@ -26,10 +36,9 @@ const list = async (
     .createQueryBuilder("articles")
     .offset((page - 1) * size)
     .limit(size)
-    .setFindOptions({
-      where,
-      relations:["user","category"]
-    })
+    .where(where)
+    .setParameters(parameters)
+    .setFindOptions({ where: categoryWhere, relations: ["user", "category"] })
     .getMany()
 
   if (articles.length) {
@@ -37,7 +46,7 @@ const list = async (
       code: 0,
       data: articles
     })
-  } else { 
+  } else {
     res.status(200).json(EXCEPTION_ARTICLE.GET_LIST_FAILED)
   }
 }

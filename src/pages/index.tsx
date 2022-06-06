@@ -1,9 +1,9 @@
 import getInitializedDataSource from "db"
+import { NextPage } from "next"
 import Navigation from "components/navigation"
 import ArticleList from "components/articleList"
-import { Category } from "db/enyity/category"
-import { NextPage } from "next"
 import { ALL_CATEGORY_ITEM } from "constant"
+import { Category } from "db/enyity/category"
 import { ICaytegory } from "types/category"
 import { useState } from "react"
 
