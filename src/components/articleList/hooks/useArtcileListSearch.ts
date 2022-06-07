@@ -17,19 +17,17 @@ export const useArticleListSearch = (categoryId: number) => {
 
   const getArticleList = async () => {
     const { reset, ...resetQuery } = query
-    if (isFinished && !reset) return
     setIsLoading(true)
-
+    if (isFinished && !reset) return
     const list = await client('/article/list', {
       method: 'POST',
       data: resetQuery
     })
-
     setIsLoading(false)
     reset && setIsFinished(false)
 
     if (!list) {
-      if (query.search) setArticleList([])
+      if (resetQuery.search && resetQuery.page === 1) setArticleList([])
       return setIsFinished(true)
     }
 
@@ -58,6 +56,7 @@ export const useArticleListSearch = (categoryId: number) => {
 
   return useMemo(() => ({
     isLoading,
+    setIsLoading,
     isFinished,
     articleList,
     queryDispatch
@@ -66,7 +65,8 @@ export const useArticleListSearch = (categoryId: number) => {
       isLoading,
       isFinished,
       articleList,
-      queryDispatch
+      queryDispatch,
+      setIsLoading
     ]
   )
 }

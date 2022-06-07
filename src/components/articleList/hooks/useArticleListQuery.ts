@@ -15,7 +15,6 @@ type QueryAction = {
 
 const listQueryReducer = (prevState: typeof intialState, action: QueryAction) => {
   const { type, data } = action
-  console.log(type)
 
   switch (type) {
     case 'category': {

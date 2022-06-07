@@ -125,7 +125,7 @@ const Waterfall: NextPage<WaterfallProps> = ({
 
   return (
     <div
-      className="relative"
+      className="relative overflow-x-hidden"
       ref={containerRef}
       style={{ height: conatinerHeight + 'px' }}
     >
