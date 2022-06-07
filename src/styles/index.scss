@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "./transition.scss";
+@import "./base.scss";

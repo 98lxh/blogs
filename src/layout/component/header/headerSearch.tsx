@@ -61,7 +61,9 @@ const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ o
         {
           historyList.map((history, index) => (
             <div
-              className="mr-2 mb-1.5 flex items-center cursor-pointer bg-zinc-100 px-1.5 py-0.5 text-zinc-900 text-sm font-bold rounded-sm duration-300 dark:bg-zinc-900 dark:text-zinc-200"
+              className="mr-2 mb-1.5 flex items-center cursor-pointer bg-zinc-100 px-1.5 py-0.5
+               text-zinc-900 text-sm font-bold rounded-sm duration-300 dark:bg-zinc-900 
+               dark:text-zinc-200"
               key={index}
               onClick={()=>onHistoryItemClick(history)}
             >

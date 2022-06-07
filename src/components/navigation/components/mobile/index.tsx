@@ -44,7 +44,7 @@ const MobileNavgation: NextPage<NavigationProps> =
     return (
       <div className="bg-white sticky top-0 z-10 dark:bg-zinc-900 duration-500 transition-colors">
         <ul
-          className="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden last:mr-4"
+          className="relative flex overflow-x-auto p-1 text-xs text-zinc-600 overflow-hidden last:mr-4 scrollbar-thin scrollbar-thumb-transparent"
           ref={siderTargetRef}
         >
           {/* 弹出层按钮 */}

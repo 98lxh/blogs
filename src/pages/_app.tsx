@@ -4,10 +4,9 @@ import { store } from 'store'
 import { authActions } from 'store/auth.slice'
 import { useREM } from 'hooks/useREM'
 import { useIsMobile } from 'hooks/useIsMobile'
-import { isEmptyObject } from 'utils/isEmptyObject'
 import Layout from 'layout'
+import AppInitialization from 'components/appInitialization'
 import "styles/index.scss"
-import "styles/transition.scss"
 
 interface AppProps {
   initialValue: Record<any, any>,
@@ -16,14 +15,14 @@ interface AppProps {
 }
 
 function MyApp({ initialValue, Component, pageProps }: AppProps) {
-  const { userInfo } = initialValue || {}
-  useBootstarp(userInfo)
-
+  useBootstarp(initialValue.userInfo)
   return (
     <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-       </Layout>
+      <AppInitialization>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AppInitialization>
     </Provider>
   )
 }
@@ -41,13 +40,13 @@ MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
   }
 }
 
-const useBootstarp = (userInfo:any) => { 
+const useBootstarp = (userInfo: any) => {
   //区别移动端pc端
   useIsMobile()
   //rem适配
   useREM()
   //初始化用户数据
-  if (!isEmptyObject(userInfo))  store.dispatch(authActions.setUser(userInfo))
+  store.dispatch(authActions.setUser(userInfo))
 }
 
 
