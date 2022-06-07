@@ -18,15 +18,15 @@ export const usePopoverPosition = () => {
     switch (type) {
       case 'top-left': {
         return {
-          top: '0px',
-          left: -overlaySize!.width + 'px'
+          top: '10px',
+          left: -overlaySize!.width - 5 + 'px'
         }
       }
 
       case 'top-right': {
         return {
-          top: '0px',
-          left: childrenSize!.width + 'px'
+          top: '10px',
+          left: childrenSize!.width - 5 + 'px'
         }
       }
 

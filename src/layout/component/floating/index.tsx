@@ -3,7 +3,7 @@ import Popover from "libs/popover"
 const Floating = () => {
 
   return (
-    <div className=" fixed bottom-10 right-5">
+    <div className=" fixed bottom-10 right-2">
       {/* 引导 */}
       <div className="w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 
       border-zinc-200 rounded-full flex justify-center items-center cursor-pointer 
