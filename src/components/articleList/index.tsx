@@ -10,14 +10,13 @@ import { useArticleListSearch } from "./hooks/useArtcileListSearch";
 const List: NextPage<{ categoryId: number }> = ({ categoryId }) => {
   const isMobile = useSelector(selectIsMobile)
   const [complatePosition, setComplatePosition] = useState(false)
-  const { articleList, isFinished, isLoading, queryDispatch,setIsLoading } = useArticleListSearch(categoryId)
+  const { articleList, isFinished, isLoading, queryDispatch } = useArticleListSearch(categoryId)
 
   return (
     <div className="max-w-screen-xl mx-auto relative m-1 xl:mt-4">
       <Infinite
         isLoading={isLoading}
         isFinished={isFinished}
-        setIsLoading={setIsLoading}
         onLoad={() => queryDispatch({ type: 'page' })}
       >
         <Waterfall

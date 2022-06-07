@@ -56,7 +56,6 @@ export const useArticleListSearch = (categoryId: number) => {
 
   return useMemo(() => ({
     isLoading,
-    setIsLoading,
     isFinished,
     articleList,
     queryDispatch
@@ -66,7 +65,6 @@ export const useArticleListSearch = (categoryId: number) => {
       isFinished,
       articleList,
       queryDispatch,
-      setIsLoading
     ]
   )
 }

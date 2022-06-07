@@ -7,7 +7,6 @@ import { Category } from "db/enyity/category"
 import { ICaytegory } from "types/category"
 import { useState } from "react"
 
-
 const Home: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => { 
   const [categoryId, setCategoryId] = useState(0)
   return (
