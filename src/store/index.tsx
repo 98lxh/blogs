@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { authSlice } from "./auth.slice"
-import { historySlice } from "./history.slice"
-import { systemSlice } from "./system.slice"
+import { authSlice } from "./slices/auth.slice"
+import { searchSlice } from "./slices/search.slice"
+import { systemSlice } from "./slices/system.slice"
 
 
 export const rootReducer = {
   auth: authSlice.reducer,
   system: systemSlice.reducer,
-  history:historySlice.reducer
+  search:searchSlice.reducer
 }
 
 export const store = configureStore({

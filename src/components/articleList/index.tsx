@@ -1,16 +1,16 @@
 import { NextPage } from "next";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectIsMobile } from "store/slices/system.slice";
+import { useArticleListSearch } from "./hooks/useArtcileListSearch";
 import Infinite from "libs/infinite";
 import Waterfall from "libs/waterfall";
 import Item from "./item";
-import { useSelector } from "react-redux";
-import { selectIsMobile } from "store/system.slice";
-import { useArticleListSearch } from "./hooks/useArtcileListSearch";
 
-const List: NextPage<{ categoryId: number }> = ({ categoryId }) => {
+const List: NextPage = () => {
   const isMobile = useSelector(selectIsMobile)
   const [complatePosition, setComplatePosition] = useState(false)
-  const { articleList, isFinished, isLoading, queryDispatch } = useArticleListSearch(categoryId)
+  const { articleList, isFinished, isLoading, queryDispatch } = useArticleListSearch()
 
   return (
     <div className="max-w-screen-xl mx-auto relative m-1 xl:mt-4">

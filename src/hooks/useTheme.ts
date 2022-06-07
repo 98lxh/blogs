@@ -2,12 +2,11 @@ import { THEME_DARK, THEME_LIGHT, THEME_SYSTEM } from "constant"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { store } from "store"
-import { selectThemeType, systemActions } from "store/system.slice"
+import { selectThemeType, systemActions } from "store/slices/system.slice"
 import { useMount } from "./useMount"
 let matchMedia: MediaQueryList
 
 const watchSystemThemeChange = () => {
-  //仅需一次初始化
   if (matchMedia) return
   matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
   matchMedia.onchange = () => {
@@ -36,7 +35,7 @@ const changeTheme = (themeType: string) => {
 export const useTheme = () => {
   const themeType = useSelector(selectThemeType)
 
-  //从本地存储中读取初始化应用主题
+  //初始化从本地存储中读取初始化应用主题
   useMount(() => {
     store.dispatch(systemActions.setThemeType(window.localStorage.getItem('theme')))
   })

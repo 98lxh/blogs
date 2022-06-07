@@ -4,12 +4,11 @@ import { HistoryQuery, Close, Delete } from "@icon-park/react"
 import Search from "libs/search"
 import Mark from "libs/mark"
 import confirm from "libs/confirm"
+import { store } from "store"
+import { useSelector } from "react-redux"
 import { useDebounce } from "ahooks"
 import { useHint } from "layout/hooks/useHint"
-import { store } from "store"
-import { systemActions } from "store/system.slice"
-import { useSelector } from "react-redux"
-import { historyActions, selectHistorys } from "store/history.slice"
+import { searchActions, selectHistorys } from "store/slices/search.slice"
 
 // eslint-disable-next-line no-unused-vars
 const Hint: NextPage<{ keyword: string, onHintItemClick: (search: string) => void }> = ({ keyword, onHintItemClick }) => {
@@ -42,7 +41,7 @@ const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ o
       title: '确认',
       content: '是否确认清空历史搜索记录',
       onConfirm() { 
-        store.dispatch(historyActions.clearHistory())
+        store.dispatch(searchActions.clearHistory())
       }
     })
   }
@@ -72,7 +71,7 @@ const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ o
                 className="w-2.5 h-2.5 p-0.5 ml-1 duration-300 rounded-sm hover:bg-zinc-100 dark:hover:bg-zinc-700"
                 onClick={(evt) => {
                   evt.stopPropagation()
-                  store.dispatch(historyActions.deleteHistory(index))
+                  store.dispatch(searchActions.deleteHistory(index))
                 }}
               />
             </div>
@@ -88,8 +87,8 @@ const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
 
   const handleSearch = (search: string) => {
     setSearchValue(search)
-    store.dispatch(historyActions.setHistory(search))
-    store.dispatch(systemActions.setSearchText(search))
+    store.dispatch(searchActions.setHistory(search))
+    store.dispatch(searchActions.setSearchText(search))
   }
 
   return (
@@ -97,7 +96,7 @@ const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
       <Search
         value={searchVal}
         onChange={setSearchValue}
-        onClear={()=> store.dispatch(systemActions.setSearchText(''))}
+        onClear={()=> store.dispatch(searchActions.setSearchText(''))}
         placeholder="搜索"
         dropdown={(
           <div>

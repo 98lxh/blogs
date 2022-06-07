@@ -1,16 +1,20 @@
-import { RootState } from './index';
+import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
 
 interface State {
   historys: string[]
+  categoryId: number
+  searchText: string
 }
 
 const initialState: State = {
-  historys: []
+  historys: [],
+  categoryId: 0,
+  searchText: ''
 }
 
-export const historySlice = createSlice({
-  name: 'history',
+export const searchSlice = createSlice({
+  name: 'search',
   initialState,
   reducers: {
     initHistory(state, action) {
@@ -31,10 +35,18 @@ export const historySlice = createSlice({
     clearHistory(state) {
       state.historys = []
       localStorage.setItem('history', JSON.stringify([]))
+    },
+    setCategoryId(state, action) {
+      state.categoryId = action.payload
+    },
+    setSearchText(state, action) {
+      state.searchText = action.payload
     }
   }
 })
 
 
-export const historyActions = historySlice.actions
-export const selectHistorys = (state: RootState) => state.history.historys
+export const searchActions = searchSlice.actions
+export const selectHistorys = (state: RootState) => state.search.historys
+export const selectCategoryId = (state: RootState) => state.search.categoryId
+export const selectSearchText = (state: RootState) => state.search.searchText

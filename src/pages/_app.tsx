@@ -1,11 +1,11 @@
 import { NextPage } from 'next'
 import { Provider } from 'react-redux'
 import { store } from 'store'
-import { authActions } from 'store/auth.slice'
+import { authActions } from 'store/slices/auth.slice'
 import { useREM } from 'hooks/useREM'
 import { useIsMobile } from 'hooks/useIsMobile'
-import Layout from 'layout'
 import AppInitialization from 'components/appInitialization'
+import Layout from 'layout'
 import "styles/index.scss"
 
 interface AppProps {

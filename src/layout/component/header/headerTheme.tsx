@@ -4,7 +4,7 @@ import Popover from "libs/popover"
 import { Display, Sun, Moon } from "@icon-park/react"
 import { THEME_DARK, THEME_LIGHT, THEME_SYSTEM } from "constant"
 import { useSelector } from "react-redux"
-import { selectThemeType, systemActions } from "store/system.slice"
+import { selectThemeType, systemActions } from "store/slices/system.slice"
 import { store } from "store"
 
 const HeaderTheme: NextPage<HTMLAttributes<HTMLElement>> = (props) => {

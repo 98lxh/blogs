@@ -1,4 +1,4 @@
-import { RootState } from './index';
+import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
 
 export type User = {

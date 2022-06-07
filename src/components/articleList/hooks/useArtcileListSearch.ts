@@ -1,13 +1,14 @@
 import { useHttp } from "hooks/useAsync"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useSelector } from "react-redux"
-import { selectSearchText } from "store/system.slice"
-import { IArticle } from "types/article"
+import { selectCategoryId, selectSearchText } from "store/slices/search.slice"
 import { useArtcleListQuery } from "./useArticleListQuery"
+import { IArticle } from "types/article"
 
-export const useArticleListSearch = (categoryId: number) => {
+export const useArticleListSearch = () => {
   const client = useHttp()
   const search = useSelector(selectSearchText)
+  const categoryId = useSelector(selectCategoryId)
   const prevCategoryId = useRef(categoryId)
   const prevSearch = useRef(search)
   const [articleList, setArticleList] = useState<IArticle[]>([])
