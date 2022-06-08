@@ -21,7 +21,7 @@ const Infinite: NextPage<InfiniteProps> = ({ children, isLoading, isFinished, on
       if (!isLoading && !isFinished && loadRefInViewPort) {
         onLoad && onLoad()
       }
-    },500)
+    },300)
   }
 
   useEffect(() => {

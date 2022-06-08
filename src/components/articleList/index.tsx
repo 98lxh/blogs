@@ -25,7 +25,7 @@ const List: NextPage = () => {
           picturePreReading={false}
           colunm={isMobile ? 2 : 5}
           onComplatePosition={() => !complatePosition && setComplatePosition(true)}
-          renderItem={(article, width) => <Item article={article} width={width} lazy={complatePosition} />}
+          renderItem={(article, width) =><Item article={article} width={width} lazy={complatePosition} />}
         />
       </Infinite>
     </div>

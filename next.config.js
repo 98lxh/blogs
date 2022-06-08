@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
-const withSvgr = require("next-svgr");
+const nextConfig = {
+  reactStrictMode: true,
+}
 
-module.exports = withSvgr({
-  // your config for other plugins or the general next.js here...
-});
+const removeImports = require('next-remove-imports')()
+
+module.exports = removeImports(nextConfig)

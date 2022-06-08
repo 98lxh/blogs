@@ -19,9 +19,15 @@ function MyApp({ initialValue, Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <AppInitialization>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        {
+          (Component as any).noLayout
+            ? <Component {...pageProps} />
+            : (
+            <Layout>
+              <Component {...pageProps} />
+              </Layout>
+            )          
+        }
       </AppInitialization>
     </Provider>
   )
