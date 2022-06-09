@@ -1,11 +1,7 @@
+import { User } from 'types/user';
 import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
 
-export type User = {
-  avatar: string
-  userId: string
-  nickname: string
-}
 
 interface State {
   user: User | null

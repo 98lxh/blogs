@@ -1,28 +1,14 @@
 import getInitializedDataSource from "db"
+import Head from "next/head"
 import { Article } from "db/enyity/article"
 import { NextPage } from "next"
-import Head from "next/head"
-import { useEffect, useState } from "react"
 import { IArticle } from "types/article"
+import { useFloatStatus } from "./hooks/useFloatStatus"
 import ArticleContent from "./components/articleContent"
 import ArticleFloat from "./components/articleFloat"
 
-let timer: any
 const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
-  const [status, setStatus] = useState('in')
-
-  useEffect(() => {
-    timer = setTimeout(() => {
-      setStatus('on')
-    })
-
-    return () => {
-      clearTimeout(timer)
-    }
-  },
-    []
-  )
-
+  const status = useFloatStatus()
   return (
     <div
       className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden 

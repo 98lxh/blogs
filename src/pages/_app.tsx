@@ -23,10 +23,10 @@ function MyApp({ initialValue, Component, pageProps }: AppProps) {
           (Component as any).noLayout
             ? <Component {...pageProps} />
             : (
-            <Layout>
-              <Component {...pageProps} />
+              <Layout>
+                <Component {...pageProps} />
               </Layout>
-            )          
+            )
         }
       </AppInitialization>
     </Provider>
@@ -38,7 +38,7 @@ MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
   return {
     initialValue: {
       userInfo: {
-        userId,
+        id: userId,
         nickname,
         avatar
       }

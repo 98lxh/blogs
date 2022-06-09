@@ -9,11 +9,12 @@ const ArticleContent: NextPage<{ content: string,status:string }> = ({content,st
 
   return (
     <div
-      className="absolute top-[350px] left-[20px] w-[calc(100vw-30px)] text-base duration-1000"
+      className="absolute top-[400px] left-2 w-[calc(100vw-30px)] text-base duration-1000"
       style={status === 'in' ? { top: '100vh' } : {}}
     >
       <MDEditor
         theme={theme === 'THEME_DARK' ? 'dark' : 'light'}
+        previewTheme="vuepress"
         modelValue={content}
         previewOnly={true}
       />

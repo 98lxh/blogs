@@ -32,7 +32,7 @@ const ThemeButton: FC<HTMLAttributes<HTMLElement> & { placement?: PopoverPlaceme
                       <div
                         className={`flex items-center p-1 cursor-pointer rounded duration-200 hover:bg-zinc-100/60 
                         dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-300 mb-0.5
-                         ${themeType === theme.type && 'cursor-not-allowed bg-zinc-600 hover:bg-zinc-600 dark:hover:bg-zinc-600 text-white'}`}
+                         ${themeType === theme.type && 'cursor-not-allowed bg-zinc-200 hover:bg-zinc-200 dark:bg-zinc-600  dark:hover:bg-zinc-600 dark:text-white'}`}
                       >
                         <Icon className="w-1.5 h-1.5 mr-1" />
                         <span className="0 text-sm">{theme.name}</span>

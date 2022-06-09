@@ -14,7 +14,7 @@ export const MapSizeToClass = {
     icon: 'w-1.5 h-1.5'
   },
   small: {
-    button: 'w-7 h-4 text-base',
+    button: 'w-6 h-3 text-sm',
     icon: ''
   },
   'icon-small': {
