@@ -1,10 +1,11 @@
 import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
 import { ICaytegory } from 'types/category';
+import { THEME_TYPE } from 'constant';
 
 interface State {
   isMobile?: boolean
-  themeType?: any
+  themeType?: THEME_TYPE
   categorys: ICaytegory[],
 }
 

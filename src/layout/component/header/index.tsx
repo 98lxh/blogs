@@ -1,10 +1,10 @@
 import { NextPage } from "next"
 import { useRouter } from "next/router"
 import { HTMLAttributes } from "react"
+import { Snowflake } from "@icon-park/react"
 import HeaderSearch from "./headerSearch"
 import HeaderMy from "./headerMy"
-import HeaderTheme from "./headerTheme"
-import { Snowflake } from "@icon-park/react"
+import ThemeButton from "components/themeButton"
 
 
 const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps }) => { 
@@ -28,7 +28,7 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
           onClick={onToHome}
         />
         <HeaderSearch className="mr-1 flex-1" />
-        <HeaderTheme className="mr-1 h-4" />
+        <ThemeButton isHeader={true} className="mr-1 h-4" />
         <HeaderMy className="mr-1" />
       </div>
     </header>

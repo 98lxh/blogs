@@ -1,4 +1,4 @@
-import { THEME_DARK, THEME_LIGHT, THEME_SYSTEM } from "constant"
+import { THEME_TYPE } from "constant"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { store } from "store"
@@ -10,7 +10,7 @@ const watchSystemThemeChange = () => {
   if (matchMedia) return
   matchMedia = window.matchMedia('(prefers-color-scheme: dark)')
   matchMedia.onchange = () => {
-    changeTheme(THEME_SYSTEM)
+    changeTheme(THEME_TYPE.SYSTEM)
   }
 }
 
@@ -19,13 +19,13 @@ const changeTheme = (themeType: string) => {
   if (!root) return
   let themeClass = ''
   switch (themeType) {
-    case THEME_LIGHT:
+    case THEME_TYPE.LIGHT:
       themeClass = 'light'
       break
-    case THEME_DARK:
+    case THEME_TYPE.DARK:
       themeClass = 'dark'
       break
-    case THEME_SYSTEM:
+    case THEME_TYPE.SYSTEM:
       watchSystemThemeChange()
       themeClass = matchMedia.matches ? 'dark' : 'light'
   }
@@ -41,6 +41,6 @@ export const useTheme = () => {
   })
 
   useEffect(() => {
-    changeTheme(themeType)
+    changeTheme(themeType!)
   }, [themeType])
 }
