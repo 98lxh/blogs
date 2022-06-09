@@ -66,6 +66,7 @@ const ArticleFloat: NextPage<{ article: IArticle, status: string }> = ({ article
       >
         <div className="mr-1.5">
           <p>阅读 : {article.views}</p>
+          <p className="mt-0.5">分类 : {article.category.title}</p>
           <p className="mt-0.5">创建时间 : {createTime}</p>
           <p className="mt-0.5">更新时间 : {updateTime}</p>
         </div>

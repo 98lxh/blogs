@@ -1,5 +1,5 @@
 import { NextPage } from "next"
-import React from "react"
+import React, { Fragment } from "react"
 import { useSelector } from "react-redux"
 import { selectIsMobile } from "store/slices/system.slice"
 import Floating from "./component/floating"
@@ -12,13 +12,13 @@ const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
   const isShowHeader = !isMobile
 
   return (
-    <div>
+    <Fragment>
       {isShowHeader && <Header className="h-header" />}
       <Main className="h-main dark:bg-zinc-900">
         {children}
       </Main>
       <Floating />
-    </div>
+    </Fragment>
   )
 }
 

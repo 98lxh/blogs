@@ -33,7 +33,7 @@ export const getServerSideProps = async ({ params }: any) => {
     where: {
       id: articleId
     },
-    relations: ['user']
+    relations: ['user','category']
   })
 
   if (article) {

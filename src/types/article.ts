@@ -1,3 +1,4 @@
+import { ICaytegory } from './category';
 import { User } from './user';
 
 export interface IArticle {
@@ -9,4 +10,5 @@ export interface IArticle {
   update_time: Date
   views: number
   user: User
+  category: ICaytegory
 }

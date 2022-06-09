@@ -68,6 +68,9 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
         <p className="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1" ref={titleRef}>
           { article.title}
         </p>
+        <p className="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1">
+          分类 : { article.category.title}
+        </p>
         <div className="flex items-center mt-1 px-1">
           <img
             className="h-2 w-2 rounded-full"

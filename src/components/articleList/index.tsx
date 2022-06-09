@@ -13,7 +13,7 @@ const List: NextPage = () => {
   const { articleList, isFinished, isLoading, queryDispatch } = useArticleListSearch()
 
   return (
-    <div className="max-w-screen-xl mx-auto relative m-1 xl:mt-4">
+    <div className="max-w-screen-xl h-screen mx-auto relative m-1 xl:mt-4">
       <Infinite
         isLoading={isLoading}
         isFinished={isFinished}
