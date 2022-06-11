@@ -1,3 +1,5 @@
+import { AppDispatch } from './../index';
+import { UserForm, userLogin, userLogout } from './../../api/user';
 import { User } from 'types/user';
 import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
@@ -22,6 +24,17 @@ export const authSlice = createSlice({
   }
 })
 
+const { setUser } = authSlice.actions
 export const authActions = authSlice.actions
+
+export const login = (form: UserForm) =>
+  (dispatch: AppDispatch) =>
+    userLogin(form)
+      .then(user => dispatch(setUser(user)))
+
+export const logout = () =>
+  (dispatch: AppDispatch) =>
+    userLogout()
+      .then(() => dispatch(setUser(null)))
 
 export const selectUser = (state: RootState) => state.auth.user

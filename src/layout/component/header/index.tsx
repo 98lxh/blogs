@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { useRouter } from "next/router"
 import { HTMLAttributes } from "react"
-import { Snowflake } from "@icon-park/react"
+import { Cube } from "@icon-park/react"
 import HeaderSearch from "./headerSearch"
 import HeaderMy from "./headerMy"
 import ThemeButton from "components/themeButton"
@@ -23,8 +23,8 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
       `}
     >
       <div className="flex items-center">
-        <Snowflake
-          className="h-2 w-2 rounded-sm text-main cursor-pointer mr-2"
+        <Cube
+          className="h-3 w-3 rounded-sm text-main cursor-pointer mr-2"
           onClick={onToHome}
         />
         <HeaderSearch className="mr-1 flex-1" />

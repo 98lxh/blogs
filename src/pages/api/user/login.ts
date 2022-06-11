@@ -11,7 +11,7 @@ import md5 from 'md5';
 
 interface ILoginReqBody {
   identity_type: 'password' | 'github',
-  username?: string,
+  nickname?: string,
   password?: string
 }
 
@@ -20,13 +20,14 @@ const login = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const { username = '', password = '' } = req.body as ILoginReqBody
+  const { nickname = '', password = '' } = JSON.parse(req.body) as ILoginReqBody
   const psdMd5 = md5(password)
   const dataSource = await getInitializedDataSource()
   const cookies = Cookie.fromApiRoute(req, res)
   const userRepo = dataSource.getRepository(User)
+
   const user = await userRepo.findOneBy({
-    nickname: username
+    nickname
   })
 
   if (!user) return res.status(400).json({ msg: '该用户不存在' })
@@ -41,22 +42,22 @@ const login = async (
     },
     relations: ['user']
   })
-
   if (!userAuth) return res.status(400).json({ msg: '用户名或密码错误' })
-  const { id, nickname, avatar } = user;
 
   const session = req.session as ISession
-  session.id = id
-  session.nickname = nickname
-  session.avatar = avatar
+  session.id = user.id
+  session.nickname = user.nickname
+  session.avatar = user.avatar
   await session.save()
 
-  setCookie(cookies, { userId: id, nickname: nickname, avatar: avatar })
-
+  setCookie(cookies, { userId: user.id, nickname: user.nickname, avatar: user.avatar })
   res.status(200).json({
     msg: '登陆成功',
     data: user
   })
 }
 
+
 export default withIronSessionApiRoute(login, ironOptions)
+
+
