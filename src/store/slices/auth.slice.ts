@@ -40,6 +40,6 @@ export const logout = () =>
 export const register = (form: UserForm) =>
   (dispatch: AppDispatch) =>
     userRegister(form)
-      .then(() => dispatch(setUser(null)))
+      .then((user) => dispatch(setUser(user)))
 
 export const selectUser = (state: RootState) => state.auth.user

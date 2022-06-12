@@ -57,7 +57,7 @@ const useBootstarp = (userInfo: any) => {
   //rem适配
   useREM()
   //初始化用户数据
-  store.dispatch(authActions.setUser(userInfo))
+  if(userInfo) store.dispatch(authActions.setUser(userInfo))
 }
 
 

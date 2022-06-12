@@ -3,20 +3,19 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { FC, useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
-import { useDispatch } from "react-redux"
-import { login, register as userRegister } from "store/slices/auth.slice"
 import message from "libs/message"
 import Button from "libs/button"
-import { User } from "types/user"
 import { UserForm } from "api/user"
-import { Back, Github } from "@icon-park/react"
+import { Back } from "@icon-park/react"
+import { buildFormInfo } from "./utils/buildFormInfo"
 
-const AuthForm: FC<{ type: 'register' | 'login' }> = ({ type }) => {
+export type FormType = 'register' | 'login'
+
+const AuthForm: FC<{ type:FormType }> = ({ type }) => {
   const { push } = useRouter()
-  const isLogin = useMemo(() => type === 'login', [type])
+  const formInfo = useMemo(() => buildFormInfo(type), [type])
   const [loading,setLoading] = useState(false)
   // eslint-disable-next-line no-unused-vars
-  const dispatch = useDispatch() as (...args: unknown[]) => Promise<User>
   const {
     register,
     handleSubmit,
@@ -29,10 +28,10 @@ const AuthForm: FC<{ type: 'register' | 'login' }> = ({ type }) => {
     try {
       await trigger(['nickname', 'password'])
       setLoading(true)
-      await dispatch(isLogin ? login(data) : userRegister(data))
+      await formInfo.dispatch(data)
       setLoading(false)
-      message.success(isLogin ? '登录成功!' : '注册成功!')
-      push(isLogin ? '/' : '/login')
+      message.success(formInfo.successMessage)
+      push(formInfo.successLink)
     } catch (e) { 
       setLoading(false)
     }
@@ -46,6 +45,7 @@ const AuthForm: FC<{ type: 'register' | 'login' }> = ({ type }) => {
         type="info"
         icon={<Back />}
       />
+      <p className="text-base dark:text-zinc-200 text-center">{formInfo.title}</p>
       <form onSubmit={handleSubmit(onSubmit as any)}>
         <input
           className="dark:bg-zinc-800 dark:text-zinc-400 border-b-zinc-400 border-b w-full outline-none pb-1 px-1 text-base focus:border-b-main"
@@ -104,8 +104,8 @@ const AuthForm: FC<{ type: 'register' | 'login' }> = ({ type }) => {
 
         {/* 跳转按钮 */}
         <div className="pt-1 pb-3 leading-[0px] text-right">
-          <Link href={isLogin ? "/register" : "/login"}>
-            <span className="inline-block pb-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 text-base cursor-pointer">{isLogin ? '去注册' : '去登录'}</span>
+          <Link href={formInfo.link}>
+            <span className="inline-block pb-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 text-base cursor-pointer">{ formInfo.linkText}</span>
           </Link>
         </div>
 
@@ -113,19 +113,9 @@ const AuthForm: FC<{ type: 'register' | 'login' }> = ({ type }) => {
           loading={loading}
           className="dark-bg-zinc-900 w-full"
         >
-          {isLogin ? '登录' : '注册'}
+          {formInfo.buttonText}
         </Button>
 
-        {/* 第三方登录 */}
-        {
-          isLogin && (<div className="flex justify-around mt-4">
-            <Button
-              type="info"
-              className="rounded-3xl cursor-pointer"
-              icon={<Github />}
-            />
-          </div>)
-        }
       </form>
     </div>
   )

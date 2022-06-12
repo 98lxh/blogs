@@ -5,12 +5,12 @@ import Head from "next/head"
 const Login = () => {
   return (
     <div className="relative h-screen bg-white dark:bg-zinc-900">
-      <Head><title>登录</title></Head>
-      {/* 头部按钮 */}
+      <Head><title>用户登录</title></Head>
       <div className="pt-5 h-10 xl:block text-main">
         <Cube />
       </div>
       <AuthForm type="login" />
+      {/* todo:第三方登录 */}
     </div>
   )
 }

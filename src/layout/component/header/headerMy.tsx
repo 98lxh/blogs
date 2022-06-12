@@ -27,12 +27,17 @@ const Logged: FC<{ userInfo: User }> = ({ userInfo }) => {
     })
   }, [push, dispatch, message, confirm])
 
+  const toProfile = useCallback(() => {
+    push('/profile')
+  }, [push])
+
   const menus = useMemo(() => ([
     {
       id: 0,
       title: '个人资料',
       icon: UserIcon,
       path: '/profile',
+      onClick: toProfile
     },
     {
       id: 2,
@@ -41,7 +46,7 @@ const Logged: FC<{ userInfo: User }> = ({ userInfo }) => {
       onClick: onLogout
     },
   ]),
-    [onLogout]
+    [onLogout, toProfile]
   )
 
   return (
