@@ -1,5 +1,5 @@
 import { AppDispatch } from './../index';
-import { UserForm, userLogin, userLogout } from './../../api/user';
+import { UserForm, userLogin, userLogout, userRegister } from './../../api/user';
 import { User } from 'types/user';
 import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
@@ -35,6 +35,11 @@ export const login = (form: UserForm) =>
 export const logout = () =>
   (dispatch: AppDispatch) =>
     userLogout()
+      .then(() => dispatch(setUser(null)))
+
+export const register = (form: UserForm) =>
+  (dispatch: AppDispatch) =>
+    userRegister(form)
       .then(() => dispatch(setUser(null)))
 
 export const selectUser = (state: RootState) => state.auth.user

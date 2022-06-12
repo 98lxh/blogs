@@ -30,7 +30,7 @@ const login = async (
     nickname
   })
 
-  if (!user) return res.status(400).json({ msg: '该用户不存在' })
+  if (!user) return res.status(401).json({ message: '该用户不存在' })
 
   //在user_auth中查找
   const userAuthRepo = dataSource.getRepository(UserAuth)
@@ -42,7 +42,7 @@ const login = async (
     },
     relations: ['user']
   })
-  if (!userAuth) return res.status(400).json({ msg: '用户名或密码错误' })
+  if (!userAuth) return res.status(401).json({ message: '用户名或密码错误' })
 
   const session = req.session as ISession
   session.id = user.id

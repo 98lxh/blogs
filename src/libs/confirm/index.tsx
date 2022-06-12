@@ -54,7 +54,7 @@ const Confirm: NextPage<ConfigProps> = ({
           <div className="flex justify-end">
             <Button
               type="info"
-              className="mr-2"
+              className="mr-2 w-auto px-1" 
               onClick={() => {
                 setConfirmVisible(false)
                 onCancel && onCancel()
@@ -65,6 +65,7 @@ const Confirm: NextPage<ConfigProps> = ({
             </Button>
             <Button
               type="primary"
+              className="w-auto px-1"
               onClick={() => {
                 setConfirmVisible(false)
                 onConfirm && onConfirm()

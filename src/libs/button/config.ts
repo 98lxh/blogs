@@ -6,7 +6,7 @@ export const MapTypeToClass = {
 
 export const MapSizeToClass = {
   default: {
-    button: 'h-4 text-base p-0.5',
+    button: 'h-4 text-base',
     icon: ''
   },
   'icon-default': {

@@ -1,3 +1,4 @@
+import message from "libs/message"
 import qs from "qs"
 
 /* eslint-disable no-undef */
@@ -20,13 +21,14 @@ export const http = async (endpoint: string, { data, ...customConfig }: Config =
 
   return window.fetch(`/api/${endpoint}`, config)
     .then(async response => {
-      //todo：错误处理
-
-
       const result = await response.json()
       if (response.ok) {
         return result.data
       } else {
+        switch (response.status) {
+          case 401:
+            message.error(result.message)
+        }
         return Promise.reject()
       }
     })

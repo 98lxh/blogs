@@ -17,3 +17,10 @@ export const userLogout = async () => {
     method: 'POST'
   })
 }
+
+export const userRegister = async (data: UserForm) => {
+  return http('/user/register', {
+    method: 'POST',
+    data
+  })
+}
