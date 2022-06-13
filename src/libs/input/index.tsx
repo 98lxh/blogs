@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react"
+import { FC, HTMLAttributes, useMemo } from "react"
 
 interface InputProps {
   type?: 'text' | 'textarea'
@@ -8,11 +8,12 @@ interface InputProps {
   onChange?: (value: string) => void
 }
 
-const Input: FC<InputProps> = ({
+const Input: FC<InputProps & HTMLAttributes<HTMLDivElement>> = ({
   type = 'text',
   value,
   onChange,
-  max
+  max,
+  ...attrs
 }) => {
   const currentValueLength = useMemo(() => value.length, [value])
 
@@ -26,7 +27,7 @@ const Input: FC<InputProps> = ({
   )
 
   return (
-    <div className="relative leading-none">
+    <div  {...attrs} className={`relative leading-none ${attrs.className}`}>
       {
         type === 'text'
         ? (

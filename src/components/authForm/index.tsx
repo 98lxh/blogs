@@ -15,7 +15,6 @@ const AuthForm: FC<{ type:FormType }> = ({ type }) => {
   const { push } = useRouter()
   const formInfo = useMemo(() => buildFormInfo(type), [type])
   const [loading,setLoading] = useState(false)
-  // eslint-disable-next-line no-unused-vars
   const {
     register,
     handleSubmit,
