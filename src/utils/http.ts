@@ -7,7 +7,7 @@ interface Config extends RequestInit {
 }
 
 
-export const http = async (endpoint: string, { data, ...customConfig }: Config = {}) => {
+export const http = async  <T = any>(endpoint: string, { data, ...customConfig }: Config = {}): Promise<T> => {
   const config: Config = {
     method: 'GET',
     ...customConfig

@@ -4,6 +4,7 @@ import confirm from "libs/confirm";
 import Input from "libs/input";
 import message from "libs/message";
 import { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -13,6 +14,7 @@ import { selectIsMobile } from "store/slices/system.slice";
 const Profile: NextPage = () => {
   const isMobile = useSelector(selectIsMobile)
   const userInfo = useSelector(selectUser, shallowEqual)
+   // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch() as (...args: unknown[]) => Promise<unknown>
   const { push } = useRouter()
 
@@ -30,6 +32,7 @@ const Profile: NextPage = () => {
 
   return (
     <div className="h-full bg-zinc-200 dark:bg-zinc-800 duration-300 overflow-auto lg:p-1">
+      <Head><title>{userInfo?.nickname} 个人资料</title></Head>
       <div
         className="relative max-w-screen-lg max-auto bg-white dark:bg-zinc-900 
         duration-300 lg:rounded-sm lg:border-zinc-200 lg:dark:border-zinc-600
@@ -41,7 +44,7 @@ const Profile: NextPage = () => {
               <div className="sticky text-base dark:text-zinc-200 h-4 leading-4 text-center">
                 <span>个人资料</span>
                 <Back
-                  className=" absolute left-2 top-[50%] translate-y-[-50%]"
+                  className=" absolute left-2 top-[50%] translate-y-[-50%] w-2 h-3"
                   onClick={() => push('/')}
                 />
               </div>

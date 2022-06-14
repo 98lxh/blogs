@@ -1,8 +1,9 @@
 import { AddOne } from "@icon-park/react"
 import ThemeButton from "components/themeButton"
 import Popover from "libs/popover"
+import { useRouter } from "next/router"
 const Floating = () => {
-
+  const { push } = useRouter()
   return (
     <div className=" fixed bottom-10 right-2">
       {/* 主题 */}
@@ -17,7 +18,10 @@ const Floating = () => {
         placement="top-left"
         overlay={(
           <div className="w-[140px] overflow-hidden">
-            <div className="p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800 text-sm dark:text-zinc-200">
+            <div
+              className="p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:hover:bg-zinc-800 text-sm dark:text-zinc-200"
+              onClick={()=> push('/editor/new')}
+            >
               创建文章
             </div>
           </div>

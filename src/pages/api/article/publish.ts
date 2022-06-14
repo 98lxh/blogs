@@ -14,7 +14,7 @@ const publish = async (
   res: NextApiResponse
 ) => {
   const session: ISession = req.session
-  const { title = '', content = '', categoryId = 1 } = req.body
+  const { title = '', content = '', categoryId = 1 } = JSON.parse(req.body)
   const dataSource = await getInitializedDataSource()
   const userRepo = dataSource.getRepository(User)
   const articleRepo = dataSource.getRepository(Article)
@@ -37,7 +37,7 @@ const publish = async (
   const article = new Article()
   article.title = title
   article.content = content;
-  article.cover = ''
+  article.cover = `/images/${parseInt(String(Math.random() * 16))}.jpeg`
   article.create_time = now
   article.update_time = now
   article.is_delete = 0;

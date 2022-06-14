@@ -1,18 +1,15 @@
 import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
-import { ICaytegory } from 'types/category';
 import { THEME_TYPE } from 'constant';
 
 interface State {
   isMobile?: boolean
   themeType?: THEME_TYPE
-  categorys: ICaytegory[],
 }
 
 const initialState: State = {
   isMobile: undefined,
   themeType: undefined,
-  categorys: [],
 }
 
 export const systemSlice = createSlice({
@@ -25,9 +22,6 @@ export const systemSlice = createSlice({
     setThemeType(state, action) {
       window.localStorage.setItem('theme', action.payload)
       state.themeType = action.payload
-    },
-    setCategory(state, action) {
-      state.categorys = action.payload
     },
   }
 })

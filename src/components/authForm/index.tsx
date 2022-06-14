@@ -1,7 +1,7 @@
 import { ErrorMessage } from "@hookform/error-message"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { FC, useMemo, useState } from "react"
+import { FC, useCallback, useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
 import message from "libs/message"
 import Button from "libs/button"
@@ -11,10 +11,10 @@ import { buildFormInfo } from "./utils/buildFormInfo"
 
 export type FormType = 'register' | 'login'
 
-const AuthForm: FC<{ type:FormType }> = ({ type }) => {
+const AuthForm: FC<{ type: FormType }> = ({ type }) => {
   const { push } = useRouter()
   const formInfo = useMemo(() => buildFormInfo(type), [type])
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -22,7 +22,7 @@ const AuthForm: FC<{ type:FormType }> = ({ type }) => {
     formState: { errors }
   } = useForm()
 
-  const onSubmit = async (data: UserForm) => {
+  const onSubmit = useCallback(async (data: UserForm) => {
     //表单校验
     try {
       await trigger(['nickname', 'password'])
@@ -31,10 +31,12 @@ const AuthForm: FC<{ type:FormType }> = ({ type }) => {
       setLoading(false)
       message.success(formInfo.successMessage)
       push(formInfo.successLink)
-    } catch (e) { 
+    } catch (e) {
       setLoading(false)
     }
-  }
+  },
+    [trigger, setLoading, push, message]
+  )
 
   return (
     <div className="block p-3 mt-4 dark:bg-zinc-800 bg-white w-[388px] max-w-[90%] xl:mt-8 rounded-sm shadow-lg absolute left-[50%] top-[80px] translate-x-[-50%]">
@@ -104,7 +106,7 @@ const AuthForm: FC<{ type:FormType }> = ({ type }) => {
         {/* 跳转按钮 */}
         <div className="pt-1 pb-3 leading-[0px] text-right">
           <Link href={formInfo.link}>
-            <span className="inline-block pb-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 text-base cursor-pointer">{ formInfo.linkText}</span>
+            <span className="inline-block pb-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 text-base cursor-pointer">{formInfo.linkText}</span>
           </Link>
         </div>
 
