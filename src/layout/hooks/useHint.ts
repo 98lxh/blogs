@@ -1,23 +1,18 @@
-import { useHttp } from "hooks/useAsync"
+import { requestHintList } from "api/hint"
 import { useEffect, useState } from "react"
 
 export const useHint = (keyword: string) => {
-  const client = useHttp()
   const [hintList, setHintList] = useState<{ title: string }[]>([])
 
-  const requestHintList = async () => {
+  const setHintListAsync = async () => {
     if (!keyword) return setHintList([])
 
-    const list = await client('article/hint', {
-      data: {
-        keyword,
-      }
-    })
+    const list = await requestHintList(keyword)
     setHintList(list)
   }
 
   useEffect(() => {
-    requestHintList()
+    setHintListAsync()
   },
     [keyword]
   )

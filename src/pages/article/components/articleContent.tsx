@@ -8,7 +8,7 @@ const ArticleContent: NextPage<{ content: string,status:string }> = ({content,st
 
   return (
     <div
-      className="absolute top-[420px] left-2 w-[calc(100vw-30px)] text-base duration-1000"
+      className="absolute top-[430px] left-2 w-[calc(100vw-30px)] text-base duration-1000"
       style={status === 'in' ? { top: '100vh' } : {}}
     >
       <MDEditor

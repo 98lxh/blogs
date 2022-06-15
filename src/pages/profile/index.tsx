@@ -14,7 +14,7 @@ import { selectIsMobile } from "store/slices/system.slice";
 const Profile: NextPage = () => {
   const isMobile = useSelector(selectIsMobile)
   const userInfo = useSelector(selectUser, shallowEqual)
-   // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   const dispatch = useDispatch() as (...args: unknown[]) => Promise<unknown>
   const { push } = useRouter()
 

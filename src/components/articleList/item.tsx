@@ -36,11 +36,12 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
 
   
   return (
-    <div
-      className="bg-white dark:bg-zinc-800 rounded pd-1"
-      onClick={toArticleDetailWithId}
-    >
-      <div className="relative w-full rounded cursor-zoom-in group" style={{ backgroundColor: buildRandomColor() }}>
+    <div className="bg-white dark:bg-zinc-800 rounded pd-1">
+      <div
+        className="relative w-full rounded cursor-zoom-in group"
+        style={{ backgroundColor: buildRandomColor() }}
+        onClick={toArticleDetailWithId}
+      >
         <img
           className="w-full h-full rounded bg-transparent"
           ref={imageRef}

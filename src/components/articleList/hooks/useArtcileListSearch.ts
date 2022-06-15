@@ -1,12 +1,11 @@
-import { useHttp } from "hooks/useAsync"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { selectCategoryId, selectSearchText } from "store/slices/search.slice"
+import { requestArticleList } from 'api/article';
 import { useArtcleListQuery } from "./useArticleListQuery"
 import { IArticle } from "types/article"
 
 export const useArticleListSearch = () => {
-  const client = useHttp()
   const search = useSelector(selectSearchText)
   const categoryId = useSelector(selectCategoryId)
   const prevCategoryId = useRef(categoryId)
@@ -20,10 +19,7 @@ export const useArticleListSearch = () => {
     const { reset, ...resetQuery } = query
     setIsLoading(true)
     if (isFinished && !reset) return
-    const list = await client('/article/list', {
-      method: 'POST',
-      data: resetQuery
-    })
+    const list = await requestArticleList(resetQuery)
     setIsLoading(false)
     reset && setIsFinished(false)
 

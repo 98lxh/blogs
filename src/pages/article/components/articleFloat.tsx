@@ -70,7 +70,7 @@ const ArticleFloat: NextPage<{ article: IArticle, status: string }> = ({ article
           <p className="mt-0.5">创建时间 : {createTime}</p>
           <p className="mt-0.5">更新时间 : {updateTime}</p>
         </div>
-        {(userInfo && Number(userInfo.id)) === article.user.id && <Button size="small" type="info">编辑</Button>}
+        {(userInfo && Number(userInfo.id)) === article.user.id && <Button size="small" type="info" onClick={()=>push(`/editor/${article.id}`)}>编辑</Button>}
       </div>
     </div>
   )

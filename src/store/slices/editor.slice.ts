@@ -1,9 +1,10 @@
-import { requestArticleDetial } from './../../api/article';
-import { requestCategoryList } from './../../api/category';
+import { requestArticleDetail } from 'api/article';
+import { requestCategoryList } from 'api/category';
 import { AppDispatch } from './../index';
 import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
 import { ICaytegory } from 'types/category';
+import message from "libs/message"
 
 export type EditorArticle = {
   title: string
@@ -57,13 +58,14 @@ export const initCategoryList = () =>
 
 export const initEditorArticle = (id: number) =>
   (dispatch: AppDispatch) => {
-    requestArticleDetial(id).then(res => {
+    message.warning('等待文章初始化完成，开始编辑~')
+    requestArticleDetail(id).then(res => {
       const { category, title, content } = res
-
       dispatch(setEditorArticle({
         categoryId: category.id,
         title,
         content
       }))
+      message.success('文章初始完成,开始编辑!')
     })
   }
