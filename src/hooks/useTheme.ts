@@ -45,7 +45,6 @@ export const useTheme = () => {
   }, [themeType])
 }
 
-
 export const useGetTheme = () => {
   const [theme, setTheme] = useState<THEME_TYPE>(THEME_TYPE.LIGHT)
 
