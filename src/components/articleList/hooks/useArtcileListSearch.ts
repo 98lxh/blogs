@@ -4,6 +4,7 @@ import { selectCategoryId, selectSearchText } from "store/slices/search.slice"
 import { requestArticleList } from 'api/article';
 import { useArtcleListQuery } from "./useArticleListQuery"
 import { IArticle } from "types/article"
+import { WaterfallRef } from "libs/waterfall";
 
 export const useArticleListSearch = () => {
   const search = useSelector(selectSearchText)
@@ -11,18 +12,26 @@ export const useArticleListSearch = () => {
   const prevCategoryId = useRef(categoryId)
   const prevSearch = useRef(search)
   const [articleList, setArticleList] = useState<IArticle[]>([])
+  const waterfallRef = useRef<WaterfallRef | null>(null)
   const [isFinished, setIsFinished] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [query, queryDispatch] = useArtcleListQuery()
 
   const getArticleList = async () => {
     const { reset, ...resetQuery } = query
+    //加载
     setIsLoading(true)
-    reset && setArticleList([])
+
+    //重置状态
+    if (reset) {
+      setArticleList([])
+      setIsFinished(false)
+      waterfallRef.current?.resetHeight()
+    }
+
     if (isFinished && !reset) return
     const list = await requestArticleList(resetQuery)
     setIsLoading(false)
-    reset && setIsFinished(false)
 
     if (!list) return setIsFinished(true)
 
@@ -55,13 +64,15 @@ export const useArticleListSearch = () => {
     isLoading,
     isFinished,
     articleList,
-    queryDispatch
+    queryDispatch,
+    waterfallRef
   }),
     [
       isLoading,
       isFinished,
       articleList,
       queryDispatch,
+      waterfallRef
     ]
   )
 }

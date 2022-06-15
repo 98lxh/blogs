@@ -1,5 +1,4 @@
-import { NextPage } from "next"
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useImperativeHandle, useMemo, useRef, useState } from "react"
 import { buildColumnHeightRecord, getAllImg, getImgElemements, getMinHeightColumn, mapDataSourceToStyle, onComplateImgs, getMinHeight, getMaxHeight, onGetItemHeights } from "./utils"
 
 interface WaterfallProps {
@@ -9,12 +8,16 @@ interface WaterfallProps {
   colunmSpacing?: number
   rowSpacing?: number
   picturePreReading?: boolean
-  onComplatePosition?:() => void
+  onComplatePosition?: () => void
   // eslint-disable-next-line no-unused-vars
   renderItem: (item: any, columnWidth: number, index: number) => React.ReactNode
 }
 
-const Waterfall: NextPage<WaterfallProps> = ({
+export interface WaterfallRef {
+  resetHeight: () => void
+}
+
+const Waterfall = React.forwardRef<WaterfallRef, WaterfallProps>(({
   colunm = 2,
   colunmSpacing = 20,
   rowSpacing = 20,
@@ -23,7 +26,9 @@ const Waterfall: NextPage<WaterfallProps> = ({
   renderItem,
   nodeKey,
   dataSource
-}) => {
+},
+  ref
+) => {
   //容器
   const containerRef = useRef<HTMLDivElement | null>(null)
   //每列宽度
@@ -39,7 +44,7 @@ const Waterfall: NextPage<WaterfallProps> = ({
   //记录元素的高度
   let itemHeights: number[] = []
   //映射 记录每列高度= buildColumnHeightRecord(colunm)
-  let columnHeightRecord: Record<string,number> = {};
+  let columnHeightRecord: Record<string, number> = {};
 
   //计算列宽度 (容器宽度 - 所有列间距宽度) / 列数
   const calcColumnWidth = () => {
@@ -123,6 +128,14 @@ const Waterfall: NextPage<WaterfallProps> = ({
     ]
   )
 
+  useImperativeHandle(ref, () => ({
+    resetHeight: () => {
+      setContainerHeight(0)
+    }
+  }), [
+    setContainerHeight
+  ])
+
   return (
     <div
       className="relative overflow-x-hidden"
@@ -131,27 +144,29 @@ const Waterfall: NextPage<WaterfallProps> = ({
     >
       {
         dataSource && columnWidth
-          ? 
+          ?
           <>
             {
-            dataSource.map((item, index) => (
-              <div
-                key={nodeKey ? item[nodeKey] : index}
-                className="waterfall-item absolute duration-300"
-                style={{
-                  width: columnWidth + 'px',
-                  left: mapStyle[index]?.left + 'px',
-                  top: mapStyle[index]?.top + 'px',
-                }}
-              >
-                {renderItem && renderItem(item, columnWidth, index)}
-              </div>
-            ))}
+              dataSource.map((item, index) => (
+                <div
+                  key={nodeKey ? item[nodeKey] : index}
+                  className="waterfall-item absolute duration-300"
+                  style={{
+                    width: columnWidth + 'px',
+                    left: mapStyle[index]?.left + 'px',
+                    top: mapStyle[index]?.top + 'px',
+                  }}
+                >
+                  {renderItem && renderItem(item, columnWidth, index)}
+                </div>
+              ))}
           </>
           : null
       }
     </div>
   )
-}
+})
+
+Waterfall.displayName = 'Waterfall'
 
 export default Waterfall

@@ -10,10 +10,12 @@ import Item from "./item";
 const List: NextPage = () => {
   const isMobile = useSelector(selectIsMobile)
   const [complatePosition, setComplatePosition] = useState(false)
-  const { articleList, isFinished, isLoading, queryDispatch } = useArticleListSearch()
+  const { articleList, isFinished, isLoading, queryDispatch, waterfallRef } = useArticleListSearch()
 
   return (
-    <div className="max-w-screen-xl h-screen mx-auto relative m-1 xl:mt-4">
+    <div
+      className="max-w-screen-xl mx-auto relative m-1 xl:mt-4"
+    >
       <Infinite
         isLoading={isLoading}
         isFinished={isFinished}
@@ -21,11 +23,12 @@ const List: NextPage = () => {
       >
         <Waterfall
           dataSource={articleList}
+          ref={waterfallRef}
           nodeKey="id"
           picturePreReading={false}
           colunm={isMobile ? 2 : 5}
           onComplatePosition={() => !complatePosition && setComplatePosition(true)}
-          renderItem={(article, width) =><Item article={article} width={width} lazy={complatePosition} />}
+          renderItem={(article, width) => <Item article={article} width={width} lazy={complatePosition} />}
         />
       </Infinite>
     </div>

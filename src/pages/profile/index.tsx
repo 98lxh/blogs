@@ -5,7 +5,6 @@ import confirm from "libs/confirm";
 import Input from "libs/input";
 import message from "libs/message";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -49,7 +48,7 @@ const Profile = () => {
               <div className="sticky text-base dark:text-zinc-200 h-4 leading-4 text-center">
                 <span>个人资料</span>
                 <Back
-                  className=" absolute left-2 top-[50%] translate-y-[-50%] w-2 h-3"
+                  className="absolute left-2 top-[50%] translate-y-[-50%] w-2 h-3"
                   onClick={() => push('/')}
                 />
               </div>
@@ -63,7 +62,7 @@ const Profile = () => {
           {/* 头像 */}
           <div className="lg:absolute lg:right-[16%]">
             <div className=" relative w-[80px] h-[80px] group lg:cursor-pointer lg:left-1/2 lg:translate-x-[-50%]">
-              <Image
+              <img
                 className=" rounded-full w-full h-full lg:inline-block"
                 src={userInfo!.avatar}
                 alt=""
