@@ -1,8 +1,8 @@
-import { NextPage } from 'next'
 import MDEditor from "md-editor-rt"
 import { useGetTheme } from 'hooks/useTheme';
+import { FC } from 'react';
 
-const ArticleContent: NextPage<{ content: string,status:string }> = ({content,status}) => {
+const ArticleContent: FC<{ content: string,status:string }> = ({content,status}) => {
   const theme = useGetTheme()
 
   return (

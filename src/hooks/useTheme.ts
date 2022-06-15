@@ -47,10 +47,10 @@ export const useTheme = () => {
 
 
 export const useGetTheme = () => {
-  const root = document.querySelector('html')
   const [theme, setTheme] = useState<THEME_TYPE>(THEME_TYPE.LIGHT)
 
   useEffect(() => {
+    const root = document.querySelector('html')
     setTheme(root!.className.includes('dark') ? THEME_TYPE.DARK : THEME_TYPE.LIGHT)
   }, [])
 
