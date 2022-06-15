@@ -1,9 +1,9 @@
 import { Back } from "@icon-park/react";
+import { usePermission } from "hooks/usePermission";
 import Button from "libs/button";
 import confirm from "libs/confirm";
 import Input from "libs/input";
 import message from "libs/message";
-import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
@@ -11,7 +11,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { logout, selectUser } from "store/slices/auth.slice";
 import { selectIsMobile } from "store/slices/system.slice";
 
-const Profile: NextPage = () => {
+const Profile = () => {
   const isMobile = useSelector(selectIsMobile)
   const userInfo = useSelector(selectUser, shallowEqual)
   // eslint-disable-next-line no-unused-vars
@@ -29,6 +29,8 @@ const Profile: NextPage = () => {
     })
   }
     , [push, confirm, dispatch])
+
+  usePermission()
 
   return (
     <div className="h-full bg-zinc-200 dark:bg-zinc-800 duration-300 overflow-auto lg:p-1">
@@ -76,13 +78,13 @@ const Profile: NextPage = () => {
           {/* 用户名 */}
           <div className="py-1 lg:flex lg:items-center lg:my-1">
             <span className="w-8 block mb-1 font-bold dark:text-zinc-300 lg:mb-0">用户名</span>
-            <Input className="lg:w-[600px]" value={userInfo!.nickname} max={20} />
+            <Input className="lg:w-[600px]" value={userInfo?.nickname || ""} max={20} />
           </div>
 
           {/* 个人介绍 */}
           <div className="py-1 lg:flex lg:items-center lg:my-1">
             <span className="w-8 block mb-1 font-bold dark:text-zinc-300 lg:mb-0">个人介绍</span>
-            <Input className="lg:w-[600px]" type="textarea" value={userInfo!.introduce || ''} max={20} />
+            <Input className="lg:w-[600px]" type="textarea" value={userInfo?.introduce || ''} max={20} />
           </div>
 
           {/* 保存修改 */}

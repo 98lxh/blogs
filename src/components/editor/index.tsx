@@ -5,17 +5,17 @@ import Popover from "libs/popover"
 import Button from "libs/button"
 import Input from "libs/input"
 import EditorOverlay from "./overlay"
-import { useSelector } from "react-redux"
-import { selectThemeType } from "store/slices/system.slice"
 import { useRouter } from "next/router"
 import { editorAction } from "store/slices/editor.slice"
 import { useInitEditorArticle } from "./hooks/useInitEditorArticle"
+import { THEME_TYPE } from "constant"
+import { useGetTheme } from "hooks/useTheme"
 
 const Editor: FC<{ id?: number }> = ({ id }) => {
   const { push } = useRouter()
-  const theme = useSelector(selectThemeType)
+  const theme = useGetTheme()
   const { dispatch, editorArticle, isUpdate } = useInitEditorArticle(id)
-
+ 
   return (
     <div className="text-base relative overflow-hidden">
       <div className="flex">
@@ -56,7 +56,7 @@ const Editor: FC<{ id?: number }> = ({ id }) => {
         modelValue={editorArticle.content}
         onChange={content => dispatch(editorAction.setEditorArticle({ content }))}
         placeholder="请输入文章内容..."
-        theme={theme === 'THEME_DARK' ? 'dark' : 'light'}
+        theme={theme === THEME_TYPE.LIGHT ? 'light' : 'dark'}
         previewTheme="vuepress"
         style={{
           height: 'calc(100vh - 50px)',

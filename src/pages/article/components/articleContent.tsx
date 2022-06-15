@@ -1,10 +1,9 @@
 import { NextPage } from 'next'
 import MDEditor from "md-editor-rt"
-import { useSelector } from 'react-redux';
-import { selectThemeType } from 'store/slices/system.slice';
+import { useGetTheme } from 'hooks/useTheme';
 
 const ArticleContent: NextPage<{ content: string,status:string }> = ({content,status}) => {
-  const theme = useSelector(selectThemeType)
+  const theme = useGetTheme()
 
   return (
     <div
