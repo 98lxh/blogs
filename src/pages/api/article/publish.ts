@@ -5,7 +5,7 @@ import { ironOptions } from 'config/index';
 import { User } from 'db/enyity/users';
 import { withIronSessionApiRoute } from "iron-session/next"
 import { Article } from 'db/enyity/article';
-import { EXCEPTION_ARTICLE } from '../config/codes';
+import { EXCEPTION_ARTICLE, EXCEPTION_USER } from '../config/codes';
 import { Category } from 'db/enyity/category';
 
 //发布文章
@@ -19,12 +19,14 @@ const publish = async (
   const userRepo = dataSource.getRepository(User)
   const articleRepo = dataSource.getRepository(Article)
   const categoryRepo = dataSource.getRepository(Category)
-
+  if (!session.id) return res.status(401).json(EXCEPTION_USER.LOGIN_OVERDUE)
   const user = await userRepo.findOne({
     where: {
       id: session.id
     }
   })
+
+  console.log(user)
 
   const category = await categoryRepo.findOne({
     where: {

@@ -26,8 +26,13 @@ export const EXCEPTION_ARTICLE = {
     message: '更新文章失败~'
   },
 
+  UPDATE_FAILED_AUTH: {
+    code: 2004,
+    message: '您没有更新该文章的权限~'
+  },
+
   NOT_FOUND: {
-    code: 2003,
+    code: 2005,
     message: '没有找到该文章~'
   }
 }

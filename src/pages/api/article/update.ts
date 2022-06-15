@@ -1,4 +1,3 @@
-import { EXCEPTION_USER } from '../config/codes';
 import { NextApiResponse, NextApiRequest } from 'next';
 import getInitializedDataSource from 'db';
 import { ISession } from '../types';
@@ -37,7 +36,7 @@ const update = async (
 
   if (!article) return res.status(400).json(EXCEPTION_ARTICLE.NOT_FOUND)
 
-  if (article.user.id !== session.id) return res.status(401).json(EXCEPTION_USER.LOGIN_OVERDUE)
+  if (article.user.id !== session.id) return res.status(401).json(EXCEPTION_ARTICLE.UPDATE_FAILED_AUTH)
 
   article.title = title
   article.content = content;
