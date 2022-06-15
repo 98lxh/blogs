@@ -18,15 +18,13 @@ export const useArticleListSearch = () => {
   const getArticleList = async () => {
     const { reset, ...resetQuery } = query
     setIsLoading(true)
+    reset && setArticleList([])
     if (isFinished && !reset) return
     const list = await requestArticleList(resetQuery)
     setIsLoading(false)
     reset && setIsFinished(false)
 
-    if (!list) {
-      if (resetQuery.search && resetQuery.page === 1) setArticleList([])
-      return setIsFinished(true)
-    }
+    if (!list) return setIsFinished(true)
 
     reset ? setArticleList(list) : setArticleList(([...articleList, ...list]))
   }
