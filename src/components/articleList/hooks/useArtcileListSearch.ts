@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { selectCategoryId, selectSearchText } from "store/slices/search.slice"
 import { requestArticleList } from 'api/article';
@@ -15,7 +15,7 @@ export const useArticleListSearch = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [query, queryDispatch] = useArtcleListQuery()
 
-  const getArticleList = useCallback(async () => {
+  const getArticleList = async () => {
     const { reset, ...resetQuery } = query
     setIsLoading(true)
     if (isFinished && !reset) return
@@ -23,21 +23,14 @@ export const useArticleListSearch = () => {
     setIsLoading(false)
     reset && setIsFinished(false)
 
-    setArticleList(prevList => {
-      if (!list) {
-        if (resetQuery.search && resetQuery.page === 1) return []
-        setIsFinished(true)
-        return prevList
-      }
-      return reset ? list : [...prevList, ...list]
-    })
-  }, [
-    setIsLoading,
-    setIsFinished,
-    setArticleList,
-    isFinished,
-    query
-  ])
+    if (!list) {
+      if (resetQuery.search && resetQuery.page === 1) setArticleList([])
+      return setIsFinished(true)
+    }
+
+    reset ? setArticleList(list) : setArticleList(([...articleList, ...list]))
+  }
+
 
   useEffect(() => {
     if (prevCategoryId.current !== categoryId) {
@@ -51,12 +44,12 @@ export const useArticleListSearch = () => {
     prevCategoryId.current = categoryId
     prevSearch.current = search
   },
+    // eslint-disable-next-line no-unused-vars
     [
       query,
       categoryId,
       search,
       queryDispatch,
-      getArticleList
     ]
   )
 
