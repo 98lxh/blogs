@@ -12,6 +12,7 @@ export const useInitEditorArticle = (id?: number) => {
   const isUpdate = useRef(false)
   const userInfo = useSelector(selectUser)
   const { push } = useRouter()
+
   const initUpdateArticle = useCallback(async () => {
     if (!id) return false
 
@@ -33,7 +34,8 @@ export const useInitEditorArticle = (id?: number) => {
   }, [
     dispatch,
     push,
-    id
+    id,
+    userInfo?.id
   ])
 
   useEffect(() => {
@@ -43,7 +45,12 @@ export const useInitEditorArticle = (id?: number) => {
     return () => {
       dispatch(editorAction.setEditorArticle(defaultEditor))
     }
-  }, [])
+  },
+    [
+      initUpdateArticle,
+      dispatch
+    ]
+  )
 
 
   return useMemo(() => ({

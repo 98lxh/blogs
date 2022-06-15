@@ -35,7 +35,7 @@ const AuthForm: FC<{ type: FormType }> = ({ type }) => {
       setLoading(false)
     }
   },
-    [trigger, setLoading, push, message]
+    [trigger, setLoading, push, formInfo]
   )
 
   return (

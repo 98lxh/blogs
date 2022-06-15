@@ -42,10 +42,12 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
         style={{ backgroundColor: buildRandomColor() }}
         onClick={toArticleDetailWithId}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="w-full h-full rounded bg-transparent"
           ref={imageRef}
-          style={{height:calcImgHeight()}}
+          style={{ height: calcImgHeight() }}
+          alt=""
         />
         <div className="opacity-0 w-full h-full bg-zinc-900/50 absolute top-0 right-0 rounded duration-300 group-hover:opacity-100">
           <Button

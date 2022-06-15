@@ -8,6 +8,7 @@ import { selecrArticleFloat } from "store/slices/float.slice"
 import { format } from "date-fns"
 import { IArticle } from "types/article"
 import { selectUser } from "store/slices/auth.slice"
+import Image from "next/image"
 
 const ArticleFloat: NextPage<{ article: IArticle, status: string }> = ({ article, status }) => {
   const articleFloat = useSelector(selecrArticleFloat)
@@ -24,7 +25,7 @@ const ArticleFloat: NextPage<{ article: IArticle, status: string }> = ({ article
         className={`absolute duration-1000`}
         style={status === 'in' ? cover?.inStyle : { top: 0 + 'px', left: 0 + 'px', width: '100vw', height: '300px' }}
       >
-        <img className="w-full h-full" src={article.cover} />
+        <Image className="w-full h-full" src={article.cover} alt="" />
         <div className="w-full h-full bg-zinc-900/80 absolute top-0"></div>
       </div>
 
@@ -41,7 +42,7 @@ const ArticleFloat: NextPage<{ article: IArticle, status: string }> = ({ article
         className={`absolute duration-1000 flex flex-col justify-center items-center z-10`}
         style={status === 'in' ? author?.inStyle : { top: 280 + 'px', right: 20 + 'px', color: 'white', width: '60px', height: '60px' }}
       >
-        <img className="w-full h-full rounded-full border border-zinc-200" src={article.user.avatar} />
+        <Image className="w-full h-full rounded-full border border-zinc-200" src={article.user.avatar} alt="" />
         <span className="text-sm dark:text-zinc-200 text-zinc-900">{article.user.nickname}</span>
       </div>
 

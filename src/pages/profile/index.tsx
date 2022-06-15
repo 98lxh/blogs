@@ -5,6 +5,7 @@ import confirm from "libs/confirm";
 import Input from "libs/input";
 import message from "libs/message";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -28,13 +29,15 @@ const Profile = () => {
       }
     })
   }
-    , [push, confirm, dispatch])
+    , [push, dispatch])
 
   usePermission()
 
   return (
     <div className="h-full bg-zinc-200 dark:bg-zinc-800 duration-300 overflow-auto lg:p-1">
-      <Head><title>{userInfo?.nickname} 个人资料</title></Head>
+      <Head>
+        <title>{userInfo?.nickname} 个人资料</title>
+      </Head>
       <div
         className="relative max-w-screen-lg max-auto bg-white dark:bg-zinc-900 
         duration-300 lg:rounded-sm lg:border-zinc-200 lg:dark:border-zinc-600
@@ -60,9 +63,10 @@ const Profile = () => {
           {/* 头像 */}
           <div className="lg:absolute lg:right-[16%]">
             <div className=" relative w-[80px] h-[80px] group lg:cursor-pointer lg:left-1/2 lg:translate-x-[-50%]">
-              <img
+              <Image
                 className=" rounded-full w-full h-full lg:inline-block"
-                src={userInfo?.avatar}
+                src={userInfo!.avatar}
+                alt=""
               />
               <div className=" absolute top-0 rounded-full w-full h-full bg-black/40 hidden lg:group-hover:block ">
                 <div

@@ -21,11 +21,8 @@ export const useInitOverlay = (articleId?: number) => {
 
     push(`/article/${article.id}`)
   }, [
-    message,
     push,
-    checkEditorArticle,
-    editorInfo.successMessage,
-    editorInfo.requestAPI,
+    editorInfo,
     editorArticle,
     articleId
   ])
@@ -40,7 +37,7 @@ export const useInitOverlay = (articleId?: number) => {
     categorys,
     dispatch,
     handler,
-    editorArticle,
-    editorInfo
+    editorInfo,
+    editorArticle
   ])
 }
