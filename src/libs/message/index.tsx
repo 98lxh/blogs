@@ -45,7 +45,7 @@ export const Message = forwardRef<HTMLDivElement, MessageProps>(({
     <CSSTransition classNames="up" timeout={0} in={visible}>
       <div
         ref={ref}
-        className="max-w-[80%] fixed top-[20px] left-[50%] translate-x-[-50%] z-50 flex items-center px-3 py-1.5
+        className="lg:w-auto w-[90vw] fixed top-[20px] left-[50%] translate-x-[-50%] z-50 flex items-center px-3 py-1.5
          rounded-sm cursor-pointer bg-white shadow-2xl dark:bg-zinc-700 dark:text-zinc-200"
         style={{ top: top + 'px', transition: `all 300ms` }}
       >
