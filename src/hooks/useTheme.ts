@@ -1,6 +1,6 @@
-import { THEME_TYPE } from "constant"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
+import { THEME_TYPE } from "constant"
 import { store } from "store"
 import { selectThemeType, systemActions } from "store/slices/system.slice"
 import { useMount } from "./useMount"
@@ -29,6 +29,7 @@ const changeTheme = (themeType: string) => {
       watchSystemThemeChange()
       themeClass = matchMedia.matches ? 'dark' : 'light'
   }
+  store.dispatch(systemActions.setCurrentTheme(themeClass === 'dark' ? THEME_TYPE.DARK : THEME_TYPE.LIGHT))
   root.className = themeClass
 }
 
@@ -43,15 +44,4 @@ export const useTheme = () => {
   useEffect(() => {
     changeTheme(themeType!)
   }, [themeType])
-}
-
-export const useGetTheme = () => {
-  const [theme, setTheme] = useState<THEME_TYPE>(THEME_TYPE.LIGHT)
-
-  useEffect(() => {
-    const root = document.querySelector('html')
-    setTheme(root!.className.includes('dark') ? THEME_TYPE.DARK : THEME_TYPE.LIGHT)
-  }, [])
-
-  return theme
 }

@@ -9,12 +9,13 @@ import { useRouter } from "next/router"
 import { editorAction } from "store/slices/editor.slice"
 import { useInitEditorArticle } from "./hooks/useInitEditorArticle"
 import { THEME_TYPE } from "constant"
-import { useGetTheme } from "hooks/useTheme"
+import { useSelector } from "react-redux"
+import { selectCurrentTheme } from "store/slices/system.slice"
 
 const Editor: FC<{ id?: number }> = ({ id }) => {
   const { push } = useRouter()
-  const theme = useGetTheme()
   const { dispatch, editorArticle, isUpdate } = useInitEditorArticle(id)
+  const theme = useSelector(selectCurrentTheme)
  
   return (
     <div className="text-base relative overflow-hidden">

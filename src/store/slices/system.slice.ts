@@ -5,6 +5,7 @@ import { THEME_TYPE } from 'constant';
 interface State {
   isMobile?: boolean
   themeType?: THEME_TYPE
+  currentTheme?: THEME_TYPE
 }
 
 const initialState: State = {
@@ -23,6 +24,9 @@ export const systemSlice = createSlice({
       window.localStorage.setItem('theme', action.payload)
       state.themeType = action.payload
     },
+    setCurrentTheme(state, action) {
+      state.currentTheme = action.payload
+    },
   }
 })
 
@@ -30,3 +34,4 @@ export const systemSlice = createSlice({
 export const systemActions = systemSlice.actions
 export const selectIsMobile = (state: RootState) => state.system.isMobile
 export const selectThemeType = (state: RootState) => state.system.themeType
+export const selectCurrentTheme = (state: RootState) => state.system.currentTheme

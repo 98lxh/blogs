@@ -1,9 +1,10 @@
-import MDEditor from "md-editor-rt"
-import { useGetTheme } from 'hooks/useTheme';
 import { FC } from 'react';
+import MDEditor from "md-editor-rt"
+import { useSelector } from "react-redux";
+import { selectCurrentTheme } from "store/slices/system.slice";
 
 const ArticleContent: FC<{ content: string,status:string }> = ({content,status}) => {
-  const theme = useGetTheme()
+  const theme = useSelector(selectCurrentTheme)
 
   return (
     <div
