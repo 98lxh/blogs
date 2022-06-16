@@ -64,7 +64,7 @@ const Profile = () => {
             <div className=" relative w-[80px] h-[80px] group lg:cursor-pointer lg:left-1/2 lg:translate-x-[-50%]">
               <img
                 className=" rounded-full w-full h-full lg:inline-block"
-                src={userInfo!.avatar}
+                src={userInfo?.avatar || ''}
                 alt=""
               />
               <div className=" absolute top-0 rounded-full w-full h-full bg-black/40 hidden lg:group-hover:block ">

@@ -35,7 +35,7 @@ const RouterLoading: FC<{ children: ReactNode, loadingRules?: (RegExp | string)[
       {
         loading && (
           <div className="fixed t-0 l-0 w-screen h-screen bg-black/60 z-50 text-zinc-200">
-            <div className=" absolute right-5 bottom-5 text-sm flex flex-col items-center">
+            <div className="fixed right-5 bottom-5 text-sm flex flex-col items-center">
               <div className="animate-spin w-3 h-3 text-main mb-1">
                 <Loading />
               </div>
