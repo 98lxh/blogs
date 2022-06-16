@@ -3,6 +3,7 @@ import { Fragment, ReactNode } from "react"
 import { useIsInitialization } from "hooks/useIsInitialization"
 import { useSearchHistory } from "hooks/useSearchHistory"
 import { useTheme } from "hooks/useTheme"
+import RouterLoading from "components/routerLoading"
 
 const AppInitialization: NextPage<{ children: ReactNode }> = ({ children }) => {
   const isInitialization = useIsInitialization()
@@ -15,7 +16,9 @@ const AppInitialization: NextPage<{ children: ReactNode }> = ({ children }) => {
     <Fragment>
       {/* 未完成初始化过度中不展示 todo：预加载动画 */}
       {!isInitialization && <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-white" />}
-      {children}
+      <RouterLoading loadingRules={[/article\/[0-9]/]}>
+        {children}
+      </RouterLoading>
     </Fragment>
   )
 }

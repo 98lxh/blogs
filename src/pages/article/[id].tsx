@@ -9,6 +9,7 @@ import ArticleContent from "components/articleDetail/content"
 
 const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
   const status = useFloatStatus()
+  
   return (
     <div
       className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden 
