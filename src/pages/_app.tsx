@@ -1,21 +1,21 @@
 import { NextPage } from 'next'
 import { Provider } from 'react-redux'
 import { store } from 'store'
-import { authActions } from 'store/slices/auth.slice'
 import { useREM } from 'hooks/useREM'
 import { useIsMobile } from 'hooks/useIsMobile'
+import { useUserInfo } from 'hooks/useUserInfo'
 import AppInitialization from 'components/appInitialization'
 import Layout from 'layout'
 import "styles/index.scss"
 
 interface AppProps {
-  initialValue: Record<any, any>,
   Component: NextPage,
   pageProps: any
 }
 
-function MyApp({ initialValue, Component, pageProps }: AppProps) {
-  useBootstarp(initialValue.userInfo)
+function MyApp({ Component, pageProps }: AppProps) {
+  useBootstarp()
+  
   return (
     <Provider store={store}>
       <AppInitialization>
@@ -33,31 +33,14 @@ function MyApp({ initialValue, Component, pageProps }: AppProps) {
   )
 }
 
-MyApp.getInitialProps = async ({ ctx }: { ctx: any }) => {
-  const { userId, nickname, avatar } = ctx?.req?.cookies || {};
 
-  const userInfo = userId
-    ? ({
-    id: userId,
-    nickname,
-    avatar
-    })
-    : null
-  
-  return {
-    initialValue: {
-      userInfo
-    }
-  }
-}
-
-const useBootstarp = (userInfo: any) => {
+const useBootstarp = () => {
   //区别移动端pc端
   useIsMobile()
   //rem适配
   useREM()
   //初始化用户数据
-  if(userInfo) store.dispatch(authActions.setUser(userInfo))
+  useUserInfo()
 }
 
 

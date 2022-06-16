@@ -14,7 +14,7 @@ const Layout: NextPage<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Fragment>
       {isShowHeader && <Header className="h-header" />}
-      <Main className="lg:h-main dark:bg-zinc-900 h-[100vh]">
+      <Main className="lg:h-main h-[calc(100vh-34px)] dark:bg-zinc-900">
         {children}
       </Main>
       <Floating />

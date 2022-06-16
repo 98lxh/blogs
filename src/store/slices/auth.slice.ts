@@ -19,6 +19,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action) {
+      console.log(action.payload)
       state.user = action.payload
     }
   }
@@ -30,12 +31,18 @@ export const authActions = authSlice.actions
 export const login = (form: UserForm) =>
   (dispatch: AppDispatch) =>
     userLogin(form)
-      .then(user => dispatch(setUser(user)))
+      .then(user => {
+        dispatch(setUser(user))
+        window.localStorage.setItem('user', JSON.stringify(user))
+      })
 
 export const logout = () =>
   (dispatch: AppDispatch) =>
     userLogout()
-      .then(() => dispatch(setUser(null)))
+      .then(() => {
+        dispatch(setUser(null))
+        window.localStorage.removeItem('user')
+      })
 
 export const register = (form: UserForm) =>
   (dispatch: AppDispatch) =>
