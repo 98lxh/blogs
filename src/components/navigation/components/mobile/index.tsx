@@ -36,7 +36,7 @@ const MobileNavgation: NextPage<NavigationProps> =
   ({ categorys,
     setCurCategoryIdx,
     curCategoryIdx,
-    setCategoryId
+    setCategory
   }) => {
     const { siderItemsRef, siderTargetRef, siderStyle } = useMobileSider({ setCurCategoryIdx, curCategoryIdx })
     const [visiblePopup, setVisiblePopup] = useState(false)
@@ -66,7 +66,7 @@ const MobileNavgation: NextPage<NavigationProps> =
                 key={category.id}
                 onClick={() => {
                   setCurCategoryIdx(index)
-                  setCategoryId(category.id)
+                  setCategory(category.title)
                 }}
                 ref={siderItem => siderItemsRef.current[index] = siderItem}
               >
@@ -83,7 +83,7 @@ const MobileNavgation: NextPage<NavigationProps> =
             categorys={categorys}
             onItemClick={(index: number) => {
               setCurCategoryIdx(index)
-              setCategoryId(categorys[index].id)
+              setCategory(categorys[index].title)
               setVisiblePopup(false)
             }}
           />

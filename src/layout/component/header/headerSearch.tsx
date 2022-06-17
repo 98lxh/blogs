@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from "react"
+import { HTMLAttributes, useEffect, useState } from "react"
 import { NextPage } from "next"
 import { HistoryQuery, Close, Delete } from "@icon-park/react"
 import Search from "libs/search"
@@ -9,9 +9,10 @@ import { useSelector } from "react-redux"
 import { useDebounce } from "ahooks"
 import { useHint } from "layout/hooks/useHint"
 import { searchActions, selectHistorys } from "store/slices/search.slice"
+import { useRouter } from "next/router"
 
 // eslint-disable-next-line no-unused-vars
-const Hint: NextPage<{ keyword: string, onHintItemClick: (search: string) => void }> = ({ keyword, onHintItemClick }) => {
+const Hint: NextPage<{ keyword: string, onHintItemClick?: (search: string) => void }> = ({ keyword, onHintItemClick }) => {
   const debounceKeyword = useDebounce(keyword, { wait: 500 })
   const hintList = useHint(debounceKeyword)
 
@@ -21,7 +22,7 @@ const Hint: NextPage<{ keyword: string, onHintItemClick: (search: string) => voi
         hintList.map((hint, index) => (
           <div
             className="py-1 pl-1 text-base font-bold text-zinc-500 rounded cursor-pointer duration-300 hover:bg-zinc-200 dark:hover:bg-zinc-900 dark:text-zinc-200"
-            onClick={() => onHintItemClick(hint.title)}
+            onClick={() => onHintItemClick && onHintItemClick(hint.title)}
             key={index}
           >
             <Mark title={hint.title} keyword={keyword} />
@@ -33,19 +34,19 @@ const Hint: NextPage<{ keyword: string, onHintItemClick: (search: string) => voi
 }
 
 // eslint-disable-next-line no-unused-vars
-const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ onHistoryItemClick}) => {
+const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ onHistoryItemClick }) => {
   const historyList = useSelector(selectHistorys)
 
   const onClearHistory = () => {
     confirm({
       title: '确认',
       content: '是否确认清空历史搜索记录',
-      onConfirm() { 
+      onConfirm() {
         store.dispatch(searchActions.clearHistory())
       }
     })
   }
-   
+
   return (
     <div>
       <div className="flex items-center text-xs mb-1 text-zinc-400">
@@ -64,7 +65,7 @@ const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ o
                text-zinc-900 text-sm font-bold rounded-sm duration-300 dark:bg-zinc-900 
                dark:text-zinc-200"
               key={index}
-              onClick={()=>onHistoryItemClick(history)}
+              onClick={() => onHistoryItemClick(history)}
             >
               <span>{history}</span>
               <Close
@@ -83,20 +84,28 @@ const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ o
 }
 
 const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
-  const [searchVal, setSearchValue] = useState('')
+  const { push, query } = useRouter()
+  const [searchVal, setSearchValue] = useState("")
 
   const handleSearch = (search: string) => {
+    if (!search) return
     setSearchValue(search)
+    push({ pathname: '/search', query: { keyword: search } })
     store.dispatch(searchActions.setHistory(search))
-    store.dispatch(searchActions.setSearchText(search))
   }
+
+  useEffect(() => {
+    setSearchValue(() => (query.keyword && typeof query.keyword === 'string' ) ? query.keyword : "") 
+  }, [
+    query
+  ])
 
   return (
     <div {...props}>
       <Search
         value={searchVal}
         onChange={setSearchValue}
-        onClear={()=> store.dispatch(searchActions.setSearchText(''))}
+        onSearch={handleSearch}
         placeholder="搜索"
         dropdown={(
           <div>

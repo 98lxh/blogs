@@ -3,10 +3,10 @@ import { IArticle } from 'types/article';
 import { http } from "utils/http"
 
 interface ArticleListQuery {
-  categoryId: number
+  category?: string
   size: number
   page: number
-  search: string
+  search?: string
 }
 
 

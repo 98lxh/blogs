@@ -14,7 +14,7 @@ const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
     dark:scrollbar-thumb-zinc-900"
     >
       <Head>
-        <title>{article.title}</title>
+        <title>{article.title} - Blogs</title>
       </Head>
       <ArticleHeader article={article} />
       <ArticleContent content={ article.content} />

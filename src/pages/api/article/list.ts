@@ -9,24 +9,25 @@ const list = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const { page = 1, size = 20, categoryId = 0, search = '' } = JSON.parse(req.body)
+  const { page = 1, size = 20, category = "", search = '' } = JSON.parse(req.body)
   const dataSource = await getInitializedDataSource()
   const categoryRepo = dataSource.getRepository(Category)
   let where: string = ''
   let parameters: any = {}
   let categoryWhere: any = {}
-  if (categoryId) {
-    const category = await categoryRepo.findOneBy({ id: categoryId })
+  if (category) {
+    const findCategory = await categoryRepo.findOneBy({ title: category })
+
     categoryWhere = {
-      category
+      category: findCategory
     }
   }
 
   if (search) {
-    where += `articles.title=:title`
+    where += `articles.title LIKE :title`
     parameters = {
       ...parameters,
-      title: search
+      title: '%' + search + '%'
     }
   }
 

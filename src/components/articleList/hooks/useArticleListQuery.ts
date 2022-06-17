@@ -3,7 +3,7 @@ import { useReducer } from 'react';
 const intialState = {
   size: 10,
   page: 1,
-  categoryId: 0,
+  category: '',
   search: '',
   reset: false
 }
@@ -21,7 +21,7 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
       return {
         ...intialState,
         reset: true,
-        categoryId: data?.categoryId || 0
+        category: data?.category || ''
       }
     }
 
@@ -30,6 +30,7 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
         ...prevState,
         page: 1,
         reset: true,
+        category: '',
         search: data?.search || '',
       }
     }
@@ -44,4 +45,4 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
   }
 }
 
-export const useArtcleListQuery = () => useReducer(listQueryReducer, intialState)
+export const useArtcleListQuery = (init: { search?: string, category?: string }) => useReducer(listQueryReducer, { ...intialState, ...init })

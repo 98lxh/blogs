@@ -27,6 +27,7 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
 
   const onInputSearch = () => {
     onSearch && onSearch(inputProps.value || '')
+    setShowDropdown(false)
   }
 
   useClickAway(() => { 

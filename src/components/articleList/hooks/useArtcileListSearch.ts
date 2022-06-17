@@ -1,24 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import { useSelector } from "react-redux"
-import { selectCategoryId, selectSearchText } from "store/slices/search.slice"
 import { requestArticleList } from 'api/article';
 import { useArtcleListQuery } from "./useArticleListQuery"
 import { IArticle } from "types/article"
 import { WaterfallRef } from "libs/waterfall";
 
-export const useArticleListSearch = () => {
-  const search = useSelector(selectSearchText)
-  const categoryId = useSelector(selectCategoryId)
-  const prevCategoryId = useRef(categoryId)
+export const useArticleListSearch = ({ search, category }: { search?: string, category?: string }) => {
+  const prevCategory = useRef(category)
   const prevSearch = useRef(search)
   const [articleList, setArticleList] = useState<IArticle[]>([])
   const waterfallRef = useRef<WaterfallRef | null>(null)
   const [isFinished, setIsFinished] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [query, queryDispatch] = useArtcleListQuery()
+  const [query, queryDispatch] = useArtcleListQuery({ search, category })
 
   const getArticleList = async () => {
     const { reset, ...resetQuery } = query
+    console.log(resetQuery)
     //加载
     setIsLoading(true)
 
@@ -40,22 +37,22 @@ export const useArticleListSearch = () => {
 
 
   useEffect(() => {
-    if (prevCategoryId.current !== categoryId) {
-      queryDispatch({ type: 'category', data: { categoryId } })
+    if (prevCategory.current !== category && category) {
+      queryDispatch({ type: 'category', data: { category } })
     } else if (prevSearch.current !== search) {
       queryDispatch({ type: 'search', data: { search } })
     } else {
       getArticleList()
     }
 
-    prevCategoryId.current = categoryId
+    prevCategory.current = category
     prevSearch.current = search
   },
     // eslint-disable-next-line no-unused-vars
     [
       query,
-      categoryId,
       search,
+      category,
       queryDispatch,
     ]
   )

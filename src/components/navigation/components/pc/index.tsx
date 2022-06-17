@@ -8,7 +8,7 @@ const PCNavgation: NextPage<NavigationProps> = (
     categorys,
     setCurCategoryIdx,
     curCategoryIdx,
-    setCategoryId
+    setCategory
   }
 ) => {
   const [isOpenCategory, setIsOpenCategory] = useState(false)
@@ -39,7 +39,7 @@ const PCNavgation: NextPage<NavigationProps> = (
               }
               onClick={() => {
                 setCurCategoryIdx(index)
-                setCategoryId(category.id)
+                setCategory(category.title)
               }}
               key={category.id}
             >

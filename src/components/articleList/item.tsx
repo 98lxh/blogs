@@ -2,23 +2,24 @@ import { useRef } from "react"
 import { NextPage } from "next"
 import Button from "libs/button"
 import message from "libs/message"
+import Mark from "libs/mark"
 import { IArticle } from "types/article"
 import { Eyes, DownloadOne } from "@icon-park/react"
 import { mapImgUrlToSize } from "config/mapUrlToImgSize"
 import { useLazy } from "hooks/useLazy"
 import { buildRandomColor } from "utils/buildRandomColor"
 
-const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ article, width, lazy }) => {
+const Item: NextPage<{ article: IArticle, width: number, lazy: boolean, search?: string }> = ({ article, width, lazy, search }) => {
   const imageRef = useRef<HTMLImageElement | null>(null)
   const titleRef = useRef<HTMLDivElement | null>(null)
   const authorRef = useRef<HTMLImageElement | null>(null)
-  const calcImgHeight = () => { 
+  const calcImgHeight = () => {
     const imgSize = mapImgUrlToSize[article.cover]
     return (width / imgSize.width) * imgSize.height
   }
 
   const toArticleDetailWithId = () => {
-    window.open(`/article/${article.id}`,"_blank")
+    window.open(`/article/${article.id}`, "_blank")
   }
 
   useLazy(imageRef, {
@@ -26,7 +27,7 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
     lazy
   })
 
-  
+
   return (
     <div className="bg-white dark:bg-zinc-800 rounded pd-1">
       <div
@@ -50,7 +51,7 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
           <Button
             className="absolute top-1.5 right-1.5"
             type="info"
-            onClick={(e) => { 
+            onClick={(e) => {
               e.stopPropagation()
               message.error('暂未开放下载 !')
             }}
@@ -60,11 +61,13 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
         </div>
       </div>
       <div>
+
         <p className="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1" ref={titleRef}>
-          { article.title}
+
+          {search ? <Mark keyword={search} title={article.title} /> : article.title}
         </p>
         <p className="text-[0.25rem] mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1">
-          分类 : { article.category.title}
+          分类 : {article.category.title}
         </p>
         <div className="flex items-center mt-1 px-1">
           <img
@@ -78,6 +81,6 @@ const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ artic
       </div>
     </div>
   )
- }
+}
 
 export default Item

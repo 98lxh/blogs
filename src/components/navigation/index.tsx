@@ -1,34 +1,46 @@
 import { NextPage } from "next"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import { selectIsMobile } from "store/slices/system.slice"
-import { store } from "store"
-import { searchActions } from "store/slices/search.slice"
 import { ICaytegory } from "types/category"
 import MobileNavgation from "./components/mobile"
 import PCNavgation from "./components/pc"
+import { useRouter } from "next/router"
 
-export interface NavigationProps { 
+export interface NavigationProps {
   curCategoryIdx: number
   // eslint-disable-next-line no-unused-vars
   setCurCategoryIdx: (value: number) => void
   // eslint-disable-next-line no-unused-vars
-  setCategoryId:(value:number) => void
-  categorys:ICaytegory[]
+  setCategory: (value: string) => void
+  categorys: ICaytegory[]
 }
 
-const Navigation: NextPage<Pick<NavigationProps, 'categorys'>> = ({categorys}) => {
-  const [curCategoryIdx, setCurCategoryIdx ] = useState(0)
+const Navigation: NextPage<Pick<NavigationProps, 'categorys'>> = ({ categorys }) => {
+  const [curCategoryIdx, setCurCategoryIdx] = useState(0)
   const isMobile = useSelector(selectIsMobile)
+  const { push, query } = useRouter()
 
-  const navigationProps = useMemo(()=>({
+  const navigationProps = useMemo(() => ({
     curCategoryIdx,
     setCurCategoryIdx,
-    setCategoryId:(id:number)=>store.dispatch(searchActions.setCategoryId(id)),
-    categorys:categorys || []
+    setCategory: (category: string) => push("/" + category),
+    categorys: categorys || []
   }),
-    [categorys,setCurCategoryIdx,curCategoryIdx]
+    [categorys, setCurCategoryIdx, curCategoryIdx]
   )
+
+  //初始化选择分类
+  useEffect(() => {
+    if (query.category) {
+      setCurCategoryIdx(() => {
+        const index = categorys.findIndex(c => c.title === query.category)
+        return index < 0 ? 0 : index
+      })
+    }
+  }, [
+    query
+  ])
 
   return (
     isMobile

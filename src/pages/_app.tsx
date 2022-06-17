@@ -15,7 +15,7 @@ interface AppProps {
 
 function MyApp({ Component, pageProps }: AppProps) {
   useBootstarp()
-  
+
   return (
     <Provider store={store}>
       <AppInitialization>
@@ -32,7 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     </Provider>
   )
 }
-
 
 const useBootstarp = () => {
   //区别移动端pc端
