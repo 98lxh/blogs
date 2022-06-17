@@ -5,9 +5,11 @@ import { FormType } from "../index";
 
 export const buildFormInfo = (type: FormType) => {
   const isLogin = type === 'login'
+  // eslint-disable-next-line no-unused-vars
+  const storeDispatch = store.dispatch as (...args: unknown[]) => Promise<any>
 
   const dispatch = async (data: UserForm) => {
-    return store.dispatch(isLogin ? login(data) : register(data))
+    return storeDispatch(isLogin ? login(data) : register(data))
   }
 
   return ({
