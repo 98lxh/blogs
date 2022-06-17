@@ -7,26 +7,18 @@ import { Eyes, DownloadOne } from "@icon-park/react"
 import { mapImgUrlToSize } from "config/mapUrlToImgSize"
 import { useLazy } from "hooks/useLazy"
 import { buildRandomColor } from "utils/buildRandomColor"
-import { useRouter } from "next/router"
-import { saveArticleFloat } from "./utils/saveArticleFloat"
 
 const Item: NextPage<{ article: IArticle,width:number,lazy:boolean }> = ({ article, width, lazy }) => {
   const imageRef = useRef<HTMLImageElement | null>(null)
   const titleRef = useRef<HTMLDivElement | null>(null)
   const authorRef = useRef<HTMLImageElement | null>(null)
-  const { push} = useRouter()
   const calcImgHeight = () => { 
     const imgSize = mapImgUrlToSize[article.cover]
     return (width / imgSize.width) * imgSize.height
   }
 
   const toArticleDetailWithId = () => {
-    saveArticleFloat({
-      imageRef,
-      titleRef,
-      authorRef
-    })
-    push(`/article/${article.id}`)
+    window.open(`/article/${article.id}`,"_blank")
   }
 
   useLazy(imageRef, {

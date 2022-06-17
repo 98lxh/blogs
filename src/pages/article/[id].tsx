@@ -3,13 +3,10 @@ import Head from "next/head"
 import { Article } from "db/enyity/article"
 import { NextPage } from "next"
 import { IArticle } from "types/article"
-import { useFloatStatus } from "hooks/article/useFloatStatus"
-import ArticleHeaderFloat from "components/articleDetail/headerFloat"
+import ArticleHeader from "components/articleDetail/headerFloat"
 import ArticleContent from "components/articleDetail/content"
 
 const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
-  const status = useFloatStatus()
-  
   return (
     <div
       className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden 
@@ -19,8 +16,8 @@ const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
       <Head>
         <title>{article.title}</title>
       </Head>
-      <ArticleHeaderFloat article={article} status={status} />
-      <ArticleContent content={ article.content} status={status } />
+      <ArticleHeader article={article} />
+      <ArticleContent content={ article.content} />
     </div>
   )
 }

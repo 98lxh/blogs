@@ -3,15 +3,12 @@ import Button from "libs/button"
 import { useRouter } from "next/router"
 import { FC, useMemo } from "react"
 import { shallowEqual, useSelector } from "react-redux"
-import { selecrArticleFloat } from "store/slices/float.slice"
 import { format } from "date-fns"
 import { IArticle } from "types/article"
 import { selectUser } from "store/slices/auth.slice"
 
-const ArticleHeaderFloat: FC<{ article: IArticle, status: string }> = ({ article, status }) => {
-  const articleFloat = useSelector(selecrArticleFloat)
+const ArticleHeader: FC<{ article: IArticle }> = ({ article }) => {
   const userInfo = useSelector(selectUser, shallowEqual)
-  const { cover, title, author } = useMemo(() => articleFloat! || {}, [articleFloat])
   const createTime = useMemo(() => format(new Date(article.create_time), 'yyyy-MM-dd'), [article])
   const updateTime = useMemo(() => format(new Date(article.update_time), 'yyyy-MM-dd'), [article])
   const { push } = useRouter()
@@ -19,35 +16,25 @@ const ArticleHeaderFloat: FC<{ article: IArticle, status: string }> = ({ article
   return (
     <div>
       {/* 文章封面 */}
-      <div
-        className={`absolute duration-1000`}
-        style={status === 'in' ? cover?.inStyle : { top: 0 + 'px', left: 0 + 'px', width: '100vw', height: '300px' }}
-      >
+      <div className="absolute h-[300px] w-full" >
         <img className="w-full h-full" src={article.cover} alt="" />
         <div className="w-full h-full bg-zinc-900/80 absolute top-0"></div>
       </div>
 
       {/* 文章标题 */}
-      <div
-        className={`absolute duration-1000 text-base`}
-        style={status === 'in' ? title?.inStyle : { top: '150px', left: 30 + 'px', color: 'white' }}
-      >
+      <div className="absolute text-base top-[150px] left-1 text-zinc-200" >
         {article.title}
       </div>
 
       {/* 作者信息 */}
-      <div
-        className={`absolute duration-1000 flex flex-col justify-center items-center z-10`}
-        style={status === 'in' ? author?.inStyle : { top: 280 + 'px', right: 20 + 'px', color: 'white', width: '60px', height: '60px' }}
-      >
+      <div className="absolute flex flex-col justify-center items-center z-10 w-[60px] right-2 top-[270px]">
         <img className="w-full h-full rounded-full border border-zinc-200" src={article.user.avatar} alt="" />
         <span className="text-sm dark:text-zinc-200 text-zinc-900">{article.user.nickname}</span>
       </div>
 
       {/* 返回 */}
       <div
-        className="absolute left-2 top-[280px] duration-1000"
-        style={status === 'in' ? author?.inStyle : {}}
+        className="absolute left-2 top-[280px]"
         onClick={() => push('/')}
       >
         <Button
@@ -59,10 +46,7 @@ const ArticleHeaderFloat: FC<{ article: IArticle, status: string }> = ({ article
       </div>
 
       {/* 文章信息 */}
-      <div
-        className="absolute left-2 top-[335px] duration-1000 text-sm dark:text-zinc-200 height-[300px] flex items-end"
-        style={status === 'in' ? author?.inStyle : {}}
-      >
+      <div className="absolute left-2 top-[335px] text-sm dark:text-zinc-200 height-[300px] flex items-end" >
         <div className="mr-1.5">
           <p>阅读 : {article.views}</p>
           <p className="mt-0.5">分类 : {article.category.title}</p>
@@ -76,4 +60,4 @@ const ArticleHeaderFloat: FC<{ article: IArticle, status: string }> = ({ article
 }
 
 
-export default ArticleHeaderFloat
+export default ArticleHeader
