@@ -8,11 +8,7 @@ import ArticleContent from "components/articleDetail/content"
 
 const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
   return (
-    <div
-      className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden 
-      duration-500 transition-colors scrollbar-thin scrollbar-thumb-zinc-200
-    dark:scrollbar-thumb-zinc-900"
-    >
+    <div className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900">
       <Head>
         <title>{article.title} - Blogs</title>
       </Head>

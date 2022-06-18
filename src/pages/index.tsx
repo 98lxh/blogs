@@ -1,19 +1,22 @@
 import { NextPage } from "next"
 import getInitializedDataSource from "db"
-import Navigation from "components/navigation"
-import ArticleList from "components/articleList"
 import { ALL_CATEGORY_ITEM } from "constant"
 import { Category } from "db/enyity/category"
 import { ICaytegory } from "types/category"
 import Head from "next/head"
+import ArticleListContainer from "components/listContainer"
+import { Fragment } from "react"
 
 const Home: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
   return (
-    <div className="h-full overflow-auto bg-white  dark:bg-zinc-800 duration-500 transition-colors scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900">
-      <Head><title>Blogs</title></Head>
-      <Navigation categorys={categorys} />
-      <ArticleList />
-    </div>
+    <Fragment>
+      <Head>
+        <title>
+          Blogs
+        </title>
+      </Head>
+      <ArticleListContainer categorys={categorys} />
+    </Fragment>
   )
 }
 
