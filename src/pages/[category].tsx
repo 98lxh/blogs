@@ -16,7 +16,7 @@ const Categorys: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
   return (
     <Fragment>
       <Head>
-        <title>{`${category === 'search' ? '搜索 - ' + keyword : category} - Blogs`}</title>
+        <title>{`${query.category === 'search' ? '搜索 - ' + keyword : category} - Blogs`}</title>
       </Head>
       <ArticleListContainer
         categorys={categorys}

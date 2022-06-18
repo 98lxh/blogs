@@ -33,7 +33,7 @@ const Profile = () => {
   usePermission()
 
   return (
-    <div className="h-full bg-zinc-200 dark:bg-zinc-800 duration-300 overflow-auto lg:p-1">
+    <div className="h-[100vh] lg:h-main bg-zinc-200 dark:bg-zinc-900 duration-300 overflow-auto lg:p-1">
       <Head>
         <title>{userInfo?.nickname} 个人资料</title>
       </Head>
