@@ -5,6 +5,7 @@ import { HamburgerButton } from "@icon-park/react"
 import { ICaytegory } from "types/category"
 import { useMobileSider } from "components/navigation/hooks/useMobileSider"
 import { NavigationProps } from "components/navigation"
+import Link from "next/link"
 
 
 
@@ -36,7 +37,6 @@ const MobileNavgation: NextPage<NavigationProps> =
   ({ categorys,
     setCurCategoryIdx,
     curCategoryIdx,
-    setCategory
   }) => {
     const { siderItemsRef, siderTargetRef, siderStyle } = useMobileSider({ setCurCategoryIdx, curCategoryIdx })
     const [visiblePopup, setVisiblePopup] = useState(false)
@@ -61,17 +61,20 @@ const MobileNavgation: NextPage<NavigationProps> =
 
           {
             categorys.map((category, index) => (
-              <li
-                className={`shrink-0 px-1.5 py-0 z-10 duration-150 ${curCategoryIdx === index && 'text-zinc-100'}`}
+              <Link
+                prefetch
+                href={'/' + category.title}
                 key={category.id}
-                onClick={() => {
-                  setCurCategoryIdx(index)
-                  setCategory(category.title)
-                }}
-                ref={siderItem => siderItemsRef.current[index] = siderItem}
               >
-                {category.title}
-              </li>
+                <li
+                  className={`shrink-0 px-1.5 py-0 z-10 duration-150 ${curCategoryIdx === index && 'text-zinc-100'}`}
+
+                  onClick={() => setCurCategoryIdx(index)}
+                  ref={siderItem => siderItemsRef.current[index] = siderItem}
+                >
+                  {category.title}
+                </li>
+              </Link>
             ))
           }
         </ul>
@@ -83,7 +86,6 @@ const MobileNavgation: NextPage<NavigationProps> =
             categorys={categorys}
             onItemClick={(index: number) => {
               setCurCategoryIdx(index)
-              setCategory(categorys[index].title)
               setVisiblePopup(false)
             }}
           />

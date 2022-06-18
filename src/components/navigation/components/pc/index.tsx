@@ -2,13 +2,13 @@ import { NextPage } from "next"
 import { useState } from "react"
 import { DoubleDown, DoubleUp } from "@icon-park/react"
 import { NavigationProps } from "components/navigation"
+import Link from "next/link"
 
 const PCNavgation: NextPage<NavigationProps> = (
   {
     categorys,
     setCurCategoryIdx,
     curCategoryIdx,
-    setCategory
   }
 ) => {
   const [isOpenCategory, setIsOpenCategory] = useState(false)
@@ -30,21 +30,22 @@ const PCNavgation: NextPage<NavigationProps> = (
 
         {
           categorys.map((category, index) => (
-            <li
-              className={
-                `shrink-0 px-1.5 py-0 z-10 duration-200 text-zinc-900 text-sm font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 rounded mr-1 mb-1
-                ${index === curCategoryIdx && 'text-zinc-900 bg-zinc-200 dark:text-zinc-300 dark:bg-zinc-900'} dark:text-zinc-500 dark:hover:text-zinc-300
-                 dark:hover:bg-zinc-900
-                `
-              }
-              onClick={() => {
-                setCurCategoryIdx(index)
-                setCategory(category.title)
-              }}
+            <Link
+              prefetch
+              href={'/' + category.title}
               key={category.id}
             >
-              {category.title}
-            </li>
+              <li
+                className={
+                  `shrink-0 px-1.5 py-0 z-10 duration-200 text-zinc-900 text-sm font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 rounded mr-1 mb-1
+                ${index === curCategoryIdx && 'text-zinc-900 bg-zinc-200 dark:text-zinc-300 dark:bg-zinc-900'} dark:text-zinc-500 dark:hover:text-zinc-300
+                 dark:hover:bg-zinc-900
+                `}
+                onClick={() => setCurCategoryIdx(index)}
+              >
+                {category.title}
+              </li>
+            </Link>
           ))
         }
       </ul>
