@@ -27,10 +27,14 @@ const Categorys: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
   )
 }
 
+
+let categorys: ICaytegory[] | null = null
 export const getServerSideProps = async () => {
-  const dataSource = await getInitializedDataSource()
-  const categoryRepo = dataSource.getRepository(Category)
-  const categorys = await categoryRepo.find()
+  if (!categorys) { 
+    const dataSource = await getInitializedDataSource()
+    const categoryRepo = dataSource.getRepository(Category)
+    categorys = await categoryRepo.find() as unknown as ICaytegory[]
+  }
 
   return ({
     props: {

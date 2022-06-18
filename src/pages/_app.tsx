@@ -7,6 +7,8 @@ import { useUserInfo } from 'hooks/useUserInfo'
 import AppInitialization from 'components/appInitialization'
 import Layout from 'layout'
 import "styles/index.scss"
+import { useEffect } from 'react'
+import { initCategoryList } from 'store/slices/editor.slice'
 
 interface AppProps {
   Component: NextPage,
@@ -40,6 +42,10 @@ const useBootstarp = () => {
   useREM()
   //初始化用户数据
   useUserInfo()
+
+  useEffect(() => { 
+    store.dispatch(initCategoryList())
+  })
 }
 
 
