@@ -26,8 +26,6 @@ const redirect = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { access_token } = result.data
 
-  console.log(access_token)
-
   const githubUserInfo = await axios.get('https://api.github.com/user', {
     headers: {
       accept: 'application/json',

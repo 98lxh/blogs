@@ -15,23 +15,18 @@ export const useArticleListSearch = ({ search, category }: { search?: string, ca
 
   const getArticleList = async () => {
     const { reset, ...resetQuery } = query
-    console.log(resetQuery)
     //加载
     setIsLoading(true)
-
     //重置状态
     if (reset) {
       setArticleList([])
       setIsFinished(false)
       waterfallRef.current?.resetHeight()
     }
-
     if (isFinished && !reset) return
     const list = await requestArticleList(resetQuery)
     setIsLoading(false)
-
     if (!list) return setIsFinished(true)
-
     reset ? setArticleList(list) : setArticleList(([...articleList, ...list]))
   }
 

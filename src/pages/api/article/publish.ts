@@ -26,8 +26,6 @@ const publish = async (
     }
   })
 
-  console.log(user)
-
   const category = await categoryRepo.findOne({
     where: {
       id: categoryId

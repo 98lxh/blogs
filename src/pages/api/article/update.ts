@@ -39,10 +39,10 @@ const update = async (
   if (article.user.id !== session.id) return res.status(401).json(EXCEPTION_ARTICLE.UPDATE_FAILED_AUTH)
 
   article.title = title
-  article.content = content;
+  article.content = content
   article.update_time = now
   article.category = category
-  console.log(category)
+
   const resArticle = await articleRepo.save(article)
 
   if (resArticle) {
