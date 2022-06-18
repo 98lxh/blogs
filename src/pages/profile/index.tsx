@@ -1,10 +1,10 @@
 import { Back } from "@icon-park/react";
+import Head from "components/head";
 import { usePermission } from "hooks/usePermission";
 import Button from "libs/button";
 import confirm from "libs/confirm";
 import Input from "libs/input";
 import message from "libs/message";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
@@ -33,10 +33,10 @@ const Profile = () => {
   usePermission()
 
   return (
-    <div className="h-[100vh] lg:h-main bg-zinc-200 dark:bg-zinc-900 duration-300 overflow-auto lg:p-1">
-      <Head>
-        <title>{userInfo?.nickname} 个人资料</title>
-      </Head>
+    <div className="lg:h-main bg-zinc-200 dark:bg-zinc-900 duration-300 overflow-auto lg:p-1">
+      <Head
+        title={userInfo?.nickname + '的个人中心' }
+      />
       <div
         className="relative max-w-screen-lg max-auto bg-white dark:bg-zinc-900 
         duration-300 lg:rounded-sm lg:border-zinc-200 lg:dark:border-zinc-600

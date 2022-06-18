@@ -1,4 +1,3 @@
-import Head from "next/head"
 import { ALL_CATEGORY_ITEM } from "constant"
 import getInitializedDataSource from "db"
 import { Category } from "db/enyity/category"
@@ -7,6 +6,7 @@ import { useRouter } from "next/router"
 import { Fragment, useMemo } from "react"
 import { ICaytegory } from "types/category"
 import ArticleListContainer from "components/listContainer"
+import Head from "components/head"
 
 const Categorys: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
   const { query } = useRouter()
@@ -15,9 +15,9 @@ const Categorys: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
 
   return (
     <Fragment>
-      <Head>
-        <title>{`${query.category === 'search' ? '搜索 - ' + keyword : category} - Blogs`}</title>
-      </Head>
+      <Head
+        title={`${query.category === 'search' ? '搜索 - ' + keyword : category}`}
+      />
       <ArticleListContainer
         categorys={categorys}
         keyword={keyword}
