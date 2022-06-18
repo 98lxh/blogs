@@ -22,7 +22,7 @@ const ArticleHeader: FC<{ article: IArticle }> = ({ article }) => {
       </div>
 
       {/* 文章标题 */}
-      <div className="absolute text-base top-[150px] left-2 text-zinc-200" >
+      <div className="absolute text-base top-[150px] left-1 text-zinc-200" >
         {article.title}
       </div>
 

@@ -9,12 +9,19 @@ svg{
 }
 
 .dark{
-  #md-editor-rt{
+  #md-editor-rt,
+  #article-preview-wrapper{
     background-color: #27272a !important;
   }
 
   .md-input-wrapper,
   .md-toolbar{
     color:#999;
+  }
+}
+
+.md-catalog-link{
+  span:hover{
+    color:#06b6d4;
   }
 }

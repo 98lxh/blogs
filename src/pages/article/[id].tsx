@@ -7,8 +7,12 @@ import ArticleContent from "components/articleDetail/content"
 import Head from "components/head"
 
 const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
+  
   return (
-    <div className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900">
+    <div
+      id="scroll-wrapper"
+      className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900"
+    >
       <Head
         title={article.title}
       />

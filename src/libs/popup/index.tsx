@@ -10,7 +10,6 @@ interface PopupProps {
 }
 
 const Popup: NextPage<PopupProps> = ({ children, visible, onClose }) => {
-
   return ReactDOM.createPortal(
     <Fragment>
      <CSSTransition
