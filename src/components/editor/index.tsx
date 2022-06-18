@@ -1,24 +1,42 @@
 import { FC } from "react"
-import { Back, Down } from "@icon-park/react"
+import { Back, Down, Loading } from "@icon-park/react"
 import MDEditor from "md-editor-rt"
 import Popover from "libs/popover"
 import Button from "libs/button"
 import Input from "libs/input"
 import EditorOverlay from "./overlay"
 import { useRouter } from "next/router"
-import { editorAction } from "store/slices/editor.slice"
+import { editorAction, EditorArticle } from "store/slices/editor.slice"
 import { useInitEditorArticle } from "./hooks/useInitEditorArticle"
 import { THEME_TYPE } from "constant"
 import { useSelector } from "react-redux"
 import { selectCurrentTheme } from "store/slices/system.slice"
 
+const EditorLoading: FC<{ isUpdate: boolean, editorArticle: EditorArticle }> = ({ isUpdate, editorArticle }) => {
+
+  return (
+    (isUpdate && !editorArticle.categoryId)
+      ? (
+        <div className="fixed t-0 l-0 w-screen h-screen bg-black/60 z-50 text-zinc-200">
+          <div className="absolute left-1/2 top-1/2 translate-x-[-50%] flex flex-col items-center">
+            <Loading className="animate-spin w-3 h-3 duration-300 mb-1" />
+            <p>等待文章初始化...</p>
+          </div>
+        </div>
+      )
+      : null
+  )
+}
+
+
 const Editor: FC<{ id?: number }> = ({ id }) => {
   const { push } = useRouter()
-  const { dispatch, editorArticle, isUpdate } = useInitEditorArticle(id)
+  const { dispatch, editorArticle } = useInitEditorArticle(id)
   const theme = useSelector(selectCurrentTheme)
- 
+
   return (
     <div className="text-base relative overflow-hidden">
+      <EditorLoading isUpdate={!!id} editorArticle={editorArticle} />
       <div className="flex">
         <Button
           icon={<Back />}
@@ -39,7 +57,7 @@ const Editor: FC<{ id?: number }> = ({ id }) => {
           placement="bottom-left"
           overlay={(
             <EditorOverlay
-              isUpdate={isUpdate.current}
+              isUpdate={!!id}
               articleId={id}
             />
           )}
