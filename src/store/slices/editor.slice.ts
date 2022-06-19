@@ -2,7 +2,7 @@ import { requestCategoryList } from 'api/category';
 import { AppDispatch } from './../index';
 import { RootState } from '../index';
 import { createSlice } from "@reduxjs/toolkit"
-import { ICaytegory } from 'types/category';
+import { ICategory } from 'types/category';
 
 export type EditorArticle = {
   title: string
@@ -11,7 +11,7 @@ export type EditorArticle = {
 }
 
 interface State {
-  categorys: ICaytegory[] | null
+  categorys: ICategory[] | null
   editorArticle: EditorArticle
 }
 
