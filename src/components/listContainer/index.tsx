@@ -1,9 +1,9 @@
 import ArticleList from "components/articleList";
 import Navigation from "components/navigation";
 import { FC } from "react";
-import { ICaytegory } from "types/category";
+import { ICategory } from "types/category";
 
-const ArticleListContainer: FC<{ categorys: ICaytegory[], category?: string, keyword?: string }> = ({
+const ArticleListContainer: FC<{ categorys: ICategory[], category?: string, keyword?: string }> = ({
   categorys,
   keyword,
   category
