@@ -1,13 +1,10 @@
-import { NextPage } from "next"
-import getInitializedDataSource from "db"
-import { ALL_CATEGORY_ITEM } from "constant"
-import { Category } from "db/enyity/category"
-import { ICaytegory } from "types/category"
+import { InferGetStaticPropsType, NextPage } from "next"
 import ArticleListContainer from "components/listContainer"
 import { Fragment } from "react"
 import Head from "components/head"
+import { getCategorys } from "utils/cache"
 
-const Home: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
+const Home: NextPage<InferGetStaticPropsType <typeof getStaticProps>> = ({ categorys }) => {
   return (
     <Fragment>
       <Head />
@@ -17,13 +14,10 @@ const Home: NextPage<{ categorys: ICaytegory[] }> = ({ categorys }) => {
 }
 
 export const getStaticProps = async () => {
-  const dataSource = await getInitializedDataSource()
-  const categoryRepo = dataSource.getRepository(Category)
-  const categorys = await categoryRepo.find()
-
+  const categorys = await getCategorys()
   return ({
     props: {
-      categorys: JSON.parse(JSON.stringify([ALL_CATEGORY_ITEM, ...categorys]))
+      categorys: JSON.parse(JSON.stringify(categorys))
     }
   })
 }

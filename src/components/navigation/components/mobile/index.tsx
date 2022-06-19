@@ -2,7 +2,7 @@ import { NextPage } from "next"
 import { useState } from "react"
 import Popup from "libs/popup"
 import { HamburgerButton } from "@icon-park/react"
-import { ICaytegory } from "types/category"
+import { ICategory } from "types/category"
 import { useMobileSider } from "components/navigation/hooks/useMobileSider"
 import { NavigationProps } from "components/navigation"
 import Link from "next/link"
@@ -10,7 +10,7 @@ import Link from "next/link"
 
 
 // eslint-disable-next-line no-unused-vars
-const PopupMenu: NextPage<{ categorys: ICaytegory[], onItemClick: (curIndex: number) => void }> = ({ categorys, onItemClick }) => {
+const PopupMenu: NextPage<{ categorys: ICategory[], onItemClick: (curIndex: number) => void }> = ({ categorys, onItemClick }) => {
   return (
     <div className="py-2 h-[80vh] flex flex-col text-zinc-900 dark:text-zinc-200">
       <h2 className="text-xl font-bold mb-2 px-1">所有分类</h2>

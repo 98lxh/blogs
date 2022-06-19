@@ -2,7 +2,7 @@ import { NextPage } from "next"
 import { useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux"
 import { selectIsMobile } from "store/slices/system.slice"
-import { ICaytegory } from "types/category"
+import { ICategory } from "types/category"
 import MobileNavgation from "./components/mobile"
 import PCNavgation from "./components/pc"
 import { useRouter } from "next/router"
@@ -13,7 +13,7 @@ export interface NavigationProps {
   setCurCategoryIdx: (value: number) => void
   // eslint-disable-next-line no-unused-vars
   setCategory: (value: string) => void
-  categorys: ICaytegory[]
+  categorys: ICategory[]
 }
 
 const Navigation: NextPage<Pick<NavigationProps, 'categorys'>> = ({ categorys }) => {

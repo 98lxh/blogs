@@ -90,11 +90,12 @@ const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
   const handleSearch = (search: string) => {
     if (!search) return
     setSearchValue(search)
-    push({ pathname: '/search', query: { keyword: search } })
+    push(`/search/${search}`)
     store.dispatch(searchActions.setHistory(search))
   }
 
   useEffect(() => {
+    console.log(query.keyword)
     setSearchValue(() => (query.keyword && typeof query.keyword === 'string' ) ? query.keyword : "") 
   }, [
     query

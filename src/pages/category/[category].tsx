@@ -1,17 +1,10 @@
-import { ALL_CATEGORY_ITEM } from "constant"
-import { GetStaticProps, NextPage } from "next"
-import { Fragment } from "react"
-import { ICaytegory } from "types/category"
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import ArticleListContainer from "components/listContainer"
-import Head from "components/head"
+import { Fragment } from "react"
 import { getCategorys } from "utils/cache"
+import Head from "components/head"
 
-interface categoryProps {
-  categorys: ICaytegory[]
-  category:string
-}
-
-const Category: NextPage<categoryProps> = ({ categorys, category }) => {
+const Category: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ categorys, category }) => {
   return (
     <Fragment>
       <Head
@@ -27,12 +20,12 @@ const Category: NextPage<categoryProps> = ({ categorys, category }) => {
 
 
 
-export const getStaticProps: GetStaticProps = async ({ params }) => { 
+export const getStaticProps: GetStaticProps = async (context) => { 
   const categorys = await getCategorys()
   return {
     props: {
-      category:(params as any).category,
-      categorys:JSON.parse(JSON.stringify([ALL_CATEGORY_ITEM ,...categorys]))
+      category:context.params!.category,
+      categorys:JSON.parse(JSON.stringify(categorys))
     }
   }
 }
