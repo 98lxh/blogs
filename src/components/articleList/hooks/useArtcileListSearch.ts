@@ -26,6 +26,7 @@ export const useArticleListSearch = ({ search, category }: { search?: string, ca
     if (isFinished && !reset) return
     const list = await requestArticleList(resetQuery)
     setIsLoading(false)
+    setIsFinished(false)
     if (!list) return setIsFinished(true)
     reset ? setArticleList(list) : setArticleList(([...articleList, ...list]))
   }

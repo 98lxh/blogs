@@ -62,7 +62,6 @@ const MobileNavgation: NextPage<NavigationProps> =
           {
             categorys.map((category, index) => (
               <Link
-                prefetch
                 href={'/' + category.title}
                 key={category.id}
               >
