@@ -2,7 +2,7 @@ import { Fragment } from "react"
 import Head from "components/head"
 import ArticleListContainer from "components/listContainer"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
-import { getCategorys } from "utils/cache"
+import { getCacheCategorys } from "utils/cache"
 
 const Index: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ categorys, keyword }) => {
   return (
@@ -19,7 +19,7 @@ const Index: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ categ
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const categorys = await getCategorys()
+  const categorys = await getCacheCategorys()
 
   return {
     props: {

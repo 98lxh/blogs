@@ -1,7 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import ArticleListContainer from "components/listContainer"
 import { Fragment } from "react"
-import { getCategorys } from "utils/cache"
+import { getCacheCategorys } from "utils/cache"
 import Head from "components/head"
 
 const Category: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ categorys, category }) => {
@@ -21,7 +21,7 @@ const Category: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ ca
 
 
 export const getStaticProps: GetStaticProps = async (context) => { 
-  const categorys = await getCategorys()
+  const categorys = await getCacheCategorys()
   return {
     props: {
       category:context.params!.category,
@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths = async () => {
-  const categorys = await getCategorys()
+  const categorys = await getCacheCategorys()
   return ({
     paths: categorys.map(category => ({
       params: {category:category.title}
