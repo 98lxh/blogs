@@ -11,7 +11,6 @@ import Link from "next/link"
 
 // eslint-disable-next-line no-unused-vars
 const PopupMenu: NextPage<{ categorys: ICaytegory[], onItemClick: (curIndex: number) => void }> = ({ categorys, onItemClick }) => {
-
   return (
     <div className="py-2 h-[80vh] flex flex-col text-zinc-900 dark:text-zinc-200">
       <h2 className="text-xl font-bold mb-2 px-1">所有分类</h2>
@@ -62,7 +61,7 @@ const MobileNavgation: NextPage<NavigationProps> =
           {
             categorys.map((category, index) => (
               <Link
-                href={'/' + category.title}
+                href={'/category/' + category.title}
                 key={category.id}
               >
                 <li

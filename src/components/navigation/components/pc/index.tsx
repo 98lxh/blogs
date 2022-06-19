@@ -31,7 +31,7 @@ const PCNavgation: NextPage<NavigationProps> = (
         {
           categorys.map((category, index) => (
             <Link
-              href={'/' + category.title}
+              href={'/category/' + category.title}
               key={category.id}
             >
               <li
