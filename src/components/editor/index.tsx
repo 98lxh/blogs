@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Back, Down, Loading } from "@icon-park/react"
+import { Back, Down, Triangle } from "@icon-park/react"
 import MDEditor from "md-editor-rt"
 import Popover from "libs/popover"
 import Button from "libs/button"
@@ -19,7 +19,7 @@ const EditorLoading: FC<{ isUpdate: boolean, editorArticle: EditorArticle }> = (
       ? (
         <div className="fixed t-0 l-0 w-screen h-screen bg-black/60 z-50 text-zinc-200">
           <div className="absolute left-1/2 top-1/2 translate-x-[-50%] flex flex-col items-center">
-            <Loading className="animate-spin w-3 h-3 duration-300 mb-1" />
+            <Triangle className="animate-pulse w-3 h-3 duration-300 mb-1" />
             <p>等待文章初始化...</p>
           </div>
         </div>
@@ -30,7 +30,7 @@ const EditorLoading: FC<{ isUpdate: boolean, editorArticle: EditorArticle }> = (
 
 
 const Editor: FC<{ id?: number }> = ({ id }) => {
-  const { push } = useRouter()
+  const { back } = useRouter()
   const { dispatch, editorArticle } = useInitEditorArticle(id)
   const theme = useSelector(selectCurrentTheme)
 
@@ -41,7 +41,7 @@ const Editor: FC<{ id?: number }> = ({ id }) => {
         <Button
           icon={<Back />}
           type="info"
-          onClick={() => push('/')}
+          onClick={() => back()}
           className="w-[30px] h-[50px] rounded-none"
         >
         </Button>

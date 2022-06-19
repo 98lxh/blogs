@@ -1,4 +1,4 @@
-import { Loading } from "@icon-park/react"
+import { Triangle } from "@icon-park/react"
 import { useInViewport, useUnmount } from "ahooks"
 import { NextPage } from "next"
 import React, { useEffect, useRef } from "react"
@@ -41,7 +41,9 @@ const Infinite: NextPage<InfiniteProps> = ({ children, isLoading, isFinished, on
     <div>
       {children}
       {/* 加载更多 */}
-      <div ref={loadingRef} className={`w-2 mx-auto animate-spin text-main ${isLoading ? 'h-2' : 'h-0'}`}><Loading /></div>
+      <div ref={loadingRef} className={`w-3 mx-auto animate-pulse text-main ${isLoading ? 'h-3' : 'h-0'}`}>
+        <Triangle />
+      </div>
       {/* 没有更多数据 */}
       {isFinished && <p className="text-center text-base text-zinc-400">已经没有更多数据了~</p>}
     </div>
