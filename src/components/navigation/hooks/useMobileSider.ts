@@ -6,6 +6,7 @@ export const useMobileSider = ({ curCategoryIdx, setCurCategoryIdx }: Pick<Navig
   const siderTargetRef = useRef<HTMLUListElement | null>(null)
   const siderItemsRef = useRef<(HTMLLIElement | null)[]>([])
   const siderTargetScroll = useScroll(siderTargetRef)
+  const prevCategoryIdx = useRef(curCategoryIdx)
   const [siderStyle, setSiderStyle] = useState({
     transform: 'translateX(0px) translateY(-50%)',
     width: '52px'
@@ -25,10 +26,15 @@ export const useMobileSider = ({ curCategoryIdx, setCurCategoryIdx }: Pick<Navig
       transform: `translateX(${siderTargetScrollLeft + sideritemLeft - 10}px) translateY(-50%)`
     }))
 
-    if (siderItemWidth + sideritemLeft > document.body.clientWidth || siderItemWidth + sideritemLeft < 0) {
+    if (
+      (siderItemWidth + sideritemLeft > document.body.clientWidth || siderItemWidth + sideritemLeft < 0)
+      &&
+      prevCategoryIdx.current !== curCategoryIdx
+    ) {
       siderTargetRef.current?.scrollTo({ left: siderItemWidth + sideritemLeft })
     }
 
+    prevCategoryIdx.current = curCategoryIdx
   },
     [
       curCategoryIdx,
