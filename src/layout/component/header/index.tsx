@@ -11,10 +11,6 @@ import HeaderCreate from "./headerCreate"
 const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps }) => {
   const { push } = useRouter()
 
-  const onToHome = () => {
-    push('/')
-  }
-
   return (
     <header
       {...restProps}
@@ -26,12 +22,12 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
       <div className="flex items-center">
         <Triangle
           className="h-2 w-2 rounded-sm text-main cursor-pointer mr-2"
-          onClick={onToHome}
+          onClick={() => push('/')}
         />
         <HeaderSearch className="mr-1 flex-1" />
+        <HeaderCreate />
         <ThemeButton isHeader={true} className="mr-1 h-4" />
         <HeaderMy className="mr-1" />
-        <HeaderCreate />
       </div>
     </header>
   )

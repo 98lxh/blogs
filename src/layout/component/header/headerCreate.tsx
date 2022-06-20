@@ -6,7 +6,8 @@ const HeaderCreate = () => {
   const { push } = useRouter()
   return (
     <Button
-      className="px-1 mr-1"
+      className="px-1 mx-1"
+      type="info"
       onClick={()=>push('/editor/new')}
       icon={<AddOne />}
     >

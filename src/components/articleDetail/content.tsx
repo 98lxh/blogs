@@ -27,10 +27,10 @@ const ArticleContent: FC<{ content: string }> = ({ content }) => {
           visible={catalogVisible}
           onClose={() => setCatalogVisible(false)}
         >
-          <p className='text-main text-base pl-[15px] py-1'>目录</p>
+          <p className='text-main text-base pl-[10px] py-1'>目录</p>
           <MDEditor.MdCatalog
             editorId='article'
-            className='text-base pb-1'
+            className='text-sm pb-1'
             scrollElement="#scroll-wrapper"
             theme={theme === 'THEME_DARK' ? 'dark' : 'light'
             }
