@@ -5,12 +5,16 @@ import { IArticle } from "types/article"
 import ArticleHeader from "components/articleDetail/headerFloat"
 import ArticleContent from "components/articleDetail/content"
 import Head from "components/head"
+import BackTop from "libs/backTop"
+import { useRef } from "react"
 
 const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
+  const scrollElement = useRef<HTMLDivElement>(null)
   
   return (
     <div
       id="scroll-wrapper"
+      ref={scrollElement }
       className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900"
     >
       <Head
@@ -21,6 +25,10 @@ const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
       />
       <ArticleContent
         content={article.content}
+      />
+      <BackTop
+        target={scrollElement.current}
+        visibleHeight={80}
       />
     </div>
   )
