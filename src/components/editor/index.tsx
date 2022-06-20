@@ -80,6 +80,7 @@ const Editor: FC<{ id?: number }> = ({ id }) => {
         onChange={content => dispatch(editorAction.setEditorArticle({ content }))}
         placeholder="请输入文章内容..."
         theme={theme === THEME_TYPE.LIGHT ? 'light' : 'dark'}
+        toolbarsExclude={['image']}
         previewTheme="vuepress"
         style={{
           height: 'calc(100vh - 50px)',
