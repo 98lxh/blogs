@@ -24,8 +24,17 @@ export const useMobileSider = ({ curCategoryIdx, setCurCategoryIdx }: Pick<Navig
       width: siderItemWidth + 'px',
       transform: `translateX(${siderTargetScrollLeft + sideritemLeft - 10}px) translateY(-50%)`
     }))
+
+    if (siderItemWidth + sideritemLeft > document.body.clientWidth || siderItemWidth + sideritemLeft < 0) {
+      siderTargetRef.current?.scrollTo({ left: siderItemWidth + sideritemLeft })
+    }
+
   },
-    [curCategoryIdx, siderItemsRef, siderTargetScroll]
+    [
+      curCategoryIdx,
+      siderItemsRef,
+      siderTargetScroll
+    ]
   )
 
   return {
