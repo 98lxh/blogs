@@ -9,7 +9,8 @@ const ArticleListContainer: FC<{ categorys: ICategory[], category?: string, keyw
   category
 }) => {
   return (
-    <div className="h-full overflow-auto bg-white  dark:bg-zinc-800 duration-500 transition-colors scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900">
+    <div
+      className="h-full overflow-auto bg-white  dark:bg-zinc-800 duration-500 transition-colors scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900">
       <Navigation
         categorys={categorys}
       />

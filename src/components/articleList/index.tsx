@@ -13,7 +13,7 @@ const List: FC<{ search?: string, category?: string }> = (props) => {
 
   return (
     <div
-      className="max-w-screen-xl mx-auto relative m-1 xl:mt-4"
+      className="max-w-screen-xl mx-auto relative m-1 lg:mt-4 px-1"
     >
       <Infinite
         isLoading={isLoading}

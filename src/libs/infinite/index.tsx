@@ -41,8 +41,8 @@ const Infinite: NextPage<InfiniteProps> = ({ children, isLoading, isFinished, on
     <div>
       {children}
       {/* 加载更多 */}
-      <div ref={loadingRef} className={`w-3 mx-auto animate-pulse text-main ${isLoading ? 'h-3' : 'h-0'}`}>
-        <Triangle />
+      <div ref={loadingRef} className={`w-3 h-3 mx-auto animate-pulse text-main ${isLoading ? 'visible' : 'invisible'}`}>
+        <Triangle/>
       </div>
       {/* 没有更多数据 */}
       {isFinished && <p className="text-center text-base text-zinc-400">已经没有更多数据了~</p>}

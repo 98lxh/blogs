@@ -13,7 +13,7 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <Fragment>
       {isShowHeader && <Header className="h-header" />}
-      <Main className="lg:h-main h-screen dark:bg-zinc-900">
+      <Main className="h-screen fixed top-0 left-0 w-screen dark:bg-zinc-900 scrollbar-thin">
         {children}
       </Main>
       <Floating />

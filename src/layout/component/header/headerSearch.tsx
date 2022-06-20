@@ -95,7 +95,6 @@ const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
   }
 
   useEffect(() => {
-    console.log(query.keyword)
     setSearchValue(() => (query.keyword && typeof query.keyword === 'string' ) ? query.keyword : "") 
   }, [
     query
