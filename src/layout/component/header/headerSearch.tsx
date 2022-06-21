@@ -84,7 +84,7 @@ const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ o
 }
 
 const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
-  const { push, query } = useRouter()
+  const { push, query, prefetch } = useRouter()
   const [searchVal, setSearchValue] = useState("")
 
   const handleSearch = (search: string) => {
@@ -95,7 +95,11 @@ const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
   }
 
   useEffect(() => {
-    setSearchValue(() => (query.keyword && typeof query.keyword === 'string' ) ? query.keyword : "") 
+    prefetch('/search/[keyword]')
+  }, [])
+
+  useEffect(() => {
+    setSearchValue(() => (query.keyword && typeof query.keyword === 'string') ? query.keyword : "")
   }, [
     query
   ])

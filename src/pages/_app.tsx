@@ -7,7 +7,6 @@ import { useUserInfo } from 'hooks/useUserInfo'
 import AppInitialization from 'components/appInitialization'
 import Layout from 'layout'
 import "styles/index.scss"
-import { usePrefetch } from 'hooks/usePrefetch'
 
 interface AppProps {
   Component: NextPage,
@@ -41,8 +40,6 @@ const useBootstarp = () => {
   useREM()
   //初始化用户数据
   useUserInfo()
-  //预加载页面
-  usePrefetch()
 }
 
 
