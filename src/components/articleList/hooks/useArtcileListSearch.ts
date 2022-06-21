@@ -14,21 +14,15 @@ export const useArticleListSearch = ({ search, category }: { search?: string, ca
   const [query, queryDispatch] = useArtcleListQuery({ search, category })
 
   const getArticleList = async () => {
-    const { reset, ...resetQuery } = query
     //加载
     setIsLoading(true)
-    //重置状态
-    if (reset) {
-      setArticleList([])
-      setIsFinished(false)
-      waterfallRef.current?.resetHeight()
-    }
-    if (isFinished && !reset) return
-    const list = await requestArticleList(resetQuery)
+    //已加载完成
+    if (isFinished) return
+    const list = await requestArticleList(query)
     setIsLoading(false)
+    //没有更多数据
     if (!list) return setIsFinished(true)
-    setIsFinished(false)
-    reset ? setArticleList(list) : setArticleList(([...articleList, ...list]))
+    setArticleList(([...articleList, ...list]))
   }
 
 

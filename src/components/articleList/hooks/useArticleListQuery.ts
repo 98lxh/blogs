@@ -5,7 +5,6 @@ const intialState = {
   page: 1,
   category: '',
   search: '',
-  reset: false
 }
 
 type QueryAction = {
@@ -20,7 +19,6 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
     case 'category': {
       return {
         ...intialState,
-        reset: true,
         category: data?.category || ''
       }
     }
@@ -29,7 +27,6 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
       return {
         ...prevState,
         page: 1,
-        reset: true,
         category: '',
         search: data?.search || '',
       }
@@ -38,7 +35,6 @@ const listQueryReducer = (prevState: typeof intialState, action: QueryAction) =>
     case 'page': {
       return {
         ...prevState,
-        reset: false,
         page: prevState.page + 1
       }
     }

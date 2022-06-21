@@ -1,18 +1,20 @@
 import { AddOne } from "@icon-park/react"
 import Button from "libs/button"
-import { useRouter } from "next/router"
+import Link from "next/link"
 
 const HeaderCreate = () => {
-  const { push } = useRouter()
   return (
-    <Button
-      className="px-1 mx-1"
-      type="info"
-      onClick={()=>push('/editor/new')}
-      icon={<AddOne />}
+    <Link
+      href="/editor/new"
     >
-      <p className="ml-0.5">写文章</p>
-    </Button>
+      <Button
+        className="px-1 mx-1"
+        type="info"
+        icon={<AddOne />}
+      >
+        <p className="ml-0.5">写文章</p>
+      </Button>
+    </Link>
   )
 }
 
