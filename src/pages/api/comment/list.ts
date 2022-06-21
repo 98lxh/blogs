@@ -9,7 +9,7 @@ const list = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const { page = 1, size = 10, articleId } = req.body
+  const { page = 1, size = 10, articleId } = JSON.parse(req.body)
   const dataSource = await getInitializedDataSource()
   const articleRepo = dataSource.getRepository(Article)
   const article = await articleRepo.findOneBy({
@@ -31,6 +31,7 @@ const list = async (
       where,
       relations: ["user"]
     })
+    .orderBy('comments.create_time', 'DESC')
     .getMany()
 
 

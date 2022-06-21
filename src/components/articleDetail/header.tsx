@@ -16,7 +16,7 @@ const ArticleHeader: FC<{ article: IArticle }> = ({ article }) => {
   return (
     <div>
       {/* 文章封面 */}
-      <div className="absolute h-[300px] w-full" >
+      <div className=" relative h-[300px] w-full" >
         <img className="w-full h-full" src={article.cover} alt="" />
         <div className="w-full h-full bg-zinc-900/80 absolute top-0"></div>
       </div>
@@ -46,7 +46,7 @@ const ArticleHeader: FC<{ article: IArticle }> = ({ article }) => {
       </div>
 
       {/* 文章信息 */}
-      <div className="absolute left-2 top-[335px] text-sm dark:text-zinc-200 height-[300px] flex items-end" >
+      <div className="ml-2 mt-2 text-sm dark:text-zinc-200 height-[300px] flex items-end" >
         <div className="mr-1.5">
           <p>阅读 : {article.views}</p>
           <p className="mt-0.5">分类 : {article.category.title}</p>

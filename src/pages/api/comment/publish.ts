@@ -14,7 +14,7 @@ const publish = async (
   res: NextApiResponse
 ) => {
   const session: ISession = req.session
-  const { articleId = 0, content = '' } = req.body
+  const { articleId = 0, content = '' } = JSON.parse(req.body)
   const dataSource = await getInitializedDataSource()
   const userRepo = dataSource.getRepository(User)
   const articleRepo = dataSource.getRepository(Article)

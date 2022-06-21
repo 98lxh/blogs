@@ -6,22 +6,37 @@ import { selectCurrentTheme } from "store/slices/system.slice";
 import Button from 'libs/button';
 import { Triangle } from '@icon-park/react';
 import Popup from 'libs/popup';
+import { IArticle } from 'types/article';
 
-const ArticleContent: FC<{ content: string }> = ({ content }) => {
+
+const ArticleContent: FC<{ article: IArticle }> = ({ article }) => {
   const theme = useSelector(selectCurrentTheme)
   const mountRef = useMountRef()
   const [catalogVisible, setCatalogVisible] = useState(false)
 
   return (
-    <div className="absolute top-[430px] left-2 w-[calc(100vw-30px)] text-base lg:flex" >
+    <div className="relative left-2 w-[calc(100vw-30px)] text-base" >
       <MDEditor
         editorId="article"
         theme={theme === 'THEME_DARK' ? 'dark' : 'light'}
         previewTheme="vuepress"
-        modelValue={content}
+        modelValue={article.content}
         previewOnly={true}
       />
 
+
+      {/* 展示目录按钮 */}
+      <div
+        className={`fixed none right-2 bottom-2 z-50 duration-200`}
+      >
+        <Button
+          type="info"
+          icon={<Triangle className='text-main' />}
+          onClick={() => setCatalogVisible(true)}
+        />
+      </div>
+
+      {/* 目录列表 */}
       {mountRef.current && (
         <Popup
           visible={catalogVisible}
@@ -37,17 +52,6 @@ const ArticleContent: FC<{ content: string }> = ({ content }) => {
           />
         </Popup>
       )}
-
-      <div
-        className={`fixed none right-2 bottom-2 z-50 duration-200`}
-      >
-        <Button
-          type="info"
-          icon={<Triangle className='text-main' />}
-          onClick={() => setCatalogVisible(true)}
-        ></Button>
-
-      </div>
     </div>
   )
 }

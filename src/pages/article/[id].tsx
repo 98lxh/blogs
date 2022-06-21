@@ -2,8 +2,9 @@ import getInitializedDataSource from "db"
 import { Article } from "db/enyity/article"
 import { NextPage } from "next"
 import { IArticle } from "types/article"
-import ArticleHeader from "components/articleDetail/headerFloat"
+import ArticleHeader from "components/articleDetail/header"
 import ArticleContent from "components/articleDetail/content"
+import ArticleComment from "components/articleDetail/comment"
 import Head from "components/head"
 import BackTop from "libs/backTop"
 import { useRef } from "react"
@@ -24,7 +25,10 @@ const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
         article={article}
       />
       <ArticleContent
-        content={article.content}
+        article={article}
+      />
+      <ArticleComment
+       article={article}
       />
       <BackTop
         target={scrollElement.current}
