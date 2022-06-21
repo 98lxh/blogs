@@ -41,7 +41,7 @@ const Infinite: NextPage<InfiniteProps> = ({ children, isLoading, isFinished, on
     <div>
       {children}
       {/* 加载更多 */}
-      <div ref={loadingRef} className={`w-3 h-3 mx-auto animate-pulse text-main ${isLoading ? 'visible' : 'invisible'}`}>
+      <div ref={loadingRef} className={`w-3 h-3 mx-auto animate-bounce text-main ${isLoading ? 'visible' : 'invisible'}`}>
         <Triangle/>
       </div>
       {/* 没有更多数据 */}
