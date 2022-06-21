@@ -52,13 +52,13 @@ const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> =
 
   return (
     <Fragment>
+      {/* 评论区 */}
       <div
         className='dark:text-zinc-200 px-3'
         ref={commentRef}
       >
         <h1 className='text-base font-bold my-1.5'>锐评一下</h1>
         <div className='h-[1px] bg-zinc-500  my-1.5'></div>
-
         {/* 发表评论 */}
         <div className='flex w-full'>
           <img
@@ -119,6 +119,8 @@ const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> =
           </Infinite>
         </div>
       </div>
+      
+      {/* 按钮:到评论区  */}
       <Button
         className='fixed z-50 right-2 bottom-7'
         type='info'
