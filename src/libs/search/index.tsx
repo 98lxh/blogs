@@ -62,8 +62,9 @@ const Search: NextPage<SearchProps> = ({ onSearch,onClear ,dropdown, ...inputPro
         {/* 分割线 */}
         <div className=" opacity-0 h-1.5 w-[1px] absolute translate-y-[-50%] top-[50%] right-[62px] duration-500 bg-zinc-200 group-hover:opacity-100" />
         <Button
-          className="absolute translate-y-[-50%] top-[50%] right-1.5 opacity-0 group-hover:opacity-100 duration-500 rounded-3xl"
+          className="absolute translate-y-[-50%] top-[50%] right-1.5 group-hover:opacity-100 duration-500 rounded-3xl"
           size="small"
+          type="info"
           onClick={onInputSearch}
           icon={
             <SearchIcon />
