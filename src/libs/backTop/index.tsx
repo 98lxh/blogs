@@ -28,7 +28,7 @@ const BackTop: FC<{ target: Element | null, visibleHeight?: number }> = ({
     <Button
       type="info"
       onClick={() => target && target.scrollTo({ top: 0 })}
-      className={`fixed bottom-7 right-2 z-50 ${visible ? 'block' : 'hidden'}`}
+      className={`fixed bottom-12 right-2 z-50 ${visible ? 'block' : 'hidden'}`}
       icon={<ToTop />}
     />
   )

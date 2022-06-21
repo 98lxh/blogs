@@ -11,11 +11,11 @@ import { useRef } from "react"
 
 const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
   const scrollElement = useRef<HTMLDivElement>(null)
-  
+
   return (
     <div
       id="scroll-wrapper"
-      ref={scrollElement }
+      ref={scrollElement}
       className="w-screen h-screen dark:bg-zinc-800 relative overflow-x-hidden scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900"
     >
       <Head
@@ -28,7 +28,8 @@ const ArticleDetail: NextPage<{ article: IArticle }> = ({ article }) => {
         article={article}
       />
       <ArticleComment
-       article={article}
+        article={article}
+        scrollElement={scrollElement.current}
       />
       <BackTop
         target={scrollElement.current}
@@ -47,7 +48,7 @@ export const getServerSideProps = async ({ params }: any) => {
     where: {
       id: articleId
     },
-    relations: ['user','category']
+    relations: ['user', 'category']
   })
 
   if (article) {
