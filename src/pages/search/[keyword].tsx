@@ -4,7 +4,7 @@ import ArticleListContainer from "components/listContainer"
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import { getCacheCategorys } from "utils/cache"
 
-const Index: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ categorys, keyword }) => {
+const Index: NextPage<InferGetStaticPropsType<typeof getServerSideProps>> = ({ categorys, keyword }) => {
   return (
     <Fragment>
       <Head
@@ -18,7 +18,7 @@ const Index: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ categ
   )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetStaticProps = async (context) => {
   const categorys = await getCacheCategorys()
 
   return {
@@ -26,13 +26,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       categorys: JSON.parse(JSON.stringify(categorys)),
       keyword: context.params!.keyword
     }
-  }
-}
-
-export const getStaticPaths = () => {
-  return {
-    paths: [{ params: { keyword: 'Blogs' } }],
-    fallback: true
   }
 }
 
