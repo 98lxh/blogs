@@ -14,10 +14,7 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
   return (
     <header
       {...restProps}
-      className={
-        `${className} w-full bg-whit border-b px-2 py-0.5
-        dark:bg-zinc-800 dark:border-b-zinc-700 duration-500 transition-colors
-      `}
+      className={`${className} w-full bg-whit border-b px-2 py-0.5 dark:bg-zinc-800 dark:border-b-zinc-700 duration-500 transition-colors`}
     >
       <div className="flex items-center">
         <Triangle
