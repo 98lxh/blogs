@@ -45,7 +45,7 @@ const Infinite: NextPage<InfiniteProps> = ({ children, isLoading, isFinished, on
         <Triangle/>
       </div>
       {/* 没有更多数据 */}
-      {isFinished && <p className="text-center text-base text-zinc-400">已经没有更多数据了~</p>}
+      {isFinished && <p className="text-center text-base text-zinc-400 mb-2">已经没有更多数据了~</p>}
     </div>
   )
 }

@@ -54,7 +54,7 @@ const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> =
     <Fragment>
       {/* 评论区 */}
       <div
-        className='dark:text-zinc-200 px-3'
+        className='dark:text-zinc-200 pr-8 pl-2'
         ref={commentRef}
       >
         <h1 className='text-base font-bold my-1.5'>锐评一下</h1>
@@ -68,7 +68,7 @@ const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> =
           <Input
             value={comment}
             placeholder="请输入评论内容..."
-            className="w-[calc(100vw-3rem)]"
+            className="w-[calc(100vw-4rem)]"
             onChange={setComment}
             type="textarea"
             max={100}
@@ -77,7 +77,7 @@ const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> =
 
         <Button
           type="info"
-          className='ml-[calc(100vw-5rem)] w-12 p-1 mt-1'
+          className='ml-[calc(100vw-6rem)] w-12 p-1 mt-1'
           loading={isPublishLoading}
           onClick={onPublishComment}
         >
