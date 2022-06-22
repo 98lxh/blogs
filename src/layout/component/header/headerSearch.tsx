@@ -2,7 +2,6 @@ import { HTMLAttributes, useEffect, useState } from "react"
 import { NextPage } from "next"
 import { HistoryQuery, Close, Delete } from "@icon-park/react"
 import Search from "libs/search"
-import Mark from "libs/mark"
 import confirm from "libs/confirm"
 import { store } from "store"
 import { useSelector } from "react-redux"
@@ -10,6 +9,7 @@ import { useDebounce } from "ahooks"
 import { useHint } from "layout/hooks/useHint"
 import { searchActions, selectHistorys } from "store/slices/search.slice"
 import { useRouter } from "next/router"
+import mark from "libs/mark"
 
 // eslint-disable-next-line no-unused-vars
 const Hint: NextPage<{ keyword: string, onHintItemClick?: (search: string) => void }> = ({ keyword, onHintItemClick }) => {
@@ -25,7 +25,7 @@ const Hint: NextPage<{ keyword: string, onHintItemClick?: (search: string) => vo
             onClick={() => onHintItemClick && onHintItemClick(hint.title)}
             key={index}
           >
-            <Mark title={hint.title} keyword={keyword} />
+            <div dangerouslySetInnerHTML={{__html:mark(hint.title,keyword)}} />
           </div>
         ))
       }

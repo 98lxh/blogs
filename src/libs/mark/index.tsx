@@ -1,24 +1,16 @@
-import { NextPage } from "next"
+const mark = ( title:string, keyword:string ) => {
+  if (!keyword) {
+    return title
+  }
 
-const Mark: NextPage<{ title: string, keyword: string }> = ({ title, keyword }) => {
-  if (!keyword) return <>{title}</>
-  const strArr = title.split(keyword)
-  return (
-    <>
-      {
-        strArr.map((str, index) => (
-          <span key={index}>
-            {str}
-            {
-              index === strArr.length - 1 
-                ? null
-                : <span className="text-main mr-[-5px]">{ keyword} </span>
-            }
-          </span>
-        ))
-      }
-    </>
-  )
+  const a = title.toLowerCase();
+  const b = keyword.toLowerCase();
+
+  const indexof = a.indexOf(b);
+  const c = indexof > -1 ? title.substr(indexof, keyword.length) : '';
+  const val = `<span style="color:red;">${c}</span>`;
+  const regS = new RegExp(keyword, 'gi');
+  return title.replace(regS, val);
 }
 
-export default Mark
+export default mark

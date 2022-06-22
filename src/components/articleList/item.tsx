@@ -2,17 +2,15 @@ import { useRef } from "react"
 import { NextPage } from "next"
 import Button from "libs/button"
 import message from "libs/message"
-import Mark from "libs/mark"
 import { IArticle } from "types/article"
 import { Eyes, DownloadOne } from "@icon-park/react"
 import { mapImgUrlToSize } from "config/mapUrlToImgSize"
 import { useLazy } from "hooks/useLazy"
 import { buildRandomColor } from "utils/buildRandomColor"
+import mark from "libs/mark"
 
 const Item: NextPage<{ article: IArticle, width: number, lazy: boolean, search?: string }> = ({ article, width, lazy, search }) => {
   const imageRef = useRef<HTMLImageElement | null>(null)
-  const titleRef = useRef<HTMLDivElement | null>(null)
-  const authorRef = useRef<HTMLImageElement | null>(null)
   const calcImgHeight = () => {
     const imgSize = mapImgUrlToSize[article.cover]
     return (width / imgSize.width) * imgSize.height
@@ -62,9 +60,8 @@ const Item: NextPage<{ article: IArticle, width: number, lazy: boolean, search?:
       </div>
       <div>
 
-        <p className="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1" ref={titleRef}>
-
-          {search ? <Mark keyword={search} title={article.title} /> : article.title}
+        <p className="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1">
+          {search ? <div dangerouslySetInnerHTML={{ __html: mark(article.title, search) }} /> : article.title}
         </p>
         <p className="text-[0.25rem] mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1">
           分类 : {article.category.title}
@@ -73,7 +70,6 @@ const Item: NextPage<{ article: IArticle, width: number, lazy: boolean, search?:
           <img
             className="h-2 w-2 rounded-full"
             src={article.user.avatar}
-            ref={authorRef}
             alt=""
           />
           <span className="text-sm text-zinc-500 ml-1">{article.user.nickname}</span>
