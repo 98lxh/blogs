@@ -38,9 +38,7 @@ const Button: NextPage<ButtonProps & HTMLAttributes<HTMLButtonElement>> = (
 
   return (
     <button
-      className={`text-sm text-center rounded-sm 
-       duration-150 justify-center items-center flex 
-       ${sizeClass} ${typeClass} ${animation && 'active:scale-105'} ${className}`}
+      className={`text-sm text-center rounded-sm duration-150 justify-center items-center flex ${sizeClass} ${typeClass} ${animation && 'active:scale-105'} ${className}`}
       {...restProps}
       onClick={onButtonClick}
     >
