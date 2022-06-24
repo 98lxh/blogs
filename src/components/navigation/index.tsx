@@ -12,19 +12,17 @@ export interface NavigationProps {
   // eslint-disable-next-line no-unused-vars
   setCurCategoryIdx: (value: number) => void
   // eslint-disable-next-line no-unused-vars
-  setCategory: (value: string) => void
   categorys: ICategory[]
 }
 
 const Navigation: NextPage<Pick<NavigationProps, 'categorys'>> = ({ categorys }) => {
   const [curCategoryIdx, setCurCategoryIdx] = useState(0)
   const isMobile = useSelector(selectIsMobile)
-  const { push, query } = useRouter()
+  const { query } = useRouter()
 
   const navigationProps = useMemo(() => ({
     curCategoryIdx,
     setCurCategoryIdx,
-    setCategory: (category: string) => push("/" + category),
     categorys: categorys || []
   }),
     [categorys, setCurCategoryIdx, curCategoryIdx]

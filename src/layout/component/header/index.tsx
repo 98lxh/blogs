@@ -4,8 +4,8 @@ import { HTMLAttributes } from "react"
 import { Triangle } from "@icon-park/react"
 import HeaderSearch from "./headerSearch"
 import HeaderMy from "./headerMy"
-import ThemeButton from "components/themeButton"
 import HeaderCreate from "./headerCreate"
+import HeaderTheme from "./headerTheme"
 
 
 const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps }) => {
@@ -23,7 +23,7 @@ const Header: NextPage<HTMLAttributes<HTMLElement>> = ({ className, ...restProps
         />
         <HeaderSearch className="mr-1 flex-1" />
         <HeaderCreate />
-        <ThemeButton isHeader={true} className="mr-1 h-4" />
+        <HeaderTheme className="mr-1" />
         <HeaderMy className="mr-1" />
       </div>
     </header>
