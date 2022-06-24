@@ -25,7 +25,7 @@ const Hint: NextPage<{ keyword: string, onHintItemClick?: (search: string) => vo
             onClick={() => onHintItemClick && onHintItemClick(hint.title)}
             key={index}
           >
-            <div dangerouslySetInnerHTML={{__html:mark(hint.title,keyword)}} />
+            <div dangerouslySetInnerHTML={{ __html: mark(hint.title, keyword) }} />
           </div>
         ))
       }
@@ -84,7 +84,7 @@ const History: NextPage<{ onHistoryItemClick: (search: string) => void }> = ({ o
 }
 
 const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
-  const { push, query,prefetch} = useRouter()
+  const { push, query, prefetch } = useRouter()
   const [searchVal, setSearchValue] = useState("")
 
   const handleSearch = (search: string) => {

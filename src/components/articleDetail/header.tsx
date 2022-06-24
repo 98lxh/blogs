@@ -6,12 +6,29 @@ import { shallowEqual, useSelector } from "react-redux"
 import { format } from "date-fns"
 import { IArticle } from "types/article"
 import { selectUser } from "store/slices/auth.slice"
+import confirm from "libs/confirm"
+import { deleteArticle } from "api/article"
+import message from "libs/message"
 
 const ArticleHeader: FC<{ article: IArticle }> = ({ article }) => {
   const userInfo = useSelector(selectUser, shallowEqual)
   const createTime = useMemo(() => format(new Date(article.create_time), 'yyyy-MM-dd'), [article])
   const updateTime = useMemo(() => format(new Date(article.update_time), 'yyyy-MM-dd'), [article])
+  const isAuthor = useMemo(()=> (userInfo &&  Number(userInfo.id) === article.user.id),[article,userInfo])
   const { push } = useRouter()
+
+  const onDeleteArticle = () => {
+    confirm({
+      title:'',
+      content: `确认删除文章 ${article.title} 吗?`,
+      async onConfirm() {
+        message.warning('正在删除...')
+        const result = await deleteArticle(article.id)
+        message.success(`删除 ${result.title} 成功!`)
+        push(`/category/${article.category.title}`)
+      }
+    })
+  }
 
   return (
     <div>
@@ -53,7 +70,29 @@ const ArticleHeader: FC<{ article: IArticle }> = ({ article }) => {
           <p className="mt-0.5">创建时间 : {createTime}</p>
           <p className="mt-0.5">更新时间 : {updateTime}</p>
         </div>
-        {(userInfo && Number(userInfo.id)) === article.user.id && <Button size="small" type="info" onClick={()=>push(`/editor/${article.id}`)}>编辑</Button>}
+
+        {/* 删除和编辑操作 */}
+
+        {
+          isAuthor && (
+            <div className="flex">
+              <Button
+                className="mr-1"
+                size="small"
+                type="info"
+                onClick={() => push(`/editor/${article.id}`)}
+              >编辑</Button>
+              <Button
+                className=" text-error-300 bg-[#feece8] hover:bg-[#fccdc5]"
+                size="small"
+                type="info"
+                onClick={onDeleteArticle}
+              >
+                删除
+              </Button>
+            </div>
+         )
+        }
       </div>
     </div>
   )

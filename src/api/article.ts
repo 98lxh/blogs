@@ -44,3 +44,13 @@ export const updateArticle = (data: EditorArticle) => {
   })
 }
 
+//删除文章
+export const deleteArticle = (id: number) => {
+  return http<IArticle>('/article/delete', {
+    method: 'POST',
+    data: {
+      id
+    }
+  })
+}
+
