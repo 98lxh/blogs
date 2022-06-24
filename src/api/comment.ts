@@ -20,3 +20,16 @@ export const requestCommentList = (articleId: number, page = 1) => {
     }
   })
 }
+
+/**
+ * 删除评论
+ * @param {id} 评论的id
+*/
+export const deleteComment = (id: number) => {
+  return http<IComment>('/comment/delete', {
+    method: 'POST',
+    data: {
+      id
+    }
+  })
+}

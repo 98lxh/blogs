@@ -48,4 +48,14 @@ export const EXCEPTION_COMMENT = {
     code: 3002,
     message: '没有更多评论了~'
   },
+
+  NOT_FOUND: {
+    code: 3003,
+    message: '没有找到该评论~'
+  },
+
+  UPDATE_FAILED_AUTH: {
+    code: 3004,
+    message: '您没有更新该评论的权限~'
+  },
 }

@@ -10,7 +10,6 @@ const deleteArticle = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  console.log(1111)
   const session: ISession = req.session
   //文章id
   const { id } = JSON.parse(req.body)

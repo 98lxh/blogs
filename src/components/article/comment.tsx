@@ -1,5 +1,5 @@
 import { FC, Fragment, useEffect, useRef, useState } from 'react';
-import { publishComment, requestCommentList } from 'api/comment';
+import { deleteComment, publishComment, requestCommentList } from 'api/comment';
 import { Comments } from '@icon-park/react';
 import message from 'libs/message';
 import Infinite from 'libs/infinite';
@@ -10,16 +10,71 @@ import { format } from 'date-fns';
 import { selectUser } from 'store/slices/auth.slice';
 import { IArticle } from 'types/article';
 import { IComment } from 'types/comment';
+import confirm from 'libs/confirm';
+
+// eslint-disable-next-line no-unused-vars
+const ArticleCommentList: FC<{ commentList: IComment[], setCommentList: (list: IComment[]) => void }> = ({ commentList, setCommentList }) => {
+  const userInfo = useSelector(selectUser, shallowEqual)
+  const onDeleteComment = (commentId: number) => {
+    confirm({
+      title: '',
+      content: '是否确认删除该评论',
+      async onConfirm() {
+        message.warning('删除评论中...')
+        await deleteComment(commentId)
+        setCommentList(commentList.filter(c => c.id !== commentId))
+        message.success('评论删除成功')
+      },
+    })
+  }
+
+  return (
+    <>
+      {
+        commentList.map(comment => (
+          <div
+            key={comment.id}
+            className="mb-2"
+          >
+            <div className='flex text-sm'>
+              <img
+                className='w-4 h-4 rounded-full mr-1'
+                src={comment.user.avatar}
+              />
+              <span>{comment.user.nickname}</span>
+
+              <p className='flex-1 text-right mr-1'>{format(new Date(comment.create_time), 'yyyy-MM-dd HH:mm:ss')}</p>
+
+              {(userInfo && userInfo.id === Number(comment.user.id)) && (
+                <p
+                  className='text-error-100 cursor-pointer'
+                  onClick={() => onDeleteComment(comment.id)}
+                >删除
+                </p>
+              )}
+
+            </div>
+
+            <p
+              className='ml-5 text-sm break-words'
+            >
+              {comment.content}
+            </p>
+          </div>
+        ))}
+    </>
+  )
+}
 
 const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> = ({ article, scrollElement }) => {
+  const commentRef = useRef<HTMLDivElement>(null)
+  const userInfo = useSelector(selectUser, shallowEqual)
   const [comment, setComment] = useState('')
   const [commentList, setCommentList] = useState<IComment[]>([])
   const [isListLoading, setIsListLoading] = useState(false)
   const [isPublishLoading, setIsPublishLoading] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
   const [page, setPage] = useState(1)
-  const userInfo = useSelector(selectUser, shallowEqual)
-  const commentRef = useRef<HTMLDivElement>(null)
 
   const onPublishComment = async () => {
     if (!userInfo) return message.error('请先登陆再进行评论~')
@@ -46,6 +101,7 @@ const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> =
     scrollElement.scrollTo({ top: commentRef.current.offsetTop })
   }
 
+  //页面改变重新获取数据
   useEffect(() => {
     onRequestComment()
   }, [page])
@@ -94,32 +150,14 @@ const ArticleComment: FC<{ article: IArticle, scrollElement: Element | null }> =
             isLoading={isListLoading}
             onLoad={() => setPage(page + 1)}
           >
-            {
-              commentList.map(comment => (
-                <div
-                  key={comment.id}
-                  className="mb-2"
-                >
-                  <div className='flex text-sm'>
-                    <img
-                      className='w-4 h-4 rounded-full mr-1'
-                      src={comment.user.avatar}
-                    />
-                    <span>{comment.user.nickname}</span>
-                    <p className='flex-1 text-right'>{format(new Date(comment.create_time), 'yyyy-MM-dd HH:mm:ss')}</p>
-                  </div>
-                  <p
-                    className='ml-5 text-sm break-words'
-                  >
-                    {comment.content}
-                  </p>
-                </div>
-              ))
-            }
+            <ArticleCommentList
+              commentList={commentList}
+              setCommentList={setCommentList}
+            />
           </Infinite>
         </div>
       </div>
-      
+
       {/* 按钮:到评论区  */}
       <Button
         className='fixed z-50 right-2 bottom-7'
