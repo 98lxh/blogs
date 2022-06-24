@@ -95,7 +95,7 @@ const HeaderSearch: NextPage<HTMLAttributes<HTMLElement>> = (props) => {
   }
 
   useEffect(() => {
-    prefetch('/search/[keyword]')
+    prefetch('/search/[keyword]','/search/blogs')
   }, [])
 
   useEffect(() => {
